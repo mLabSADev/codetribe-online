@@ -18,8 +18,9 @@ collections:
       - {label: "Feature Image", name: "feature", widget: "image"}
       - {label: "Video Link", name: "video", widget: "link"}
       - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Author", name: "author", widget: "select", options: [{label: "Melvin Musehani", value: "melvin"}, {label: "Nokwanda Maranjane", value: "nokwanda"}]}
       - {label: "Tags (Separate by commas)", name: "tags", widget: "string"}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
   - name: "templates"
     label: "Templates"
     folder: "content/templates"
@@ -34,6 +35,7 @@ collections:
       - {label: "Date", name: "date", widget: "datetime"}
       - {label: "Author", name: "author", widget: "string"}
       - {label: "Tags (Separate by commas)", name: "tags", widget: "string"}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
   - name: "tutorials"
     label: "Tutorials"
     folder: "content/tutorials"
@@ -46,5 +48,6 @@ collections:
       - {label: "Feature Image", name: "feature", widget: "image"}
       - {label: "Video Link", name: "video", widget: "link"}
       - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Author", name: "author", widget: "select", options: [{label: "Melvin Musehani", value: "melvin"}, {label: "Nokwanda Maranjane", value: "nokwanda"}]}
       - {label: "Tags (Separate by commas)", name: "tags", widget: "string"}
+      - {label: "Draft", name: "draft", widget: "boolean", default: true}
