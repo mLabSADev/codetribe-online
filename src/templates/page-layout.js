@@ -11,7 +11,7 @@ const PageLayout = ({children, title, fullscreen = false, active}) => {
                 <Header active={active} />
             </Layout.Header>
             <Layout.Content>
-                <div style={{minHeight: 280, paddingLeft: fullscreen ? 0 : 40, paddingRight: fullscreen ? 0 : 40}}>
+                <div style={{marginBottom: 40, minHeight: 280, paddingLeft: fullscreen ? 0 : 40, paddingRight: fullscreen ? 0 : 40}}>
                     {title && <h1>{title}</h1>}
                     {children}
                 </div>

@@ -23,28 +23,28 @@ const Footer = () => {
                 <Col xs={16} sm={12} lg={8}>
                     <div style={alignmentStyle.parent}>
                         <div style={alignmentStyle.child}>
-                            <h2>Menu</h2>
-                            <Link to='/'>Home</Link>
-                            <Link to='/tutorials'>Tutorials</Link>
-                            <Link to='/blog'>Blog</Link>
-                            <Link to='/templates'>Templates</Link>
-                            <Link to='/contact'>Contact</Link>
+                            <h2 style={{color: 'white'}}>Menu</h2>
+                            <Link to='/' style={{color: 'white'}}>Home</Link>
+                            <Link to='/tutorials' style={{color: 'white'}}>Tutorials</Link>
+                            <Link to='/blog' style={{color: 'white'}}>Blog</Link>
+                            <Link to='/templates' style={{color: 'white'}}>Templates</Link>
+                            <Link to='/contact' style={{color: 'white'}}>Contact</Link>
                         </div>
                     </div>
                 </Col>
                 <Col xs={16} sm={12} lg={8}>
                     <div style={alignmentStyle.parent}>
                         <div style={alignmentStyle.child}>
-                            <h2>Legal Stuff</h2>
-                            <Link to='/terms-of-use'>Terms of Use</Link>
-                            <Link to='/privacy-policy'>Privacy Policy</Link>
+                            <h2 style={{color: 'white'}}>Legal Stuff</h2>
+                            <Link to='/terms-of-use' style={{color: 'white'}}>Terms of Use</Link>
+                            <Link to='/privacy-policy' style={{color: 'white'}}>Privacy Policy</Link>
                         </div>
                     </div>
                 </Col>
                 <Col xs={16} sm={12} lg={8}>
                     <div style={alignmentStyle.parent}>
                         <div style={alignmentStyle.child}>
-                            <h2>Follow Us</h2>
+                            <h2 style={{color: 'white'}}>Follow Us</h2>
                             <Button style={{background: '#3369ad', border: 'none', marginRight: 10}} size='large' shape='circle' icon={<FacebookFilled style={{color: 'white'}} />}></Button>
                             <Button style={{background: '#00a4ed', border: 'none'}} size='large' shape='circle' icon={<TwitterCircleFilled style={{color: 'white'}} />}></Button>
                         </div>
