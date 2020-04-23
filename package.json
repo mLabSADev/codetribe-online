@@ -17,7 +17,7 @@
     "@ant-design/icons": "^4.0.6",
     "antd": "^4.1.4",
     "gatsby": "^2.20.25",
-    "gatsby-plugin-netlify": "^2.2.3",
+    "gatsby-plugin-netlify-cms": "^4.2.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
