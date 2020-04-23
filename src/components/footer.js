@@ -1,7 +1,8 @@
 import React from 'react'
 import '../styles/footer.css'
-import { Row, Col, Divider } from 'antd'
-import { HeartFilled } from '@ant-design/icons'
+import { Row, Col, Divider, Button } from 'antd'
+import { HeartFilled, FacebookFilled, TwitterCircleFilled } from '@ant-design/icons'
+import { Link } from 'gatsby'
 
 const Footer = () => {
     const alignmentStyle = {
@@ -23,11 +24,11 @@ const Footer = () => {
                     <div style={alignmentStyle.parent}>
                         <div style={alignmentStyle.child}>
                             <h2>Menu</h2>
-                            <a href='/'>Home</a>
-                            <a href='/'>Tutorials</a>
-                            <a href='/'>Blog</a>
-                            <a href='/'>Templates</a>
-                            <a href='/'>Contact</a>
+                            <Link to='/'>Home</Link>
+                            <Link to='/tutorials'>Tutorials</Link>
+                            <Link to='/blog'>Blog</Link>
+                            <Link to='/templates'>Templates</Link>
+                            <Link to='/contact'>Contact</Link>
                         </div>
                     </div>
                 </Col>
@@ -35,18 +36,17 @@ const Footer = () => {
                     <div style={alignmentStyle.parent}>
                         <div style={alignmentStyle.child}>
                             <h2>Legal Stuff</h2>
-                            <a href='/'>Terms of Use</a>
-                            <a href='/'>Privacy Policy</a>
+                            <Link to='/terms-of-use'>Terms of Use</Link>
+                            <Link to='/privacy-policy'>Privacy Policy</Link>
                         </div>
                     </div>
                 </Col>
                 <Col xs={16} sm={12} lg={8}>
                     <div style={alignmentStyle.parent}>
                         <div style={alignmentStyle.child}>
-                            <h2>Contact Us</h2>
-                            <a href='/'>hello@reactfire.com</a>
-                            <a href='/'>@reactfire</a>
-                            <a href='/'>@reactfire</a>
+                            <h2>Follow Us</h2>
+                            <Button style={{background: '#3369ad', border: 'none', marginRight: 10}} size='large' shape='circle' icon={<FacebookFilled style={{color: 'white'}} />}></Button>
+                            <Button style={{background: '#00a4ed', border: 'none'}} size='large' shape='circle' icon={<TwitterCircleFilled style={{color: 'white'}} />}></Button>
                         </div>
                     </div>
                 </Col>

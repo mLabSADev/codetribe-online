@@ -1,1 +1,5 @@
 @import '~antd/dist/antd.css';
+
+p {
+    font-size: 1.2em;
+}
