@@ -33,11 +33,13 @@ module.exports = {
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
-              
+
             }
           }
         ]
       }
-    }
+    },
+    `gatsby-transformer-sharp`, 
+    `gatsby-plugin-sharp`
   ],
 }

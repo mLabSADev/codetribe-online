@@ -11,7 +11,7 @@ export default ({ data }) => {
                 <img alt={post.frontmatter.title} style={{
                     width: '100%',
                     marginBottom: 40
-                }} src={post.frontmatter.featureImage.publicURL} />
+                }} src={post.frontmatter.featureImage.childImageSharp.original.src} />
                 <div style={{fontSize: '1.2em'}} dangerouslySetInnerHTML={{ __html: post.html }} />
             </PageLayout>
         </div>
@@ -25,7 +25,11 @@ export const query = graphql`
       frontmatter {
         title
         featureImage {
-            publicURL
+            childImageSharp {
+                original {
+                    src
+                }
+            }
         }
       }
       fields {

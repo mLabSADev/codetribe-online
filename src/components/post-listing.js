@@ -4,7 +4,7 @@ import { Card, Col, Row } from 'antd'
 import Meta from 'antd/lib/card/Meta'
 
 const PostListing = ({type, category, limit, onClick}) => {
-    const PostCard = ({post, onClick}) => {
+    const PostCard = ({post}) => {
         const handleClick = () => {
             navigate(post.fields.slug)
         }
@@ -14,7 +14,7 @@ const PostListing = ({type, category, limit, onClick}) => {
                 hoverable={true}
                 onClick={handleClick}
                 style={{width: '100%'}}
-                cover={<img alt={post.frontmatter.title} src={post.frontmatter.featureImage.publicURL} />}
+                cover={<img alt={post.frontmatter.title} src={post.frontmatter.featureImage.childImageSharp.resize.src} />}
             >
                 <Meta title={post.frontmatter.title} description={post.excerpt} />
             </Card>
@@ -32,7 +32,11 @@ const PostListing = ({type, category, limit, onClick}) => {
                                     title
                                     author
                                     featureImage {
-                                        publicURL
+                                        childImageSharp {
+                                            resize(width: 600) {
+                                                src
+                                            }
+                                        }
                                     }
                                     date
                                 }
