@@ -9,21 +9,21 @@ collections:
   - name: "blog"
     label: "Blog"
     folder: "content/bloh"
-    create: false
+    create: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Body", name: "body", widget: "markdown"}
   - name: "templates"
     label: "Templates"
     folder: "content/templates"
-    create: false
+    create: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Body", name: "body", widget: "markdown"}
   - name: "tutorials"
     label: "Tutorials"
     folder: "content/tutorials"
-    create: false
+    create: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Body", name: "body", widget: "markdown"}
