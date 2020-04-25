@@ -8,14 +8,12 @@ module.exports = {
   /* Your site config here */
   siteMetadata: {
     title: 'ReactFire',
-    author: {
-      name: 'Melvin Musehani'
-    },
+    titleTemplate: 'ReactFire - %s',
+    description: 'Best place to learn how to build Web & Mobile Apps with React',
+    url: 'https://www.reactfire.com',
     siteUrl: 'https://www.reactfire.com',
-    social: {
-      twitter: 'reactfire',
-      facebook: 'reactfire'
-    }
+    image: '/images/logo.png',
+    twitterUsername: 'reactfire'
   },
   plugins: [
     {
@@ -24,6 +22,7 @@ module.exports = {
         shortname: `reactfire`
       }
     },
+    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-netlify-cms`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -57,7 +56,10 @@ module.exports = {
         icon: `static/favicon.png`,
       },
     },
+    `gatsby-plugin-offline`,
     `gatsby-transformer-sharp`, 
-    `gatsby-plugin-sharp`
+    `gatsby-plugin-sharp`,
+    `gatsby-plugin-robots-txt`,
+    `gatsby-plugin-sitemap`
   ],
 }
