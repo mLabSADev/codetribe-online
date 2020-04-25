@@ -45,6 +45,18 @@ module.exports = {
         ]
       }
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `ReactFire`,
+        short_name: `ReactFire`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#00586d`,
+        display: `minimal-ui`,
+        icon: `static/favicon.png`,
+      },
+    },
     `gatsby-transformer-sharp`, 
     `gatsby-plugin-sharp`
   ],
