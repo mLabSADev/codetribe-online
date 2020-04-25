@@ -18,7 +18,7 @@ const PostListing = ({type, category, limit, onClick}) => {
                 style={{width: '100%'}}
                 cover={<Img alt={post.frontmatter.title} sizes={post.frontmatter.featureImage.childImageSharp.sizes} />}
             >
-                <Meta title={post.frontmatter.title} description={post.excerpt} />
+                <Meta title={post.frontmatter.title} description={<div style={{color: 'black'}}>{post.excerpt}</div>} />
             </Card>
         )
     }
@@ -35,8 +35,8 @@ const PostListing = ({type, category, limit, onClick}) => {
                                     author
                                     featureImage {
                                         childImageSharp {
-                                            sizes(maxWidth: 630) {
-                                                ...GatsbyImageSharpSizes
+                                            sizes(maxWidth: 330) {
+                                                ...GatsbyImageSharpSizes_withWebp
                                             }
                                         }
                                     }
