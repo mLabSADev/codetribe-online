@@ -2,6 +2,8 @@ import React from 'react'
 import { StaticQuery, graphql, navigate } from 'gatsby'
 import { Card, Col, Row } from 'antd'
 import Meta from 'antd/lib/card/Meta'
+import Img from "gatsby-image"
+
 
 const PostListing = ({type, category, limit, onClick}) => {
     const PostCard = ({post}) => {
@@ -14,7 +16,7 @@ const PostListing = ({type, category, limit, onClick}) => {
                 hoverable={true}
                 onClick={handleClick}
                 style={{width: '100%'}}
-                cover={<img alt={post.frontmatter.title} src={post.frontmatter.featureImage.childImageSharp.resize.src} />}
+                cover={<Img alt={post.frontmatter.title} sizes={post.frontmatter.featureImage.childImageSharp.sizes} />}
             >
                 <Meta title={post.frontmatter.title} description={post.excerpt} />
             </Card>
@@ -33,8 +35,8 @@ const PostListing = ({type, category, limit, onClick}) => {
                                     author
                                     featureImage {
                                         childImageSharp {
-                                            resize(width: 600) {
-                                                src
+                                            sizes(maxWidth: 630) {
+                                                ...GatsbyImageSharpSizes
                                             }
                                         }
                                     }
@@ -69,10 +71,10 @@ const PostListing = ({type, category, limit, onClick}) => {
                 console.log(posts)
                 return (
                     <div>
-                        <Row gutter={16}>
+                        <Row>
                             
                             {posts.length > 0 && posts.map((post, index) => (
-                                <Col key={index} xs={24} sm={12} md={8} lg={6} style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 10}}>
+                                <Col key={index} sm={24} md={12} lg={12} xl={8} style={{paddingLeft: 10, paddingRight: 10, paddingBottom: 10}}>
                                     <PostCard post={post} onClick={onClick} />
                                 </Col>
                             ))}
