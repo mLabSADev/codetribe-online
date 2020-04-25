@@ -5,9 +5,16 @@ import Img from "gatsby-image"
 import { Divider, Space } from 'antd'
 import { UserOutlined, CalendarOutlined } from '@ant-design/icons'
 import PostListing from '../components/post-listing'
+import { Disqus } from 'gatsby-plugin-disqus'
 
 export default ({ data }) => {
     const post = data.markdownRemark
+
+    const disqusConfig = {
+        url: `https://reactfire.com${post.fields.slug}`,
+        identifier: post.fields.slug,
+        title: post.frontmatter.title,
+      }
 
     return (
         <div>
@@ -38,13 +45,18 @@ export default ({ data }) => {
                             <div style={{fontSize: '1.2em', paddingLeft: 40, paddingRight: 40, paddingBottom: 40}} dangerouslySetInnerHTML={{ __html: post.html }} />
                         </div>
 
-                        <Divider style={{height: 40}} />
+                        <Divider style={{height: 20}} />
 
                         <div style={{background: 'white', paddingLeft: 40, paddingRight: 40, paddingTop: 20}}>
                             <h2>More Posts</h2>
                             <PostListing type='tutorials' limit={3} />
                         </div>
 
+                        <Divider style={{height: 20}} />
+
+                        <div style={{padding: 40, paddingTop: 20}}>
+                            <Disqus config={disqusConfig} />
+                        </div>
                 
             </PageLayout>
         </div>

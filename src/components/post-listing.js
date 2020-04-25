@@ -55,7 +55,6 @@ const PostListing = ({type, category, limit, onClick}) => {
             render={({allMarkdownRemark}) => {
                 let posts = allMarkdownRemark.edges.map(edge => edge.node).filter(post => !!post.frontmatter.featureImage)
 
-                console.log(posts)
                 if (type) {
                     posts = posts.filter(post => post.fields.type === type)
                 }
@@ -68,7 +67,6 @@ const PostListing = ({type, category, limit, onClick}) => {
                     posts = posts.slice(0, limit)
                 }
 
-                console.log(posts)
                 return (
                     <div>
                         <Row>

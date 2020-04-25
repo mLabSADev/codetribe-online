@@ -18,6 +18,12 @@ module.exports = {
     }
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `reactfire`
+      }
+    },
     `gatsby-plugin-netlify-cms`,
     {
       resolve: `gatsby-source-filesystem`,
