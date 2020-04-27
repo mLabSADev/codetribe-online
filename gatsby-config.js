@@ -17,6 +17,12 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-164634745-1",
+      },
+    },
+    {
       resolve: `gatsby-plugin-disqus`,
       options: {
         shortname: `reactfire`
@@ -44,6 +50,13 @@ module.exports = {
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
+            }
+          },
+          {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: "_blank",
+              rel: "nofollow"
             }
           },
           `gatsby-remark-smartypants`

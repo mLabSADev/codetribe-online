@@ -3,51 +3,95 @@ import SEO from '../components/seo'
 import PageLayout from './page-layout'
 import { Divider, Button, Row, Col, Collapse, Timeline } from 'antd'
 import { ArrowRightOutlined, ArrowLeftOutlined, CheckCircleFilled } from '@ant-design/icons'
-import { graphql, Link } from 'gatsby'
+import { graphql, Link, navigate } from 'gatsby'
+import Disqus from 'gatsby-plugin-disqus/components/Disqus'
 
 export default ({ data }) => {
     const post = data.markdownRemark
     const currentChapter = post.frontmatter.chapter
     const currentLesson = post.frontmatter.lesson
+    const canGoBack = currentChapter > 0
+    let canGoForward
+    let title
+    let mainSlug
 
     const lessons = data.allMarkdownRemark.edges.map(edge => {
         return edge.node
-    })
+    }).filter(lesson => lesson.fields.tutorial === post.fields.tutorial)
     const chapters = {}
     lessons.forEach(lesson => {
-        if (chapters[lesson.frontmatter.chapter] == null) {
-            chapters[lesson.frontmatter.chapter] = {
-                lessons: []
-            }
-        }
-
-        if (lesson.frontmatter.lesson === 0) {
-            chapters[lesson.frontmatter.chapter].title = lesson.frontmatter.title
-
-            if (lesson.frontmatter.chapter === currentChapter) {
-                chapters[lesson.frontmatter.chapter].current = true
-            } else {
-                chapters[lesson.frontmatter.chapter].current = false
-            }
+        if (lesson.frontmatter.lesson === 0 && lesson.frontmatter.chapter === 0) { 
+            title = lesson.frontmatter.title
+            mainSlug = lesson.fields.slug
         } else {
-            if (lesson.frontmatter.chapter < currentChapter) {
-                lesson.completed = true
-            } else
-            if (lesson.frontmatter.chapter === currentChapter && lesson.frontmatter.lesson < currentLesson) {
-                lesson.completed = true
-            } else {
-                lesson.completed = false
+            if (chapters[lesson.frontmatter.chapter] === undefined) {
+                chapters[lesson.frontmatter.chapter] = {
+                    lessons: []
+                }
             }
 
-            if (lesson.frontmatter.chapter === currentChapter && lesson.frontmatter.lesson === currentLesson) {
-                lesson.current = true
+            if (lesson.frontmatter.lesson === 0) {
+                chapters[lesson.frontmatter.chapter].title = lesson.frontmatter.title
+    
+                if (lesson.frontmatter.chapter === currentChapter) {
+                    chapters[lesson.frontmatter.chapter].current = true
+                } else {
+                    chapters[lesson.frontmatter.chapter].current = false
+                }
             } else {
-                lesson.current = false
+                if (lesson.frontmatter.chapter < currentChapter) {
+                    lesson.completed = true
+                } else
+                if (lesson.frontmatter.chapter === currentChapter && lesson.frontmatter.lesson < currentLesson) {
+                    lesson.completed = true
+                } else {
+                    lesson.completed = false
+                }
+    
+                if (lesson.frontmatter.chapter === currentChapter && lesson.frontmatter.lesson === currentLesson) {
+                    lesson.current = true
+                } else {
+                    lesson.current = false
+                }
+    
+                chapters[lesson.frontmatter.chapter].lessons[lesson.frontmatter.lesson] = lesson
             }
-
-            chapters[lesson.frontmatter.chapter].lessons[lesson.frontmatter.lesson] = lesson
         }
     })
+
+    const lastChapter = Object.keys(chapters).length
+    const lastLesson = chapters[lastChapter].lessons.length - 1
+    canGoForward = (post.frontmatter.chapter < lastChapter || post.frontmatter.lesson < lastLesson)
+
+    const goToPrev = () => {
+        let prevLesson
+
+        console.log(post.frontmatter)
+        if (post.frontmatter.lesson === 1 && post.frontmatter.chapter === 1) {
+            navigate(mainSlug)
+
+            return
+        } else if (post.frontmatter.lesson === 0) {
+            prevLesson = chapters[post.frontmatter.chapter - 1].lessons[1]
+        } else {
+            prevLesson = chapters[post.frontmatter.chapter].lessons[post.frontmatter.lesson - 1]
+        }
+
+        navigate(prevLesson.fields.slug)
+    }
+    const goToNext = () => {
+        let nextLesson
+        if (post.frontmatter.chapter === 0) {
+            nextLesson = chapters[1].lessons[1]
+        }
+        else if (post.frontmatter.lesson === chapters[post.frontmatter.chapter].lessons.length - 1) {
+            nextLesson = chapters[post.frontmatter.chapter + 1].lessons[1]
+        } else {
+            nextLesson = chapters[post.frontmatter.chapter].lessons[post.frontmatter.lesson + 1]
+        }
+
+        navigate(nextLesson.fields.slug)
+    }
 
     return (
         <>
@@ -61,7 +105,7 @@ export default ({ data }) => {
                             <Col xs={24} sm={24} md={8} lg={6}>
                                 <div style={{background: 'white', width: '100%', marginRight: 10, marginBottom: 20}}>
                                     <div style={{paddingLeft: 20, paddingRight: 20, paddingTop: 20}}>
-                                        <h2 style={{color: '#00586d'}}>Beginner React Tutorial</h2>
+                                        <Link to={mainSlug}><h2 style={{color: '#00586d'}}>{title}</h2></Link>
                                     </div>
                                     
                                     <Collapse defaultActiveKey={[`${currentChapter}`]} bordered={false} expandIconPosition='right'>
@@ -91,9 +135,15 @@ export default ({ data }) => {
 
                                     <Divider />
                                     <div style={{display: 'flex', marginTop: 20}}>
-                                        <Button size='large' type='default' icon={<ArrowLeftOutlined />}>Previous</Button>
+                                        <Button onClick={goToPrev} disabled={!canGoBack} size='large' type='default' icon={<ArrowLeftOutlined />}>Previous</Button>
                                         <span style={{flex: 1}} />
-                                        <Button size='large' type='default'>Next <ArrowRightOutlined /></Button>
+                                        <Button onClick={goToNext} disabled={!canGoForward} size='large' type='default'>Next <ArrowRightOutlined /></Button>
+                                    </div>
+
+                                    <Divider />
+
+                                    <div style={{padding: 40, paddingTop: 20}}>
+                                        <Disqus  />
                                     </div>
                                 </div>
                             </Col>
@@ -116,6 +166,9 @@ export const query = graphql`
         lesson
         date(formatString: "MMMM DD, YYYY")
       }
+      fields {
+          tutorial
+      }
     },
     allMarkdownRemark(filter: {fields: {type: {eq: "lessons"}}}) {
         edges {
@@ -127,6 +180,7 @@ export const query = graphql`
                 },
                 fields {
                     slug
+                    tutorial
                 }
             }
         }
