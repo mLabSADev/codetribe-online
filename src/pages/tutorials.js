@@ -1,11 +1,11 @@
 import React from 'react'
 import PageLayout from '../templates/page-layout'
-import PostListing from '../components/post-listing'
+import TutorialListing from '../components/tutorial-listing'
 
 export default () => (
     <div>
         <PageLayout title='Tutorials' active='tutorials'>
-            <PostListing type={'tutorials'} />
+            <TutorialListing />
         </PageLayout>
     </div>
 )

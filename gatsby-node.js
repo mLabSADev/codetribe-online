@@ -29,6 +29,14 @@ exports.onCreateNode = ({node, getNode, actions}) => {
             name: 'type',
             value: parts[0]
         })
+
+        if (parts[0] === 'lessons') {
+          createNodeField({
+              node,
+              name: 'tutorial',
+              value: parts[1]
+          })
+        }
     }
 }
 

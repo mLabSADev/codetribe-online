@@ -3,6 +3,7 @@ import '../styles/home-content.css'
 import { Button, Divider } from 'antd'
 import { navigate } from 'gatsby'
 import PostListing from './post-listing'
+import TutorialListing from './tutorial-listing'
 
 const HomeContent = () => {
     const viewTutorials = () => {
@@ -21,7 +22,7 @@ const HomeContent = () => {
         <div>
             <div style={{marginBottom: 40}}>
                 <h3 className='section-header'>Recent Tutorials</h3>
-                <PostListing type={'tutorials'} limit={3} />
+                <TutorialListing limit={3} />
                 <div className='center-button'>
                     <Button size={'large'} onClick={viewTutorials}>View More</Button>
                 </div>
