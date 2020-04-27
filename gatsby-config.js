@@ -36,11 +36,17 @@ module.exports = {
       options: {
         plugins: [
           {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 590,
+            },
+          },
+          {
             resolve: 'gatsby-remark-prismjs',
             options: {
-
             }
-          }
+          },
+          `gatsby-remark-smartypants`
         ]
       }
     },

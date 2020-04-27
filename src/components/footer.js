@@ -24,11 +24,11 @@ const Footer = () => {
                     <div style={alignmentStyle.parent}>
                         <div style={alignmentStyle.child}>
                             <h2 style={{color: 'white'}}>Menu</h2>
-                            <Link to='/' style={{color: 'white'}}>Home</Link>
-                            <Link to='/tutorials' style={{color: 'white'}}>Tutorials</Link>
-                            <Link to='/blog' style={{color: 'white'}}>Blog</Link>
-                            <Link to='/templates' style={{color: 'white'}}>Templates</Link>
-                            <Link to='/contact' style={{color: 'white'}}>Contact</Link>
+                            <Link className='footer-links' to='/' style={{color: 'white'}}>Home</Link>
+                            <Link className='footer-links' to='/tutorials' style={{color: 'white'}}>Tutorials</Link>
+                            <Link className='footer-links' to='/blog' style={{color: 'white'}}>Blog</Link>
+                            <Link className='footer-links' to='/templates' style={{color: 'white'}}>Templates</Link>
+                            <Link className='footer-links' to='/contact' style={{color: 'white'}}>Contact</Link>
                         </div>
                     </div>
                 </Col>
@@ -36,8 +36,8 @@ const Footer = () => {
                     <div style={alignmentStyle.parent}>
                         <div style={alignmentStyle.child}>
                             <h2 style={{color: 'white'}}>Legal Stuff</h2>
-                            <Link to='/terms-of-use' style={{color: 'white'}}>Terms of Use</Link>
-                            <Link to='/privacy-policy' style={{color: 'white'}}>Privacy Policy</Link>
+                            <Link className='footer-links' to='/terms-of-use' style={{color: 'white'}}>Terms of Use</Link>
+                            <Link className='footer-links' to='/privacy-policy' style={{color: 'white'}}>Privacy Policy</Link>
                         </div>
                     </div>
                 </Col>

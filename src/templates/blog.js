@@ -6,6 +6,7 @@ import { Divider, Space } from 'antd'
 import { UserOutlined, CalendarOutlined } from '@ant-design/icons'
 import PostListing from '../components/post-listing'
 import { Disqus } from 'gatsby-plugin-disqus'
+import SEO from '../components/seo'
 
 export default ({ data }) => {
     const post = data.markdownRemark
@@ -18,6 +19,7 @@ export default ({ data }) => {
 
     return (
         <div>
+            <SEO title={post.frontmatter.title} description={post.frontmatter.description} />
             <PageLayout active={post.fields.type} withPadding={false}>
                         <div style={{background: 'white'}}>
                             <Img alt={post.frontmatter.title} style={{
@@ -73,7 +75,7 @@ export const query = graphql`
         date(formatString: "MMMM DD, YYYY")
         featureImage {
             childImageSharp {
-                sizes(maxWidth: 800) {
+                sizes(maxWidth: 1000) {
                     ...GatsbyImageSharpSizes_withWebp
                 }
             }

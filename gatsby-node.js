@@ -5,7 +5,13 @@ exports.onCreateNode = ({node, getNode, actions}) => {
     if (node.internal.type === 'MarkdownRemark') {
         const { createNodeField } = actions
         const fileNode = getNode(node.parent)
-        const [basePath] = fileNode.relativePath.split('/')
+        let parts = fileNode.relativePath.split('/')
+
+        if (parts[0] === 'lessons') {
+          basePath = ``
+        } else {
+          basePath = parts[0]
+        }
         
         const slug = createFilePath({
             node,
@@ -21,7 +27,7 @@ exports.onCreateNode = ({node, getNode, actions}) => {
         createNodeField({
             node,
             name: 'type',
-            value: basePath
+            value: parts[0]
         })
     }
 }
@@ -44,12 +50,23 @@ exports.createPages = async ({graphql, actions}) => {
   `)
 
   result.data.allMarkdownRemark.edges.forEach(({node}) => {
+    if (node.fields.slug.indexOf('lessons') == 1) {
       createPage({
-          path: node.fields.slug,
-          component: path.resolve(`./src/templates/blog.js`),
-          context: {
-              slug: node.fields.slug
-          }
+        path: node.fields.slug,
+        component: path.resolve(`./src/templates/lesson.js`),
+        context: {
+            slug: node.fields.slug
+        }
       })
+    } else {
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve(`./src/templates/blog.js`),
+        context: {
+            slug: node.fields.slug
+        }
+      })
+    }
+      
   })
 }

@@ -4,7 +4,7 @@ import Header from "../components/header"
 import Footer from "../components/footer"
 import '../styles/page-layout.css'
 
-const PageLayout = ({ children, title, active, header, withPadding = true, fullscreen = false, background = 'white' }) => {
+const LessonLayout = ({ children, title, active, header, withPadding = true, chapter, lesson }) => {
     return (
         <Layout>
             <Layout.Header style={{ background: 'white' }}>
@@ -16,9 +16,9 @@ const PageLayout = ({ children, title, active, header, withPadding = true, fulls
                     {header}
                 </div>
                 <Row style={{ marginTop: 40 }}>
-                    <Col span={fullscreen ? 0 : null} xs={0} md={2} lg={4}></Col>
-                    <Col span={fullscreen ? 24 : null} xs={fullscreen ? null : 24} md={fullscreen ? null : 20} lg={fullscreen ? null : 16}>
-                        <div style={{ background: background, marginBottom: 40, minHeight: 280, paddingTop: withPadding ? 40 : 0, paddingBottom: 20, paddingLeft: withPadding ? 40 : 0, paddingRight: withPadding ? 40 : 0 }}>
+                    <Col xs={0} md={2} lg={4}></Col>
+                    <Col xs={24} md={20} lg={16}>
+                        <div style={{ background: 'white', marginBottom: 40, minHeight: 280, paddingTop: withPadding ? 40 : 0, paddingBottom: 20, paddingLeft: withPadding ? 40 : 0, paddingRight: withPadding ? 40 : 0 }}>
                             {title && <h1 style={{marginTop: 0, paddingTop: 0}}>{title}</h1>}
                             {children}
                         </div>
@@ -32,4 +32,4 @@ const PageLayout = ({ children, title, active, header, withPadding = true, fulls
     )
 }
 
-export default PageLayout
+export default LessonLayout
