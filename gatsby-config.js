@@ -13,9 +13,15 @@ module.exports = {
     url: 'https://www.reactfire.com',
     siteUrl: 'https://www.reactfire.com',
     image: '/images/logo.png',
-    twitterUsername: 'reactfire'
+    twitterUsername: 'reactfire',
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-164634745-1",
+      },
+    },
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
@@ -44,6 +50,13 @@ module.exports = {
           {
             resolve: 'gatsby-remark-prismjs',
             options: {
+            }
+          },
+          {
+            resolve: "gatsby-remark-external-links",
+            options: {
+              target: "_blank",
+              rel: "nofollow"
             }
           },
           `gatsby-remark-smartypants`
