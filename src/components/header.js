@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Menu, Button, Dropdown } from 'antd'
+import { Menu, Button, Dropdown, Drawer } from 'antd'
 import { navigate, Link } from 'gatsby'
 import { MenuOutlined } from '@ant-design/icons'
 
@@ -52,6 +52,16 @@ const Header = ({active, toggleMenu}) => {
 
     return (
         <div style={{display: 'flex'}}>
+            <Drawer
+                title="Basic Drawer"
+                placement="left"
+                closable={true}
+                visible={true}
+                >
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+            </Drawer>
             {dimensions.width > PHONE_BREAKPOINT &&<div style={{marginRight: 20}}>
                 <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
             </div>}
@@ -61,7 +71,7 @@ const Header = ({active, toggleMenu}) => {
                 <div style={{padding: 10, width: '100%', background: '#00586a', display: 'flex', alignItems: 'center', position: 'relative'}}>
                     <Button type='link' style={{minWidth: 40, background: 'transparent'}} onClick={toggleMenu} size={'large'} icon={<MenuOutlined style={{color: 'white'}} />} />
                     <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                        <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
+                        <Link to='/'><img alt='ReactFire logo' src='/images/logo-word-white.png' style={{height: 40, marginRight: 40}} /></Link>
                     </div>
                     {/* <div style={{pointerEvents: 'none', position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                         <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
