@@ -26,7 +26,8 @@ export default ({ data }) => {
         } else {
             if (chapters[lesson.frontmatter.chapter] === undefined) {
                 chapters[lesson.frontmatter.chapter] = {
-                    lessons: []
+                    lessons: [],
+                    timeToRead: 0
                 }
             }
 
@@ -55,6 +56,7 @@ export default ({ data }) => {
                 }
     
                 chapters[lesson.frontmatter.chapter].lessons[lesson.frontmatter.lesson] = lesson
+                chapters[lesson.frontmatter.chapter].timeToRead += lesson.timeToRead
             }
         }
     })
@@ -92,6 +94,7 @@ export default ({ data }) => {
 
         navigate(nextLesson.fields.slug)
     }
+    console.log(chapters)
 
     return (
         <>
@@ -112,7 +115,7 @@ export default ({ data }) => {
                                         {Object.keys(chapters).map(key => {
                                             const chapter = chapters[key]
                                             return (
-                                                <Collapse.Panel expandIconPosition='right' header={<div style={{color: chapter.current ? '#00586d' : '#606060', fontWeight: chapter.current ? 'bold' : 'normal'}}>{`${key}. ${chapter.title}`}</div>} key={key} style={{background: 'white', borderColor: '#f0f2f5'}}>
+                                                <Collapse.Panel expandIconPosition='right' header={<div style={{color: chapter.current ? '#00586d' : '#606060', fontWeight: chapter.current ? 'bold' : 'normal'}}>{`${key}. ${chapter.title} (${chapter.timeToRead} min)`}</div>} key={key} style={{background: 'white', borderColor: '#f0f2f5'}}>
                                                     <Timeline style={{marginLeft: 20, marginTop: 10}}>
                                                         {chapter.lessons.map((lesson, key) => {
                                                             return (
@@ -182,6 +185,7 @@ export const query = graphql`
                     slug
                     tutorial
                 }
+                timeToRead
             }
         }
     }
