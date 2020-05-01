@@ -15,7 +15,7 @@ const getWindowDimensions = () => {
     }
 }
 
-const Header = ({active}) => {
+const Header = ({active, toggleMenu}) => {
     const PHONE_BREAKPOINT = 786
     const [dimensions, setDimensions] = useState(getWindowDimensions)
 
@@ -58,18 +58,25 @@ const Header = ({active}) => {
             {dimensions.width > PHONE_BREAKPOINT && menu}
 
             {dimensions.width <= PHONE_BREAKPOINT && (
-                <div style={{flexGrow: 1, position: 'absolute', top: 5, left: 20}}>
-                    <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
+                <div style={{padding: 10, width: '100%', background: '#00586a', display: 'flex', alignItems: 'center', position: 'relative'}}>
+                    <Button type='link' style={{minWidth: 40, background: 'transparent'}} onClick={toggleMenu} size={'large'} icon={<MenuOutlined style={{color: 'white'}} />} />
+                    <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
+                    </div>
+                    {/* <div style={{pointerEvents: 'none', position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
+                    </div> */}
                 </div>
+                // <div style={{flexGrow: 1, position: 'absolute', top: 5, left: 20}}>
+                //     <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
+                // </div>
             )}
 
-            {dimensions.width <= PHONE_BREAKPOINT && (
+            {/* {dimensions.width <= PHONE_BREAKPOINT && (
                 <div style={{flexGrow: 1, position: 'absolute', top: 5, right: 20}}>
-                    <Dropdown trigger={['click']} overlay={menu}>
-                        <Button size={'large'} icon={<MenuOutlined />} />
-                    </Dropdown>
+                    
                 </div>
-            )}
+            )} */}
         </div>
     )
 }
