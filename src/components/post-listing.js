@@ -35,7 +35,7 @@ const PostListing = ({type, category, limit, onClick}) => {
                                     author
                                     featureImage {
                                         childImageSharp {
-                                            sizes(maxWidth: 330) {
+                                            sizes(maxWidth: 600) {
                                                 ...GatsbyImageSharpSizes_withWebp
                                             }
                                         }
