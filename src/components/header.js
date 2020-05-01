@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Menu, Button, Dropdown, Drawer } from 'antd'
+import { Menu, Button, Drawer } from 'antd'
 import { navigate, Link } from 'gatsby'
 import { MenuOutlined } from '@ant-design/icons'
 
@@ -15,9 +15,10 @@ const getWindowDimensions = () => {
     }
 }
 
-const Header = ({active, toggleMenu}) => {
+const Header = ({active}) => {
     const PHONE_BREAKPOINT = 786
     const [dimensions, setDimensions] = useState(getWindowDimensions)
+    const [showMenu, setShowMenu] = useState(false)
 
     const goToPage = ({key}) => {
         if (key === 'home') {
@@ -29,6 +30,10 @@ const Header = ({active, toggleMenu}) => {
 
     const resizeListener = () => {
         setDimensions(getWindowDimensions())
+    }
+
+    const toggleMenu = () => {
+        setShowMenu(!showMenu)
     }
 
     useEffect(() => {
@@ -53,16 +58,36 @@ const Header = ({active, toggleMenu}) => {
     return (
         <div style={{display: 'flex'}}>
             <Drawer
-                title="Basic Drawer"
+                // title={<div></div>}
                 placement="left"
-                closable={true}
-                visible={true}
+                closable={false}
+                onClose={toggleMenu}
+                visible={showMenu}
+                bodyStyle={{background: '#00586a', color: 'white'}}
+                headerStyle={{background: '#00586a', color: 'white'}}
+                maskClosable={true}
                 >
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
+                    <div style={{color: 'white', paddingLeft: 10, paddingTop: 20}}>
+                        {[{
+                            title: 'Home',
+                            to: '/'
+                        }, {
+                            title: 'Tutorials',
+                            to: '/tutorials'
+                        }, {
+                            title: 'Blog',
+                            to: '/blog'
+                        }, {
+                            title: 'Templates',
+                            to: '/templates'
+                        }, {
+                            title: 'Contact Us',
+                            to: '/contact'
+                        }].map(({title, to}, key) => <Link key={key} to={to} style={{color: 'white', fontSize: '1.3em', display: 'block', marginBottom: 20}}>{title}</Link>)}
+                        
+                    </div>
             </Drawer>
-            {dimensions.width > PHONE_BREAKPOINT &&<div style={{marginRight: 20}}>
+            {dimensions.width > PHONE_BREAKPOINT &&<div style={{marginRight: 20, marginLeft: 20}}>
                 <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
             </div>}
             {dimensions.width > PHONE_BREAKPOINT && menu}
