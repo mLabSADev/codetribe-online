@@ -60,7 +60,7 @@ class App extends Component {
 
 ## 3. Closing tags
 
-React is extremely strict, therefore you need to be careful with invalid HTML. Always close your tags, even for single tags. An example single tag is the line break tag "\<br>". You will need to close it with a forward slash which results in this tag "\<br />".
+React is extremely strict, therefore you need to be careful with invalid HTML. Always close your tags, even for single tags. An example single tag is the line break tag "**\<br>**". You will need to close it with a forward slash which results in this tag "**\<br />**".
 
 ```javascript
 // This is correct
@@ -92,7 +92,7 @@ class App extends Component {
 
 ## 4. Using undefined tags (components)
 
-You will be able to create your own tags in React knows as Components. Components are recognised by their capitalized first letter (\<Example>). If you use a capitalized tag that is not a valid component, your app will not run. We will touch on components in later lessons.
+You will be able to create your own tags in React knows as Components. Components are recognized by their capitalized first letter (**\<Strong>**). If you use a capitalized tag that is not a valid component, your app will not run. We will touch on components in later lessons.
 
 The code below will not compile
 
@@ -104,15 +104,17 @@ class App extends Component {
     	<div>
     		<h1>Hello World</h1>
     		<p>This is a paragraph<br />Another line</p>
-        <Strong>Hey there</Strong>
+        	<Strong>Hey there</Strong>
       </div>
     )
   }
 }
 ```
 
-Find different ways you can break your app by trying new scenerios until you are comfortable with rendering layouts
+Find different ways you can break your app by trying new scenarios until you are comfortable with rendering layouts
 
 ## Activity
 
-Build a login form with an email and password field, as well as a login button below them. It should look something like the page below. If you stuck, you can quickly peak and look at the code.
+Build a login form with an email and password field, as well as a login button below them. It should look something like the page below. If you are stuck, then you can quickly peak and look at the code.
+
+<iframe width="100%" height="400" src="https://stackblitz.com/edit/reactfire-activity-1?embed=1&file=index.js&hideExplorer=1&hideNavigation=1&view=preview" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>

@@ -133,7 +133,8 @@ export default ({ data }) => {
                             </Col>
                             <Col sm={24} md={16} lg={18}>
                                 <div style={{background: 'white', paddingLeft: 40, paddingRight: 40, paddingTop:1, paddingBottom: 40}}>
-                                    <h1>{post.frontmatter.title}</h1>
+                                    <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
+                                    <p style={{color: '#00586d', fontSize: '0.9em', marginBottom: 20}}>{post.timeToRead} min of reading</p>
                                     <div style={{fontSize: '1em'}} dangerouslySetInnerHTML={{ __html: post.html }} />
 
                                     <Divider />
@@ -172,6 +173,7 @@ export const query = graphql`
       fields {
           tutorial
       }
+      timeToRead
     },
     allMarkdownRemark(filter: {fields: {type: {eq: "lessons"}}}) {
         edges {
