@@ -171,6 +171,7 @@ export const query = graphql`
       fields {
           tutorial
       }
+      timeToRead
     },
     allMarkdownRemark(filter: {fields: {type: {eq: "lessons"}}}) {
         edges {
