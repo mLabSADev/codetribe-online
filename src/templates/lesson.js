@@ -68,7 +68,6 @@ export default ({ data }) => {
     const goToPrev = () => {
         let prevLesson
 
-        console.log(post.frontmatter)
         if (post.frontmatter.lesson === 1 && post.frontmatter.chapter === 1) {
             navigate(mainSlug)
 
@@ -94,7 +93,6 @@ export default ({ data }) => {
 
         navigate(nextLesson.fields.slug)
     }
-    console.log(chapters)
 
     return (
         <>
