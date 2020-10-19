@@ -106,19 +106,19 @@ export default ({ data }) => {
                             <Col xs={24} sm={24} md={8} lg={6}>
                                 <div style={{background: 'white', width: '100%', marginRight: 10, marginBottom: 20}}>
                                     <div style={{paddingLeft: 20, paddingRight: 20, paddingTop: 20}}>
-                                        <Link to={mainSlug}><h2 style={{color: '#00586d'}}>{title}</h2></Link>
+                                        <Link to={mainSlug}><h2 style={{color: '#97CA42'}}>{title}</h2></Link>
                                     </div>
                                     
                                     <Collapse defaultActiveKey={[`${currentChapter}`]} bordered={false} expandIconPosition='right'>
                                         {Object.keys(chapters).map(key => {
                                             const chapter = chapters[key]
                                             return (
-                                                <Collapse.Panel expandIconPosition='right' header={<div style={{color: chapter.current ? '#00586d' : '#606060', fontWeight: chapter.current ? 'bold' : 'normal'}}>{`${key}. ${chapter.title} (${chapter.timeToRead} min)`}</div>} key={key} style={{background: 'white', borderColor: '#f0f2f5'}}>
+                                                <Collapse.Panel expandIconPosition='right' header={<div style={{color: chapter.current ? '#97CA42' : '#606060', fontWeight: chapter.current ? 'bold' : 'normal'}}>{`${key}. ${chapter.title} (${chapter.timeToRead} min)`}</div>} key={key} style={{background: 'white', borderColor: '#f0f2f5'}}>
                                                     <Timeline style={{marginLeft: 20, marginTop: 10}}>
                                                         {chapter.lessons.map((lesson, key) => {
                                                             return (
-                                                                <Timeline.Item color='#00586d' key={key} dot={lesson.completed ? <CheckCircleFilled style={{color: 'green'}} /> : null}>
-                                                                    <Link to={lesson.fields.slug} style={{color: lesson.current ? '#00586d' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title}</Link>
+                                                                <Timeline.Item color='#97CA42' key={key} dot={lesson.completed ? <CheckCircleFilled style={{color: 'green'}} /> : null}>
+                                                                    <Link to={lesson.fields.slug} style={{color: lesson.current ? '#97CA42' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title}</Link>
                                                                 </Timeline.Item>
                                                             )
                                                         })}
@@ -132,7 +132,7 @@ export default ({ data }) => {
                             <Col sm={24} md={16} lg={18}>
                                 <div style={{background: 'white', paddingLeft: 40, paddingRight: 40, paddingTop:1, paddingBottom: 40}}>
                                     <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
-                                    <p style={{color: '#00586d', fontSize: '0.9em', marginBottom: 20}}>{post.timeToRead} min of reading</p>
+                                    <p style={{color: '#97CA42', fontSize: '0.9em', marginBottom: 20}}>{post.timeToRead} min of reading</p>
                                     <div style={{fontSize: '1em'}} dangerouslySetInnerHTML={{ __html: post.html }} />
 
                                     <Divider />

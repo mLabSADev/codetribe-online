@@ -1,5 +1,5 @@
 ---
-title: Installing React on MacOS or Linux
+title: What is a Scrum Master?
 date: 2020-04-26
 chapter: 1
 lesson: 4

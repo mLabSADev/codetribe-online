@@ -1,5 +1,5 @@
 ---
-title: Installing Node.js on Windows
+title: What is a Product Owner?
 date: 2020-04-26
 chapter: 1
 lesson: 3

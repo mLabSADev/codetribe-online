@@ -7,13 +7,13 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: 'ReactFire',
-    titleTemplate: 'ReactFire - %s',
+    title: 'Codetribe',
+    titleTemplate: 'Codetribe - %s',
     description: 'Best place to learn how to build Web & Mobile Apps with React',
     url: 'https://www.reactfire.com',
     siteUrl: 'https://www.reactfire.com',
     image: '/images/logo.png',
-    twitterUsername: 'reactfire',
+    twitterUsername: 'codetribe',
   },
   plugins: [
     {
@@ -66,11 +66,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `ReactFire`,
-        short_name: `ReactFire`,
+        name: `Codetribe`,
+        short_name: `Codetribe`,
         start_url: `/`,
-        background_color: `#00586d`,
-        theme_color: `#00586d`,
+        background_color: `#232222`,
+        theme_color: `#97CA42`,
         display: `minimal-ui`,
         icon: `static/favicon.png`,
       },

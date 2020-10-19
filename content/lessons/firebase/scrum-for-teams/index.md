@@ -1,11 +1,11 @@
 ---
-title: React for Beginners
+title: Scrum
 author: melvin
 duration: 6 hours
-date: 2020-04-26
+date: 2020-10-19
 chapter: 0
-lesson: 0
-id: beginner
+lesson: 1
+id: scrum
 price: 0
 featureImage: react-for-beginners.png
 ---

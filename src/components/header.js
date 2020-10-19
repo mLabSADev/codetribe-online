@@ -63,8 +63,8 @@ const Header = ({active}) => {
                 closable={false}
                 onClose={toggleMenu}
                 visible={showMenu}
-                bodyStyle={{background: '#00586a', color: 'white'}}
-                headerStyle={{background: '#00586a', color: 'white'}}
+                bodyStyle={{background: '#97CA42', color: 'white'}}
+                headerStyle={{background: '#97CA42', color: 'white'}}
                 maskClosable={true}
                 >
                     <div style={{color: 'white', paddingLeft: 10, paddingTop: 20}}>
@@ -88,15 +88,15 @@ const Header = ({active}) => {
                     </div>
             </Drawer>
             {dimensions.width > PHONE_BREAKPOINT &&<div style={{marginRight: 20, marginLeft: 20}}>
-                <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
+                <Link to='/'><img alt='Codetribe logo' src='/images/codetribe-logo.png' style={{height: 40, marginRight: 40}} /></Link>
             </div>}
             {dimensions.width > PHONE_BREAKPOINT && menu}
 
             {dimensions.width <= PHONE_BREAKPOINT && (
-                <div style={{padding: 10, width: '100%', background: '#00586a', display: 'flex', alignItems: 'center', position: 'relative'}}>
-                    <Button type='link' style={{minWidth: 40, background: 'transparent'}} onClick={toggleMenu} size={'large'} icon={<MenuOutlined style={{color: 'white'}} />} />
+                <div style={{padding: 10, width: '100%', background: 'white', display: 'flex', alignItems: 'center', position: 'relative'}}>
+                    <Button type='link' style={{minWidth: 40, background: 'transparent'}} onClick={toggleMenu} size={'large'} icon={<MenuOutlined style={{color: '#97CA42'}} />} />
                     <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                        <Link to='/'><img alt='ReactFire logo' src='/images/logo-word-white.png' style={{height: 40, marginRight: 40}} /></Link>
+                        <Link to='/'><img alt='ReactFire logo' src='/images/codetribe-logo.png' style={{height: 40, marginRight: 40}} /></Link>
                     </div>
                     {/* <div style={{pointerEvents: 'none', position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                         <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>

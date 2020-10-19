@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Scrum for Management
 chapter: 1
 lesson: 1
 ---
