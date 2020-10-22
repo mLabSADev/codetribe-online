@@ -51,6 +51,7 @@ const Header = ({active}) => {
             <Menu.Item key='tutorials'>Tutorials</Menu.Item>
             <Menu.Item key='blog'>Blog</Menu.Item>
             <Menu.Item key='templates'>Example Projects</Menu.Item>
+            <Menu.Item key='webinar'>Webinar</Menu.Item>
             <Menu.Item key='contact'>Contact</Menu.Item>
         </Menu>
     )
@@ -81,6 +82,10 @@ const Header = ({active}) => {
                         {
                             title: 'Example Projects',
                             to: '/templates'
+                        }, 
+                        {
+                            title: 'Webinar',
+                            to: '/webinar'
                         }, 
                         {
                             title: 'Contact Us',

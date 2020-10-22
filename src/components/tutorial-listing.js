@@ -47,7 +47,7 @@ const TutorialListing = ({type, category, limit, onClick}) => {
                                     duration
                                     featureImage {
                                         childImageSharp {
-                                            sizes(maxWidth: 480) {
+                                            sizes(maxWidth: 580) {
                                                 ...GatsbyImageSharpSizes_withWebp
                                             }
                                         }
