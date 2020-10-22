@@ -5,6 +5,7 @@ import { Divider, Button, Row, Col, Collapse, Timeline } from 'antd'
 import { ArrowRightOutlined, ArrowLeftOutlined, CheckCircleFilled } from '@ant-design/icons'
 import { graphql, Link, navigate } from 'gatsby'
 import Disqus from 'gatsby-plugin-disqus/components/Disqus'
+import Quiz from '../components/quiz'
 
 export default ({ data }) => {
     const post = data.markdownRemark
@@ -14,6 +15,8 @@ export default ({ data }) => {
     let canGoForward
     let title
     let mainSlug
+
+    console.log(post)
 
     const lessons = data.allMarkdownRemark.edges.map(edge => {
         return edge.node
@@ -130,17 +133,23 @@ export default ({ data }) => {
                                 </div>
                             </Col>
                             <Col sm={24} md={16} lg={18}>
-                                <div style={{background: 'white', paddingLeft: 40, paddingRight: 40, paddingTop:1, paddingBottom: 40}}>
+                            <div style={{background: 'white', paddingLeft: 40, paddingRight: 40, paddingTop:1, paddingBottom: 40}}>
                                     <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
-                                    <p style={{color: '#97CA42', fontSize: '0.9em', marginBottom: 20}}>{post.timeToRead} min of reading</p>
-                                    <div style={{fontSize: '1em'}} dangerouslySetInnerHTML={{ __html: post.html }} />
+                                    
+                                    {post.frontmatter.quiz == null ? (<div>
+                                        <p style={{color: '#97CA42', fontSize: '0.9em', marginBottom: 20}}>{post.timeToRead} min of reading</p>
+                                        <div style={{fontSize: '1em'}} dangerouslySetInnerHTML={{ __html: post.html }} />
 
-                                    <Divider />
-                                    <div style={{display: 'flex', marginTop: 20}}>
-                                        <Button onClick={goToPrev} disabled={!canGoBack} size='large' type='default' icon={<ArrowLeftOutlined />}>Previous</Button>
-                                        <span style={{flex: 1}} />
-                                        <Button onClick={goToNext} disabled={!canGoForward} size='large' type='default'>Next <ArrowRightOutlined /></Button>
-                                    </div>
+                                        <Divider />
+                                        <div style={{display: 'flex', marginTop: 20}}>
+                                            <Button onClick={goToPrev} disabled={!canGoBack} size='large' type='default' icon={<ArrowLeftOutlined />}>Previous</Button>
+                                            <span style={{flex: 1}} />
+                                            <Button onClick={goToNext} disabled={!canGoForward} size='large' type='default'>Next <ArrowRightOutlined /></Button>
+                                        </div>
+
+                                    </div>) : (
+                                        <Quiz />
+                                    )}
 
                                     <Divider />
 
@@ -167,6 +176,7 @@ export const query = graphql`
         chapter
         lesson
         date(formatString: "MMMM DD, YYYY")
+        quiz
       }
       fields {
           tutorial

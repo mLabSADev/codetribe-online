@@ -5370,6 +5370,11 @@ domhandler@^3.0.0:
   dependencies:
     domelementtype "^2.0.1"
 
+dompurify@^2.0.8:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.2.0.tgz#51d34e76faa38b5d6b4e83a0678530f27fe3965c"
+  integrity sha512-bqFOQ7XRmmozp0VsKdIEe8UwZYxj0yttz7l80GBtBqdVRY48cOpXH2J/CVO7AEkV51qY0EBVXfilec18mdmQ/w==
+
 domutils@1.5.1, domutils@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.5.1.tgz#dcd8488a26f563d61079e48c9f7b7e32373682cf"
@@ -10253,6 +10258,11 @@ markdown-table@^2.0.0:
   dependencies:
     repeat-string "^1.0.0"
 
+marked@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.7.0.tgz#b64201f051d271b1edc10a04d1ae9b74bb8e5c0e"
+  integrity sha512-c+yYdCZJQrsRjTPhUx7VKkApw9bwDkNbHUKo1ovgcfDjb2kc8rLuRbIFyXL5WOEUwzSSKo3IXpph2K6DqB/KZg==
+
 md5-file@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/md5-file/-/md5-file-3.2.3.tgz#f9bceb941eca2214a4c0727f5e700314e770f06f"
@@ -13597,6 +13607,14 @@ react-polyglot@^0.6.0:
   dependencies:
     hoist-non-react-statics "^2.5.0"
     prop-types "^15.5.8"
+
+react-quiz-component@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/react-quiz-component/-/react-quiz-component-0.3.7.tgz#68738df9acaa1033b1dbd47a94a9dda4a5dd5631"
+  integrity sha512-O02oM1iHChZgGzpIRrSH9fEXaiFQf8j3l9/5TUsw/waR9LFLXFHM/zOpvAic+tGUHQDy6FoTd/n4d6lCwKFnbQ==
+  dependencies:
+    dompurify "^2.0.8"
+    marked "^0.7.0"
 
 react-reconciler@^0.24.0:
   version "0.24.0"

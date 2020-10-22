@@ -28,7 +28,7 @@ const HomeContent = () => {
                 </div>
                 <Divider />
                 
-                <h3 className='section-header'>Recent Templates</h3>
+                <h3 className='section-header'>Recent Projects</h3>
                 <PostListing type={'templates'} limit={3} />
                 <div className='center-button'>
                     <Button size={'large'} onClick={viewTemplates}>View More</Button>
@@ -36,7 +36,7 @@ const HomeContent = () => {
                 <Divider />
 
                 <h3 className='section-header'>Recent Blogs</h3>
-                <PostListing type={'blog'} limit={3} />
+                <PostListing limit={3} />
                 <div className='center-button'>
                     <Button size={'large'} onClick={viewBlogs}>View More</Button>
                 </div>

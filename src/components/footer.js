@@ -52,7 +52,7 @@ const Footer = () => {
                 </Col>
             </Row>
             <Divider />
-            <p id='copyright'>Made with <HeartFilled style={{color: 'red'}} /> in Pretoria<br />&copy; ReactFire 2020</p>
+            <p id='copyright'>Made with <HeartFilled style={{color: 'red'}} /> by <span style={{color: '#97CA42'}}>mLab</span><br />&copy; CodeTribe 2020</p>
         </div>
     )
 }

@@ -50,7 +50,7 @@ const Header = ({active}) => {
             <Menu.Item key='home'>Home</Menu.Item>
             <Menu.Item key='tutorials'>Tutorials</Menu.Item>
             <Menu.Item key='blog'>Blog</Menu.Item>
-            <Menu.Item key='templates'>Templates</Menu.Item>
+            <Menu.Item key='templates'>Example Projects</Menu.Item>
             <Menu.Item key='contact'>Contact</Menu.Item>
         </Menu>
     )
@@ -77,10 +77,12 @@ const Header = ({active}) => {
                         }, {
                             title: 'Blog',
                             to: '/blog'
-                        }, {
-                            title: 'Templates',
+                        }, 
+                        {
+                            title: 'Example Projects',
                             to: '/templates'
-                        }, {
+                        }, 
+                        {
                             title: 'Contact Us',
                             to: '/contact'
                         }].map(({title, to}, key) => <Link key={key} to={to} style={{color: 'white', fontSize: '1.3em', display: 'block', marginBottom: 20}}>{title}</Link>)}
