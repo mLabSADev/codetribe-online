@@ -76,6 +76,20 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        credentials: {
+          apiKey: "AIzaSyCSvPQ3-fpuAYGljNEBCrWTVO-yO9tepaU",
+          authDomain: "mlab-22bb9.firebaseapp.com",
+          databaseURL: "https://mlab-22bb9.firebaseio.com",
+          projectId: "mlab-22bb9",
+          storageBucket: "mlab-22bb9.appspot.com",
+          messagingSenderId: "479164571450",
+          appId: "1:479164571450:web:d87d6b0dc20f31fb927a03"
+        }
+      }
+    },
+    {
       resolve: `gatsby-plugin-offline`,
       options: {
         precachePages: [`/`, `/tutorials/`, '/blog/', '/templates/', '/contact/'],

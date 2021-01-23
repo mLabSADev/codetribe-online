@@ -1,5 +1,8 @@
 import './src/styles/global.css'
 import 'prismjs/themes/prism-tomorrow.css'
+import "firebase/auth"
+import "firebase/firestore"
+import "firebase/database"
 // import './src/styles/theme.less'
 
 export const onServiceWorkerUpdateReady = () => {
