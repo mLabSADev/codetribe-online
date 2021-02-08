@@ -7,7 +7,7 @@ chapter: 0
 lesson: 0
 id: angular
 price: 0
-featureImage: angular.jpg
+featureImage: angular.png
 ---
 
 -
