@@ -1,7 +1,7 @@
 ---
 title: Introduction to Design
 author: melvin
-duration: 8 hours
+duration: 10 days
 date: 2020-04-26
 chapter: 0
 lesson: 0

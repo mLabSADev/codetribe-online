@@ -25,7 +25,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: `reactfire`
+        shortname: `codetribe`
       }
     },
     `gatsby-plugin-react-helmet`,
