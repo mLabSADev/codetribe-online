@@ -176,7 +176,6 @@ export const query = graphql`
         chapter
         lesson
         date(formatString: "MMMM DD, YYYY")
-        quiz
       }
       fields {
           tutorial
