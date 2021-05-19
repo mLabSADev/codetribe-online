@@ -11,3 +11,4 @@ Google has spent years of research creating a design methodology called Material
 Material Design concepts have then grown into the web through the use of web components. Due to the rapid growth of cross-platform technology, those same web components are now used in building desktop applications.
 
 Apple later introduced its own design principles to allow developers to build better products for mac and iphones that take full advantage of what their platform is capable of doing in terms of design. Please refer to https://developer.apple.com/design/human-interface-guidelines/ios/overview/themes/ to read more about these design principles. 
+
