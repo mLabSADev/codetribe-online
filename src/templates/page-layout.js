@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth-service'
 import Login from '../components/login'
 const PageLayout = ({ children, title, active, header, withPadding = true, fullscreen = false, background = 'white' }) => {
     const [collapsed, setCollapsed] = useState(true)
-    const [loggedIn, setLoggedIn] = useState(null)
+    const [loggedIn, setLoggedIn] = useState(true)
 
     const toggleMenu = () => {
         setCollapsed(!collapsed)
