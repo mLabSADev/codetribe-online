@@ -136,7 +136,7 @@ export default ({ data }) => {
                             <div style={{background: 'white', paddingLeft: 40, paddingRight: 40, paddingTop:1, paddingBottom: 40}}>
                                     <h1 style={{marginBottom: 0}}>{post.frontmatter.title}</h1>
                                     
-                                    {post.frontmatter.quiz == null ? (<div>
+                                    {post.frontmatter.title != 'Test your skills' ? (<div>
                                         <p style={{color: '#97CA42', fontSize: '0.9em', marginBottom: 20}}>{post.timeToRead} min of reading</p>
                                         <div style={{fontSize: '1em'}} dangerouslySetInnerHTML={{ __html: post.html }} />
 
