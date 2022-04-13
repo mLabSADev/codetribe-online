@@ -48,10 +48,10 @@ const Header = ({active}) => {
     const menu = (
         <Menu theme="light" mode="horizontal" selectedKeys={[active]} onSelect={goToPage}>
             <Menu.Item key='home'>Home</Menu.Item>
-            <Menu.Item key='tutorials'>Tutorials</Menu.Item>
-            <Menu.Item key='blog'>Blog</Menu.Item>
-            <Menu.Item key='templates'>Example Projects</Menu.Item>
-            <Menu.Item key='webinar'>Webinar</Menu.Item>
+            <Menu.Item key='tutorials'>Courses</Menu.Item>
+            {/* <Menu.Item key='blog'>Blog</Menu.Item> */}
+            {/* <Menu.Item key='templates'>Example Projects</Menu.Item> */}
+            {/* <Menu.Item key='webinar'>Webinar</Menu.Item> */}
             <Menu.Item key='contact'>Contact</Menu.Item>
         </Menu>
     )
@@ -95,7 +95,7 @@ const Header = ({active}) => {
                     </div>
             </Drawer>
             {dimensions.width > PHONE_BREAKPOINT &&<div style={{marginRight: 20, marginLeft: 20}}>
-                <Link to='/'><img alt='Codetribe logo' src='/images/codetribe-logo.png' style={{height: 40, marginRight: 40}} /></Link>
+                <Link to='/'><img alt='Codetribe logo' src='/images/codetribe.svg' style={{height: 40, marginRight: 40}} /></Link>
             </div>}
             {dimensions.width > PHONE_BREAKPOINT && menu}
 

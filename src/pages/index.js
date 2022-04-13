@@ -7,8 +7,9 @@ import SEO from "../components/seo"
 export default () => (
     <div>
         <SEO title='Build React Web &amp; Mobile Apps' description='Building apps is easier than you think. We will take you through the process of building your own apps using React and Firebase' />
-        <PageLayout fullscreen={true} active='home' header={<HomeHeader />}>
-            <HomeContent />
-        </PageLayout>
+        {/* <PageLayout fullscreen={true} active='home'>
+            
+        </PageLayout> */}
+        <HomeContent />
     </div>
 )
