@@ -29,7 +29,7 @@ const TutorialListing = ({type, category, limit, onClick}) => {
                     flexDirection: 'column'
                 }}>
                     <h2>{post.frontmatter.title}</h2>
-                    <div style={{background: '#f5f5f5', padding: 10, fontWeight: 'bold', borderRadius: 20, width: 120, marginBottom: 10}}>By Zack Tinga</div>
+                    <div style={{background: '#f5f5f5', padding: 10, fontWeight: 'bold', borderRadius: 20, width: 120, marginBottom: 10}}>By Jane Doe</div>
                     <p style={{minHeight: 80}}>{post.excerpt}</p>
                     <div style={{display: 'flex'}}>
                         <div style={{background: '#f5f5f5', padding: 10, fontWeight: 'bold', borderRadius: 20, marginRight: 10}}>{post.frontmatter.duration}</div>

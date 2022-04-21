@@ -23,7 +23,7 @@ const HomeContent = () => {
         <div style={{padding: 20}}>
             <div style={{display: 'flex', justifyContent: 'flex-end', padding: 10, background: '#f5f5f5', borderRadius: 20, marginBottom: 20, alignItems: 'center'}}>
                 <div style={{width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgb(0, 153, 255)', borderRadius: '100%', color: 'white', marginRight: 10}}>MM</div>
-                <div style={{fontWeight: 'bold'}}>Melvin Musehani</div>
+                <div style={{fontWeight: 'bold'}}>John Doe</div>
             </div>
 
         <div style={{display: 'flex', flexDirection: 'row'}}>
