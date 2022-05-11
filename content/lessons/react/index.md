@@ -1,6 +1,6 @@
 ---
 title: ReactJS
-author: nokwanda
+author: Nokwanda Maranjane
 duration: 2 hours
 date: 2021-01-07
 chapter: 0
