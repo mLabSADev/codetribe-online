@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/home-content.css'
-import { Button, Divider } from 'antd'
+import { Button, Col, Divider, Row } from 'antd'
 import { navigate } from 'gatsby'
 import PostListing from './post-listing'
 import TutorialListing from './tutorial-listing'
@@ -26,9 +26,10 @@ const HomeContent = () => {
                 <div style={{fontWeight: 'bold'}}>John Doe</div>
             </div>
 
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-            <div style={{width: 200}}>
-            <div>
+        {/* <div style={{display: 'flex', flexDirection: 'row'}}> */}
+            <Row>
+                <Col xs={0} sm={0} md={4} lg={3}>
+            <div style={{marginRight: 20}}>
                 <h3><ArrowLeftOutlined style={{marginRight: 10, marginBottom: 20}} /> Menu</h3>
 
                 <button style={{
@@ -38,7 +39,7 @@ const HomeContent = () => {
                             borderRadius: 28,
                             color: 'rgb(143, 230, 76)',
                             cursor: 'pointer',
-                            width: 180,
+                            width: '100%',
                             marginRight: 20,
                             fontWeight: 'bold',
                         }}>Browse</button>
@@ -49,25 +50,30 @@ const HomeContent = () => {
                             borderRadius: 28,
                             color: 'rgb(61, 61, 61)',
                             cursor: 'pointer',
-                            width: 180,
+                            width: '100%',
                             marginRight: 20,
                             marginTop: 10,
                             fontWeight: 'bold'
                         }}>Coders Hub</button>
             </div>
-            </div>
+            </Col>
+            <Col xs={24} sm={24} md={20} lg={21}>
             <div style={{flex: 1}}>
                 <div style={{width: '100%', background: "linear-gradient(105deg, #5c61ff 0%, hsl(214, 100%, 84%) 100%)", borderRadius: 20, padding: 30, overflow: 'hidden', position: 'relative'}}>
-                    <span style={{color: 'white', fontSize: 64, fontWeight: 'bold', display: 'block'}}>Browse our<br />useful <span style={{color: 'rgb(143, 230, 76)'}}>Tutorials</span></span>
-                    <div style={{width: 600}}>
-                    <span style={{color: 'white'}}>Nunc quis tortor ut diam scelerisque volutpat ac ut felis. Nullam tincidunt lacinia eleifend. Vestibulum nisi augue, commodo sed tellus sed, condimentum lobortis orci. Aenean eu enim et arcu finibus facilisis nec vel orci.</span>
-                    </div>
-                    <img src='/images/ssss.webp' style={{
-                        position: 'absolute',
-                        right: -100,
-                        top: 0,
-                        bottom: 0
+                    <Row>
+                        <Col xs={24} sm={24} md={16} lg={12}>
+                        <span style={{color: 'white', fontSize: 64, fontWeight: 'bold', display: 'block'}}>Browse our<br />useful <span style={{color: 'rgb(143, 230, 76)'}}>Tutorials</span></span>
+                        <div>
+                        <span style={{color: 'white'}}>Nunc quis tortor ut diam scelerisque volutpat ac ut felis. Nullam tincidunt lacinia eleifend. Vestibulum nisi augue, commodo sed tellus sed, condimentum lobortis orci. Aenean eu enim et arcu finibus facilisis nec vel orci.</span>
+                        </div>
+                        </Col>
+                        <Col xs={0} sm={0} md={0} lg={8}>
+                        <img src='/images/ssss.webp' style={{
                     }} />
+                        </Col>
+                    </Row>
+                    
+                    
                 </div>
 
                 <div style={{marginTop: 20, background: '#f5f5f5', borderRadius: 20, border: '1px solid #dedede', padding: 15, marginBottom: 20}}>
@@ -76,7 +82,8 @@ const HomeContent = () => {
 
                 <TutorialListing limit={6} />
             </div>
-        </div>
+            </Col>
+            </Row>
         </div>
     )
 }

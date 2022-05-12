@@ -3,6 +3,7 @@ title: Working with HTTP in Angular
 date: 2018-09-08
 author: Melvin Musehani
 featureImage: "./images/http-angular/http-angular.jpg"
+duration: "0:0"
 ---
 
 Building offline apps is all fun and great, but there are instances where you need to access external information. Actually, the majority of apps and web applications out there access external data. Whether it’s for authenticating users, getting the latest scores of the tournament or getting an updated news feed – all of these are possible with RESTful APIs. In this article, you will learn how to consume HTTP APIs in Angular.

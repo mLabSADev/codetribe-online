@@ -1,6 +1,6 @@
 import React from 'react'
 import PageLayout from '../templates/page-layout'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Row, Col } from 'antd'
 import { Link } from 'gatsby';
 
 export default () => {
@@ -18,8 +18,9 @@ export default () => {
             bottom: 0,
             background: 'linear-gradient(227deg, #fffedb 0%, hsl(283, 100%, 88%) 100%)'
         }}>
+            <Row style={{height: '100%'}}>
+                <Col xs={0} sm={0} md={0} lg={16}>
             <div style={{
-                width: '70%',
                 height: '100%',
                 display: 'flex',
                 flexDirection: 'column',
@@ -31,10 +32,12 @@ export default () => {
                 <img src='/images/Frame.png' style={{
                     position: 'absolute',
                     left: 0,
-                    top: 0
+                    top: 0,
+                    opacity: 0.5
                 }} />
                 <div style={{
-                    width: 600
+                    width: 600,
+                    zIndex: 100
                 }}>
                     <p style={{
                         fontSize: 40,
@@ -50,18 +53,16 @@ export default () => {
                     <p>We are excited that you have managed to join the team. Your hardwork and dedication has been recognized. We have an amazing team that is willing to train, guide and mentor you on your journey.</p>
                 </div>
             </div>
+            </Col>
+            <Col xs={24} sm={24} md={24} lg={8} style={{height: '100%', padding: 20}}>
             <div style={{
                 background: 'white',
                 borderRadius: 20,
-                position: 'absolute',
-                top: 40,
-                bottom: 40,
-                right: 40,
-                width: '25%',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                height: '100%',
             }}>
                 <img src='/images/codetribe.svg' />
                 <h1>SIGN IN</h1>
@@ -99,7 +100,7 @@ export default () => {
                             cursor: 'pointer',
                             width: '100%',
                             marginRight: 10
-                        }}>Register</button>
+                        }}>Forgot Password</button>
                     </div>
                     <div style={{
                         flex: 1
@@ -117,6 +118,8 @@ export default () => {
                         </div>
                 </div>
             </div>
+            </Col>
+            </Row>
         </div>
     )
 }

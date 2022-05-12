@@ -3,6 +3,7 @@ title: Native vs Hybrid apps
 author: Nokwanda Maranjane
 date: 2018-06-23
 featureImage: ./images/native-vs-hybrid-apps/native-vs-hybrid-apps.png
+duration: "0:0"
 ---
 
 After reading this article you will be able to differentiate between two types of mobile development model. We are looking at native and hybrid app development.

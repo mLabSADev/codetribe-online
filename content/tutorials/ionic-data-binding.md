@@ -3,6 +3,7 @@ title: Ionic Data Binding
 date: 2018-10-29
 author: Melvin Musehani
 featureImage: "./images/ionic-data-binding/ionic-data-binding.jpg"
+duration: "0:0"
 ---
 
 ## **Understanding The Data flow**

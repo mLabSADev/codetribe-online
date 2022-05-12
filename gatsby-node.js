@@ -63,7 +63,8 @@ exports.createPages = async ({graphql, actions}) => {
         path: node.fields.slug,
         component: path.resolve(`./src/templates/lesson.js`),
         context: {
-            slug: node.fields.slug
+            slug: node.fields.slug,
+            type: 'lesson'
         }
       })
     } else {

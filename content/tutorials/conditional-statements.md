@@ -4,6 +4,7 @@ date: 2018-10-30
 author: Melvin Musehani
 featureImage: ./images/conditional-statements/conditional-statements.jpg
 seoTitle: Conditional Statements in Angular
+duration: "0:0"
 ---
 
 If you are reading this, then you should be familiar with flow controls like *if statements*. In JavaScript, *if statements* are used to control the flow of the app and make certain decisions. Angular has similar conditional statements called *ngIf.

@@ -3,6 +3,7 @@ title: Build an app in five minutes
 author: Melvin Musehani
 date: 2018-06-25
 featureImage: ./images/installing-ionic/installing-ionic.jpg
+duration: "0:0"
 ---
 
 Before you can follow any of the Ionic tutorials on this website, you need to install Ionic onto you machine. Below are instructions that can help you through the process of installing Ionic on which ever platform you are running. If you experience any problems with the instructions below, kindly leave a comment and I’ll do my best to help you out. If you have Ionic installed (Ionic4), move right along to the first tutorial of [building a Social Task Manager](https://www.ionicfire.com/creating-ionic-app-part-1-basic-task-manager/).

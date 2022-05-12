@@ -44,7 +44,6 @@ const TutorialListing = ({type, category, limit, onClick}) => {
                                     title
                                     author
                                     price
-                                    duration
                                     featureImage {
                                         childImageSharp {
                                             sizes(maxWidth: 580) {
