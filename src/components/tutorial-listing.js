@@ -29,13 +29,13 @@ const TutorialListing = ({type, category, limit, onClick}) => {
                     flexDirection: 'column'
                 }}>
                     <h2>{post.frontmatter.title}</h2>
-                    <div style={{background: '#f5f5f5', padding: 10, fontWeight: 'bold', borderRadius: 20, width: 120, marginBottom: 10}}>By Jane Doe</div>
+                    <div style={{marginBottom: 20}}><span style={{background: '#f5f5f5', padding: 10, fontWeight: 'bold', borderRadius: 20, marginBottom: 10}}>By {post.frontmatter.author}</span></div>
                     <p style={{minHeight: 80}}>{post.excerpt}</p>
-                    <div style={{display: 'flex'}}>
+                    {/* <div style={{display: 'flex'}}>
                         <div style={{background: '#f5f5f5', padding: 10, fontWeight: 'bold', borderRadius: 20, marginRight: 10}}>{post.frontmatter.duration}</div>
                         <div style={{background: '#f5f5f5', padding: 10, fontWeight: 'bold', borderRadius: 20, marginRight: 10}}>5 Sections</div>
                         <div style={{background: '#f5f5f5', padding: 10, fontWeight: 'bold', borderRadius: 20, marginRight: 10}}>Web Development</div>
-                    </div>
+                    </div> */}
                     <div style={{display: 'flex', marginTop: 20}}>
                     <div style={{
                         flex: 1,
@@ -53,12 +53,12 @@ const TutorialListing = ({type, category, limit, onClick}) => {
                         }} onClick={handleClick}>View Course</button>
                         
                         </div>
-                        <div style={{width: 50, height: 50, borderRadius: '100%', borderWidth: 1, borderColor: 'rgb(143, 230, 76)', borderStyle: 'solid', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                        {/* <div style={{width: 50, height: 50, borderRadius: '100%', borderWidth: 1, borderColor: 'rgb(143, 230, 76)', borderStyle: 'solid', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                             <HeartFilled style={{fontSize: 20, color: 'rgb(143, 230, 76)'}} />
                         </div>
                         <div style={{marginLeft: 10, width: 50, height: 50, borderRadius: '100%', borderWidth: 1, borderColor: 'rgb(143, 230, 76)', borderStyle: 'solid', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                             <BookFilled style={{fontSize: 20, color: 'rgb(143, 230, 76)'}} />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

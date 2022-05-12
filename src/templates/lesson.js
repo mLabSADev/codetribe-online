@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SEO from '../components/seo'
 import PageLayout from './page-layout'
 import { Divider, Button, Row, Col, Collapse, Timeline, Slider } from 'antd'
@@ -42,23 +42,47 @@ export default ({ data }) => {
     let canGoForward
     let title
     let mainSlug
+    const [position, setPosition] = useState()
+
+    const isLegalPage = (lesson) => {
+        if (position) {
+            let hasToMove = false
+            if (lesson.frontmatter.chapter == position.chapter && lesson.frontmatter.lesson > position.lesson) {
+                hasToMove = true
+            } else if (lesson.frontmatter.chapter > position.chapter) {
+                hasToMove = true
+            }
+    
+            return !hasToMove
+        }
+        
+        return false
+    }
 
     useEffect(() => {
         console.log(`Getting lesson progress for ${mainSlug}`);
         LessonService.currentLessonPosition('react').then(position => {
+            setPosition(position)
             const lessons = data.allMarkdownRemark.edges.map(edge => {
                 return edge.node
             }).filter(lesson => lesson.fields.tutorial === post.fields.tutorial)
 
-            console.log(position);
+            let hasToMove = false
+            let lessonToMoveTo
             for (let lesson of lessons) {
-                // if (lesson.frontmatter.chapter == position.chapter) {
-                //     navigate(lesson.fields.slug)
-                // }
-
-                if (lesson.frontmatter.lesson == position.lesson && lesson.frontmatter.chapter == position.chapter) {
-                    navigate(lesson.fields.slug)
+                if (lesson.frontmatter.chapter == position.chapter && lesson.frontmatter.lesson == position.lesson) {
+                    lessonToMoveTo = lesson
                 }
+            }
+
+            if (currentChapter == position.chapter && currentLesson > position.lesson) {
+                hasToMove = true
+            } else if (currentChapter > position.chapter) {
+                hasToMove = true
+            }
+
+            if (hasToMove) {
+                navigate(lessonToMoveTo.fields.slug)
             }
         })
     }, [])
@@ -160,9 +184,24 @@ export default ({ data }) => {
 
         console.log(`Next lesson`);
         console.log(nextLesson);
-        LessonService.setCurrentPosition('react', nextLesson.frontmatter.chapter, nextLesson.frontmatter.lesson).then(() => {
-            navigate(nextLesson.fields.slug)
+
+        LessonService.currentLessonPosition('react').then(position => {
+            let proceed = false
+            if (nextLesson.frontmatter.chapter > position.chapter) {
+                proceed = true
+            }
+
+            if (nextLesson.frontmatter.lesson > position.lesson) {
+                proceed = true
+            }
+
+            if (proceed) {
+                LessonService.setCurrentPosition('react', nextLesson.frontmatter.chapter, nextLesson.frontmatter.lesson).then(() => {
+                    navigate(nextLesson.fields.slug)
+                })
+            }
         })
+        
 
         
     }
@@ -215,9 +254,9 @@ export default ({ data }) => {
                                                             
 
                                                             return (
-                                                                <Timeline.Item color='#97CA42' key={key} dot={lesson.completed ? <CheckCircleFilled style={{color: 'green'}} /> : null}>
-                                                                    <Link style={{color: lesson.current ? '#97CA42' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title} ({DurationHelper.timeFormatToText(lesson.frontmatter.duration)})</Link>
-                                                                    {/* <Link to={lesson.fields.slug} style={{color: lesson.current ? '#97CA42' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title} ({DurationHelper.timeFormatToText(lesson.frontmatter.duration)})</Link> */}
+                                                                <Timeline.Item color='#97CA42' key={key} dot={isLegalPage(lesson) ? <CheckCircleFilled style={{color: 'green'}} /> : null}>
+                                                                    {/* <Link style={{color: lesson.current ? '#97CA42' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title} ({DurationHelper.timeFormatToText(lesson.frontmatter.duration)})</Link> */}
+                                                                    <Link to={isLegalPage(lesson) ? lesson.fields.slug : undefined} style={{color: lesson.current ? '#97CA42' : (isLegalPage(lesson) ? '#606060' : '#cfcfcf'), fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title} ({DurationHelper.timeFormatToText(lesson.frontmatter.duration)})</Link>
 
                                                                 </Timeline.Item>
                                                             )
