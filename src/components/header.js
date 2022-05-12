@@ -22,7 +22,7 @@ const Header = ({active}) => {
 
     const goToPage = ({key}) => {
         if (key === 'home') {
-            key = ''
+            key = 'home'
         }
 
         navigate(`/${key}`)
@@ -71,7 +71,7 @@ const Header = ({active}) => {
                     <div style={{color: 'white', paddingLeft: 10, paddingTop: 20}}>
                         {[{
                             title: 'Home',
-                            to: '/'
+                            to: '/home'
                         }, {
                             title: 'Tutorials',
                             to: '/tutorials'

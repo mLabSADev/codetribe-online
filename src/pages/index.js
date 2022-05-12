@@ -1,13 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PageLayout from '../templates/page-layout'
-import { Form, Input, Button, Row, Col } from 'antd'
-import { Link } from 'gatsby';
+import { Form, Input, Button, Row, Col, Alert } from 'antd'
+import { Link, navigate } from 'gatsby';
+import { AuthService } from '../services/auth-service';
 
 export default () => {
+    const [loggingIn, setIsLoggingIn] = useState(false)
+    const [errorMessage, setMessage] = useState(null)
+
+    const onLogin = values => {
+        setIsLoggingIn(true)
+        setMessage(null)
+
+        AuthService.login(values.email, values.password).then(() => {
+            onLoggedIn()
+        }).catch(err => {
+            setMessage(err.message)
+        }).finally(() => {
+            setIsLoggingIn(false)
+        })
+    }
+
     const layout = {
         labelCol: { span: 8 },
         wrapperCol: { span: 16 },
       };
+
+    const onLoggedIn = () => {
+        navigate('/home')
+    }
 
     return (
         <div style={{
@@ -66,29 +87,46 @@ export default () => {
             }}>
                 <img src='/images/codetribe.svg' />
                 <h1>SIGN IN</h1>
-                <input type='email' placeholder='Email' style={{
-                    width: '90%',
+                <Form style={{width: '90%'}} layout="vertical" initialValues={{email: '', password: ''}} onFinish={onLogin}>
+        {errorMessage && <Alert message={errorMessage} type="error" style={{marginBottom: 20}} />}
+        <Form.Item style={{}} label="Email" name='email' rules={[
+            {
+                required: true,
+                message: 'Your email address is required'
+            }
+        ]}>
+          <Input placeholder="Input your email address" style={{height: 50,
                     borderRadius: 10,
                     borderColor: 'rgb(143, 230, 76)',
                     borderStyle: 'solid',
                     padding: 10,
-                    marginBottom: 20
-                }} />
-                <input type='password' placeholder='Password' style={{
-                    width: '90%',
+                    borderWidth: 2}} />
+        </Form.Item>
+        <Form.Item label="Password" name='password' rules={[
+            {
+                required: true,
+                message: 'Your password is required'
+            }
+        ]}>
+          <Input type='password' placeholder="Input your password" style={{height: 50,
                     borderRadius: 10,
                     borderColor: 'rgb(143, 230, 76)',
                     borderStyle: 'solid',
+                    borderWidth: 2,
                     padding: 10,
-                }} />
+                    marginBottom: 20}} />
+        </Form.Item>
+        {/* <Form.Item>
+            <Button loading={loggingIn} disabled={loggingIn} htmlType='submit' type="primary" style={{height: 50, width: 100}}>Sign In</Button>
+        </Form.Item> */}
 
-                <div style={{
+<div style={{
                     display: 'flex',
                     flexDirection: 'row',
                     marginTop: 20,
                     width: '85%'
                 }}>
-                    <div style={{
+                    {/* <div style={{
                         flex: 1
                     }}>
                         <button style={{
@@ -101,22 +139,24 @@ export default () => {
                             width: '100%',
                             marginRight: 10
                         }}>Forgot Password</button>
-                    </div>
+                    </div> */}
                     <div style={{
                         flex: 1
                     }}>
-                    <Link to='/home'><button style={{
+                    <Button size='large' loading={loggingIn} disabled={loggingIn} htmlType='submit' style={{
                             background: 'rgb(143, 230, 76)',
                             borderStyle: 'none',
-                            padding: 10,
                             borderRadius: 28,
                             color: 'white',
                             cursor: 'pointer',
-                            width: '100%',
+                            width: 200,
                             marginLeft: 10
-                        }}>Sign In</button></Link>
+                        }}>Sign In</Button>
                         </div>
                 </div>
+      </Form>
+
+                
             </div>
             </Col>
             </Row>

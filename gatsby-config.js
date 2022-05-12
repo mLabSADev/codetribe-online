@@ -89,12 +89,12 @@ module.exports = {
         }
       }
     },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        precachePages: [`/`, `/tutorials/`, '/blog/', '/templates/', '/contact/'],
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-offline`,
+    //   options: {
+    //     precachePages: [`/`, `/tutorials/`, '/blog/', '/templates/', '/contact/'],
+    //   },
+    // },
     `gatsby-transformer-sharp`, 
     `gatsby-plugin-sharp`,
     `gatsby-plugin-robots-txt`,

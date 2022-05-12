@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import SEO from '../components/seo'
 import PageLayout from './page-layout'
 import { Divider, Button, Row, Col, Collapse, Timeline, Slider } from 'antd'
@@ -6,6 +6,7 @@ import { ArrowRightOutlined, ArrowLeftOutlined, CheckCircleFilled } from '@ant-d
 import { graphql, Link, navigate } from 'gatsby'
 import Disqus from 'gatsby-plugin-disqus/components/Disqus'
 import Quiz from '../components/quiz'
+import { LessonService } from '../services/lesson-service'
 
 export const DurationHelper = {
     secondsToText: seconds => {
@@ -33,14 +34,34 @@ export const DurationHelper = {
 
 export default ({ data }) => {
     const post = data.markdownRemark
-    const currentChapter = post.frontmatter.chapter
-    const currentLesson = post.frontmatter.lesson
+    let currentChapter = post.frontmatter.chapter
+    let currentLesson = post.frontmatter.lesson
     const canGoBack = currentChapter > 0
     let totalDuration;
     let totalDurationUntilCurrentLesson = 0;
     let canGoForward
     let title
     let mainSlug
+
+    useEffect(() => {
+        console.log(`Getting lesson progress for ${mainSlug}`);
+        LessonService.currentLessonPosition('react').then(position => {
+            const lessons = data.allMarkdownRemark.edges.map(edge => {
+                return edge.node
+            }).filter(lesson => lesson.fields.tutorial === post.fields.tutorial)
+
+            console.log(position);
+            for (let lesson of lessons) {
+                // if (lesson.frontmatter.chapter == position.chapter) {
+                //     navigate(lesson.fields.slug)
+                // }
+
+                if (lesson.frontmatter.lesson == position.lesson && lesson.frontmatter.chapter == position.chapter) {
+                    navigate(lesson.fields.slug)
+                }
+            }
+        })
+    }, [])
 
     console.log(post)
 
@@ -137,7 +158,13 @@ export default ({ data }) => {
             nextLesson = chapters[post.frontmatter.chapter].lessons[post.frontmatter.lesson + 1]
         }
 
-        navigate(nextLesson.fields.slug)
+        console.log(`Next lesson`);
+        console.log(nextLesson);
+        LessonService.setCurrentPosition('react', nextLesson.frontmatter.chapter, nextLesson.frontmatter.lesson).then(() => {
+            navigate(nextLesson.fields.slug)
+        })
+
+        
     }
 
     const progress = Math.round(totalDurationUntilCurrentLesson / total * 100)
@@ -189,7 +216,9 @@ export default ({ data }) => {
 
                                                             return (
                                                                 <Timeline.Item color='#97CA42' key={key} dot={lesson.completed ? <CheckCircleFilled style={{color: 'green'}} /> : null}>
-                                                                    <Link to={lesson.fields.slug} style={{color: lesson.current ? '#97CA42' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title} ({DurationHelper.timeFormatToText(lesson.frontmatter.duration)})</Link>
+                                                                    <Link style={{color: lesson.current ? '#97CA42' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title} ({DurationHelper.timeFormatToText(lesson.frontmatter.duration)})</Link>
+                                                                    {/* <Link to={lesson.fields.slug} style={{color: lesson.current ? '#97CA42' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title} ({DurationHelper.timeFormatToText(lesson.frontmatter.duration)})</Link> */}
+
                                                                 </Timeline.Item>
                                                             )
                                                         })}
