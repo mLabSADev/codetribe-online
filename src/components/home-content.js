@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/home-content.css'
 import { Button, Col, Divider, Row } from 'antd'
 import { navigate } from 'gatsby'
 import PostListing from './post-listing'
 import TutorialListing from './tutorial-listing'
 import { ArrowLeftOutlined } from '@ant-design/icons'
+import { AuthService } from '../services/auth-service'
 
 const HomeContent = () => {
+    const [user, setUser] = useState(null)
+
     const viewTutorials = () => {
         navigate('/tutorials')
     }
@@ -19,11 +22,25 @@ const HomeContent = () => {
         navigate('/blog')
     }
 
+    const getInitials = user => {
+        if (user)
+            return user.firstName.substr(0, 1) + user.lastName.substr(0, 1)
+        else
+            return '-'
+    }
+
+    useEffect(() => {
+        AuthService.currentUser().then(result => {
+            console.log(result);
+            setUser(result)
+        })
+    }, [])
+
     return (
         <div style={{padding: 20}}>
             <div style={{display: 'flex', justifyContent: 'flex-end', padding: 10, background: '#f5f5f5', borderRadius: 20, marginBottom: 20, alignItems: 'center'}}>
-                <div style={{width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgb(0, 153, 255)', borderRadius: '100%', color: 'white', marginRight: 10}}>MM</div>
-                <div style={{fontWeight: 'bold'}}>John Doe</div>
+                <div style={{width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgb(0, 153, 255)', borderRadius: '100%', color: 'white', marginRight: 10}}>{getInitials(user)}</div>
+                {user && <div style={{fontWeight: 'bold'}}>{user.firstName} {user.lastName}</div>}
             </div>
 
         {/* <div style={{display: 'flex', flexDirection: 'row'}}> */}

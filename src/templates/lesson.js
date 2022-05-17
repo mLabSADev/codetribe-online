@@ -38,11 +38,14 @@ export default ({ data }) => {
     let currentLesson = post.frontmatter.lesson
     const canGoBack = currentChapter > 0
     let totalDuration;
-    let totalDurationUntilCurrentLesson = 0;
+    // let totalDurationUntilCurrentLesson = 0;
     let canGoForward
     let title
     let mainSlug
     const [position, setPosition] = useState()
+    const [totalDurationUntilCurrentLesson, setTotalDurationUntilCurrentLesson] = useState(0)
+    const [total, setTotal] = useState(0)
+    const [nextIsLoading, setNextIsLoading] = useState(false) 
 
     const isLegalPage = (lesson) => {
         if (position) {
@@ -59,7 +62,17 @@ export default ({ data }) => {
         return false
     }
 
+    
+
     useEffect(() => {
+        // const parts = mainSlug.split('/')
+        // const finalParts = []
+        // for (let part of parts) {
+        //     if (part.trim().length !== 0) {
+        //         finalParts.push(part)
+        //     }
+        // }
+
         console.log(`Getting lesson progress for ${mainSlug}`);
         LessonService.currentLessonPosition('react').then(position => {
             setPosition(position)
@@ -81,7 +94,25 @@ export default ({ data }) => {
                 hasToMove = true
             }
 
-            if (hasToMove) {
+            let durationCount = 0
+            let totalCount = 0
+            for (let lesson of lessons) {
+                const [min, sec] = lesson.frontmatter.duration.split(':')
+        
+                totalCount += (parseInt(min) * 60) + parseInt(sec)
+        
+                if (lesson.frontmatter.chapter < position.chapter) {
+                    // setTotalDurationUntilCurrentLesson(totalDurationUntilCurrentLesson + (parseInt(min) * 60) + parseInt(sec))
+                    durationCount += (parseInt(min) * 60) + parseInt(sec)
+                } else if (lesson.frontmatter.chapter == position.chapter && lesson.frontmatter.lesson < position.lesson) {
+                    // setTotalDurationUntilCurrentLesson(totalDurationUntilCurrentLesson + (parseInt(min) * 60) + parseInt(sec))
+                    durationCount += (parseInt(min) * 60) + parseInt(sec)
+                }
+            }
+            setTotalDurationUntilCurrentLesson(durationCount)
+            setTotal(totalCount)
+
+            if (hasToMove || (currentChapter == 0 && currentLesson == 0)) {
                 navigate(lessonToMoveTo.fields.slug)
             }
         })
@@ -93,20 +124,32 @@ export default ({ data }) => {
         return edge.node
     }).filter(lesson => lesson.fields.tutorial === post.fields.tutorial)
 
-    let total = 0
+    // for (let lesson of lessons) {
+    //     const [min, sec] = lesson.frontmatter.duration.split(':')
+
+    //     total += (parseInt(min) * 60) + parseInt(sec)
+
+    //     // if (lesson.frontmatter.chapter < currentChapter) {
+    //     //     totalDurationUntilCurrentLesson += (parseInt(min) * 60) + parseInt(sec)
+    //     // } else if (lesson.frontmatter.chapter == currentChapter && lesson.frontmatter.lesson < currentLesson) {
+    //     //     totalDurationUntilCurrentLesson += (parseInt(min) * 60) + parseInt(sec)
+    //     // }
+    // }
+
+    // let total = 0
     console.log(currentChapter);
     console.log(currentLesson);
-    for (let lesson of lessons) {
-        const [min, sec] = lesson.frontmatter.duration.split(':')
+    // for (let lesson of lessons) {
+    //     const [min, sec] = lesson.frontmatter.duration.split(':')
 
-        total += (parseInt(min) * 60) + parseInt(sec)
+    //     total += (parseInt(min) * 60) + parseInt(sec)
 
-        if (lesson.frontmatter.chapter < currentChapter) {
-            totalDurationUntilCurrentLesson += (parseInt(min) * 60) + parseInt(sec)
-        } else if (lesson.frontmatter.chapter == currentChapter && lesson.frontmatter.lesson < currentLesson) {
-            totalDurationUntilCurrentLesson += (parseInt(min) * 60) + parseInt(sec)
-        }
-    }
+    //     if (lesson.frontmatter.chapter < currentChapter) {
+    //         totalDurationUntilCurrentLesson += (parseInt(min) * 60) + parseInt(sec)
+    //     } else if (lesson.frontmatter.chapter == currentChapter && lesson.frontmatter.lesson < currentLesson) {
+    //         totalDurationUntilCurrentLesson += (parseInt(min) * 60) + parseInt(sec)
+    //     }
+    // }
     totalDuration = DurationHelper.secondsToText(total);
 
     const chapters = {}
@@ -185,6 +228,7 @@ export default ({ data }) => {
         console.log(`Next lesson`);
         console.log(nextLesson);
 
+        setNextIsLoading(true)
         LessonService.currentLessonPosition('react').then(position => {
             let proceed = false
             if (nextLesson.frontmatter.chapter > position.chapter) {
@@ -199,13 +243,18 @@ export default ({ data }) => {
                 LessonService.setCurrentPosition('react', nextLesson.frontmatter.chapter, nextLesson.frontmatter.lesson).then(() => {
                     navigate(nextLesson.fields.slug)
                 })
+            } else {
+                navigate(nextLesson.fields.slug)
             }
+        }).finally(() => {
+            setNextIsLoading(false)
         })
         
 
         
     }
 
+    console.log(`Total Duration: ${totalDurationUntilCurrentLesson} / ${total}`);
     const progress = Math.round(totalDurationUntilCurrentLesson / total * 100)
 
     return (
@@ -225,7 +274,7 @@ export default ({ data }) => {
                                             <div style={{background: '#cfcfcf', flex: 1, height: 5}}>
                                                 <div style={{background: '#97CA42', width: `${progress}%`, height: 5}} />
                                             </div>
-                                            <div style={{paddingLeft: 10}}>{progress}%</div>
+                                            <div style={{paddingLeft: 10}}>{isNaN(progress) ? '-' : progress}%</div>
                                         </div>
                                     </div>
                                     
@@ -280,7 +329,7 @@ export default ({ data }) => {
                                         <div style={{display: 'flex', marginTop: 20}}>
                                             <Button onClick={goToPrev} disabled={!canGoBack} size='large' type='default' icon={<ArrowLeftOutlined />}>Previous</Button>
                                             <span style={{flex: 1}} />
-                                            <Button onClick={goToNext} disabled={!canGoForward} size='large' type='default'>Next <ArrowRightOutlined /></Button>
+                                            <Button onClick={goToNext} disabled={!canGoForward} size='large' type='default' loading={nextIsLoading}>Next <ArrowRightOutlined /></Button>
                                         </div>
 
                                     </div>) : (
