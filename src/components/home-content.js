@@ -45,7 +45,7 @@ const HomeContent = () => {
 
         {/* <div style={{display: 'flex', flexDirection: 'row'}}> */}
             <Row>
-                <Col xs={0} sm={0} md={4} lg={3}>
+                <Col xs={0} sm={0} md={0} lg={0}>
             <div style={{marginRight: 20}}>
                 <h3><ArrowLeftOutlined style={{marginRight: 10, marginBottom: 20}} /> Menu</h3>
 
@@ -74,7 +74,7 @@ const HomeContent = () => {
                         }}>Coders Hub</button>
             </div>
             </Col>
-            <Col xs={24} sm={24} md={20} lg={21}>
+            <Col xs={24} sm={24} md={24} lg={24}>
             <div style={{flex: 1}}>
                 <div style={{width: '100%', background: "linear-gradient(105deg, #5c61ff 0%, hsl(214, 100%, 84%) 100%)", borderRadius: 20, padding: 30, overflow: 'hidden', position: 'relative'}}>
                     <Row>
