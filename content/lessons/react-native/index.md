@@ -1,6 +1,6 @@
 ---
 title: React Native
-author: nokwanda
+author: Nathaneal Zondo
 duration: "0:0"
 date: 2021-01-07
 chapter: 0

@@ -1,6 +1,6 @@
 ---
 title: Ionic
-author: nokwanda
+author: Nokwanda Maranjane
 duration: "0:0"
 date: 2021-01-07
 chapter: 0

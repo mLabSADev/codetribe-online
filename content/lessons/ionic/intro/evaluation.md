@@ -3,7 +3,7 @@ title: Evaluation
 date: 2021-01-07
 chapter: 1
 lesson: 4
-duration: "0:0"
+duration: "5:00"
 ---
 
 
