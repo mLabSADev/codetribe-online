@@ -73,8 +73,10 @@ export default ({ data }) => {
         //     }
         // }
 
+        console.log(data.markdownRemark.fields.tutorial);
+
         console.log(`Getting lesson progress for ${mainSlug}`);
-        LessonService.currentLessonPosition('react').then(position => {
+        LessonService.currentLessonPosition(data.markdownRemark.fields.tutorial).then(position => {
             setPosition(position)
             const lessons = data.allMarkdownRemark.edges.map(edge => {
                 return edge.node
@@ -229,7 +231,7 @@ export default ({ data }) => {
         console.log(nextLesson);
 
         setNextIsLoading(true)
-        LessonService.currentLessonPosition('react').then(position => {
+        LessonService.currentLessonPosition(data.markdownRemark.fields.tutorial).then(position => {
             let proceed = false
             if (nextLesson.frontmatter.chapter > position.chapter) {
                 proceed = true
@@ -240,7 +242,7 @@ export default ({ data }) => {
             }
 
             if (proceed) {
-                LessonService.setCurrentPosition('react', nextLesson.frontmatter.chapter, nextLesson.frontmatter.lesson).then(() => {
+                LessonService.setCurrentPosition(data.markdownRemark.fields.tutorial, nextLesson.frontmatter.chapter, nextLesson.frontmatter.lesson).then(() => {
                     navigate(nextLesson.fields.slug)
                 })
             } else {
