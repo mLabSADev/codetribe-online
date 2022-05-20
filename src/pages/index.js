@@ -39,7 +39,7 @@ export default () => {
             bottom: 0,
             background: 'linear-gradient(227deg, #fffedb 0%, hsl(283, 100%, 88%) 100%)'
         }}>
-            <Row style={{height: '100%'}}>
+            <Row style={{height: '100%', overflow: 'hidden'}}>
                 <Col xs={0} sm={0} md={0} lg={16}>
             <div style={{
                 height: '100%',
@@ -48,7 +48,7 @@ export default () => {
                 justifyContent: 'center',
                 alignItems: 'flex-end',
                 paddingRight: 0,
-                
+                overflow: 'hidden'
             }}>
                 <img src='/images/Frame.png' style={{
                     position: 'absolute',
