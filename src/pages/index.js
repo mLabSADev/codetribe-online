@@ -85,7 +85,7 @@ export default () => {
                 flexDirection: 'column',
                 height: '100%',
             }}>
-                <img src='/images/codetribe.svg' />
+                <img src='/images/mlab.png' style={{height: 40}} />
                 <h1>SIGN IN</h1>
                 <Form style={{width: '90%'}} layout="vertical" initialValues={{email: '', password: ''}} onFinish={onLogin}>
         {errorMessage && <Alert message={errorMessage} type="error" style={{marginBottom: 20}} />}

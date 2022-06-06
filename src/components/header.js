@@ -95,7 +95,7 @@ const Header = ({active}) => {
                     </div>
             </Drawer>
             {dimensions.width > PHONE_BREAKPOINT &&<div style={{marginRight: 20, marginLeft: 20}}>
-                <Link to='/'><img alt='Codetribe logo' src='/images/codetribe.svg' style={{height: 40, marginRight: 40}} /></Link>
+                <Link to='/'><img alt='Codetribe logo' src='/images/mlab.png' style={{maxHeight: 40, marginRight: 40}} /></Link>
             </div>}
             {dimensions.width > PHONE_BREAKPOINT && menu}
 
@@ -103,7 +103,7 @@ const Header = ({active}) => {
                 <div style={{padding: 10, width: '100%', background: 'white', display: 'flex', alignItems: 'center', position: 'relative'}}>
                     <Button type='link' style={{minWidth: 40, background: 'transparent'}} onClick={toggleMenu} size={'large'} icon={<MenuOutlined style={{color: '#97CA42'}} />} />
                     <div style={{flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                        <Link to='/'><img alt='ReactFire logo' src='/images/codetribe-logo.png' style={{height: 40, marginRight: 40}} /></Link>
+                        <Link to='/'><img alt='ReactFire logo' src='/images/mlab.png' style={{height: 40, marginRight: 40, maxHeight: 40}} /></Link>
                     </div>
                     {/* <div style={{pointerEvents: 'none', position: 'absolute', left: 0, top: 0, bottom: 0, right: 0, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                         <Link to='/'><img alt='ReactFire logo' src='/images/logo.png' style={{height: 40, marginRight: 40}} /></Link>
