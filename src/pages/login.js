@@ -106,7 +106,8 @@ export default () => {
           <Input type='password' placeholder="Input your password" style={{height: 50}} />
         </Form.Item>
         <Form.Item>
-            <Button loading={loggingIn} disabled={loggingIn} htmlType='submit' type="primary" style={{height: 50, width: 100}}>Sign In</Button>
+            {/* <Button loading={loggingIn} disabled={loggingIn} htmlType='submit' type="primary" style={{height: 50, width: 100}}>Sign In</Button>
+            <Button htmlType='button' type="ghost" style={{height: 50, width: 100}}>Forgot Password</Button> */}
         </Form.Item>
       </Form>
 

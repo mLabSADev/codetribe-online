@@ -26,5 +26,8 @@ export const AuthService = {
                 return data
             })
         })
+    },
+    forgotPassword: email => {
+        return firebase.auth().sendPasswordResetEmail(email)
     }
 }
