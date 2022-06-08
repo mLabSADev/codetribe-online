@@ -40,8 +40,13 @@ const HomeContent = () => {
     return (
         <div style={{padding: 20}}>
             <div style={{display: 'flex', justifyContent: 'flex-end', padding: 10, background: '#f5f5f5', borderRadius: 20, marginBottom: 20, alignItems: 'center'}}>
+                <div style={{flex: 1}}>
+                {user && user.role === 'facilitator' && <Button type='link' onClick={() => {
+                    navigate('/students')
+                }}>View Students</Button>}
+                </div>
                 <div style={{width: 30, height: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgb(0, 153, 255)', borderRadius: '100%', color: 'white', marginRight: 10}}>{getInitials(user)}</div>
-                {user && <div style={{fontWeight: 'bold'}}>{user.firstlame} {user.lastname}</div>}
+                {user && <div style={{fontWeight: 'bold'}}>{user.firstname} {user.lastname}</div>}
             </div>
 
         {/* <div style={{display: 'flex', flexDirection: 'row'}}> */}
