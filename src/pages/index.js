@@ -36,7 +36,7 @@ const ForgotPassword = ({email, onCancel}) => {
         }}>
             <Row style={{width: '100%'}}>
                 <Col xs={0} sm={0} md={4} lg={6} />
-                <Col xs={24} sm={24} md={16} lg={8} style={{padding: 20}}>
+                <Col xs={24} sm={24} md={16} lg={9} style={{padding: 20}}>
                     <div style={{ padding: 20, width: '100%',  borderRadius: 15, background: 'white'}}>
                         <h2 style={{textAlign: 'center'}}>Reset Password</h2>
                         <p style={{textAlign: 'center'}}>Input your email address below. You will receive an email with further instructions</p>

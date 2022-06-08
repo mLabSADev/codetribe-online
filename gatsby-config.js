@@ -85,7 +85,7 @@ module.exports = {
           projectId: "mlab-22bb9",
           storageBucket: "mlab-22bb9.appspot.com",
           messagingSenderId: "479164571450",
-          appId: "1:479164571450:web:d87d6b0dc20f31fb927a03"
+          appId: "1:479164571450:web:5d286c2c7e8eba82927a03",
         }
       }
     },
