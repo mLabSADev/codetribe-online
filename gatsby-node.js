@@ -7,7 +7,7 @@ exports.onCreateNode = ({node, getNode, actions}) => {
         const fileNode = getNode(node.parent)
         let parts = fileNode.relativePath.split('/')
 
-        if (parts[0] === 'lessons') {
+        if (parts[0] === 'lessons' || parts[0] === 'webinars') {
           basePath = ``
         } else {
           basePath = parts[0]
@@ -36,6 +36,11 @@ exports.onCreateNode = ({node, getNode, actions}) => {
               name: 'tutorial',
               value: parts[1]
           })
+          createNodeField({
+            node,
+            name: 'slug2',
+            value: `/overview${slug}`,
+        })
         }
     }
 }
@@ -49,6 +54,7 @@ exports.createPages = async ({graphql, actions}) => {
           node {
             fields {
               slug
+              slug2
               type
             }
           }
@@ -67,12 +73,30 @@ exports.createPages = async ({graphql, actions}) => {
             type: 'lesson'
         }
       })
+      createPage({
+        path: node.fields.slug2,
+        component: path.resolve(`./src/templates/lesson-overview.js`),
+        context: {
+            slug: node.fields.slug2,
+            type: 'lesson'
+        }
+      })
+      
+    } else if (node.fields.slug.indexOf('webinars') == 1) {
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve(`./src/templates/webinar.js`),
+        context: {
+            slug: node.fields.slug
+        }
+      })
     } else {
       createPage({
         path: node.fields.slug,
         component: path.resolve(`./src/templates/blog.js`),
         context: {
-            slug: node.fields.slug
+            slug: node.fields.slug,
+            type: 'webinar'
         }
       })
     }

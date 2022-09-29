@@ -58,7 +58,7 @@ export default () => {
                 }} />
                 <div style={{
                     width: 600,
-                    zIndex: 100
+                    zIndex: 10000
                 }}>
                     <p style={{
                         fontSize: 40,

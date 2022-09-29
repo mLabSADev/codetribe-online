@@ -29,7 +29,7 @@ const PageLayout = ({ children, title, active, header, withPadding = true, fulls
     
     return (
         <Layout style={{ minHeight: '100vh' }} hasSider>
-            <Layout.Sider onClick={toggleMenu} style={{position: 'absolute', zIndex: 10000, minHeight: '100vh'}} trigger={null} collapsedWidth='0' collapsible collapsed={collapsed}>
+            <Layout.Sider onClick={toggleMenu} style={{position: 'absolute', zIndex: 10, minHeight: '100vh'}} trigger={null} collapsedWidth='0' collapsible collapsed={collapsed}>
                 <Menu theme='dark'>
                     <Menu.Item key='1'>Home</Menu.Item>
                     <Menu.Item key='2'>Tutorials</Menu.Item>

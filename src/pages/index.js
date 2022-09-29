@@ -145,20 +145,24 @@ export default () => {
                 }} />
                 <div style={{
                     width: 600,
-                    zIndex: 100
+                    zIndex: 10000
                 }}>
                     <p style={{
-                        fontSize: 40,
+                        fontSize: 60,
                         fontWeight: 700,
-                        fontStyle: 'normal',
+                        fontStyle: 'bold',
                         fontFamily: `"K2D", serif`
                     }}>Learn how to build<br />Android &amp; iOS<br />Apps</p>
                     <p style={{
-                        fontFamily: `"Julius Sans One", sans-serif`,
+                        fontFamily: `Poppins`,
                         color: '#3d3d3d',
                         fontSize: 16
                     }}>Welcome to Codetribe Coding Academy!</p>
-                    <p>We are excited that you have managed to join the team. Your hardwork and dedication has been recognized. We have an amazing team that is willing to train, guide and mentor you on your journey.</p>
+                    <p style={{
+                        fontFamily: `Poppins`,
+                        color: '#3d3d3d',
+                        fontSize: 16
+                    }}>We are excited that you have managed to join the team. Your hardwork and dedication has been recognized. We have an amazing team that is willing to train, guide and mentor you on your journey.</p>
                 </div>
             </div>
             </Col>
@@ -173,7 +177,9 @@ export default () => {
                 height: '100%',
             }}>
                 <img src='/images/mlab.png' style={{height: 40}} />
-                <h1>SIGN IN</h1>
+                <h1 style={{
+                    fontFamily: 'Poppins'
+                }}>SIGN IN</h1>
                 <Form style={{width: '90%'}} layout="vertical" initialValues={{email: '', password: ''}} onFinish={onLogin}>
         {errorMessage && <Alert message={errorMessage} type="error" style={{marginBottom: 20}} />}
         <Form.Item style={{}} label="Email" name='email' rules={[

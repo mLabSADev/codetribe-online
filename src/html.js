@@ -2,6 +2,24 @@ import React from "react"
 import PropTypes from "prop-types"
 
 export default function HTML(props) {
+  const fonts = [
+    'K2D-Bold',
+    'K2D-BoldItalic',
+    'K2D-ExtraBold',
+    'K2D-ExtraBoldItalic',
+    'K2D-ExtraLight',
+    'K2D-ExtraLightItalic',
+    'K2D-Italic',
+    'K2D-Light',
+    'K2D-LightItalic',
+    'K2D-Medium',
+    'K2D-MediumItalic',
+    'K2D-SemiBold',
+    'K2D-SemiBoldItalic',
+    'K2D-Thin',
+    'K2D-ThinItalic'
+  ]
+
   return (
     <html {...props.htmlAttributes}>
       <head>
@@ -11,6 +29,15 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        {fonts.map(font => {
+          return (<link
+            key={font}
+            rel="preload"
+            href={`/fonts/k2d/${font}.ttf`}
+            as="font"
+            crossOrigin="anonymous"
+          />)
+        })}
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>

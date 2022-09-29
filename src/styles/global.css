@@ -1,5 +1,123 @@
 @import '~antd/dist/antd.css';
 
+
+
+/* @font-face {
+  font-family: 'K2D';
+  font-style: bold;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-Bold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'K2D';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-BoldItalic.ttf) format('ttf');
+} */
+
+@font-face {
+  font-family: 'K2D';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-ExtraBold.ttf);
+}
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/poppins/Poppins-Medium.ttf);
+}
+
+/* @font-face {
+  font-family: 'K2D';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-ExtraBoldItalic.ttf) format('ttf');
+} */
+
+/* @font-face {
+  font-family: 'K2D';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-BoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'K2D';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-BoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'K2D';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-BoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'K2D';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-BoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'K2D';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-BoldItalic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'K2D';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/k2d/K2D-BoldItalic.ttf) format('ttf');
+} */
+.ant-timeline-item-head, .ant-timeline-item-head-custom, .ant-timeline-item-head-blue {
+  background: 'transparent' !important;
+}
+
+.ant-collapse-item .ant-collapse-no-arrow {
+  border-style: none !important;
+}
+
+.light-placeholder::placeholder {
+  color: #cfcfcf;
+}
+
+.light-placeholder:-ms-input-placeholder {
+  color: #cfcfcf;
+}
+
+.light-placeholder::-ms-input-placeholder {
+  color: #cfcfcf;
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
+
+div {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 p, li {
     font-size: 1.2em;
 }
@@ -53,3 +171,4 @@ blockquote span{
 .gatsby-highlight {
     margin-bottom: 20px;
 }
+

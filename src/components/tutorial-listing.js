@@ -1,7 +1,6 @@
 import React from 'react'
 import { StaticQuery, graphql, navigate, Link } from 'gatsby'
 import { Card, Col, Row } from 'antd'
-import Meta from 'antd/lib/card/Meta'
 import Img from "gatsby-image"
 import { BookFilled, HeartFilled } from '@ant-design/icons'
 
@@ -9,7 +8,7 @@ import { BookFilled, HeartFilled } from '@ant-design/icons'
 const TutorialListing = ({type, category, limit, onClick}) => {
     const PostCard = ({post}) => {
         const handleClick = () => {
-            navigate(post.fields.slug)
+            navigate(`/overview${post.fields.slug}`)
         }
 
         const share = () => {

@@ -33,5 +33,21 @@ export const LessonService = {
 
             return null
         })
+    },
+    saveQuiz: (lessonId, chapter, results) => {
+        return AuthService.isLoggedIn().then(user => {
+            if (user) {
+                return firebase.database().ref(`quizes/${user.uid}/${lessonId}/${chapter}`).set(results)
+            }
+        })
+    },
+    getQuizResults: (lessonId, chapter) => {
+        return AuthService.isLoggedIn().then(user => {
+            if (user) {
+                return firebase.database().ref(`quizes/${user.uid}/${lessonId}/${chapter}`).once('value').then(snapshot => {
+                    return snapshot.val()
+                })
+            }
+        })
     }
 }

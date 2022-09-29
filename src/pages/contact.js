@@ -1,5 +1,5 @@
 import React from 'react'
-import PageLayout from '../templates/page-layout'
+import PageLayout from '../templates/layout'
 import { Form, Input, Button } from 'antd'
 
 export default () => {
@@ -10,7 +10,7 @@ export default () => {
 
     return (
         <div>
-            <PageLayout title='Contact Us' active='contact'>
+            <PageLayout title='Contact Us' active='browse'>
                 <Form {...layout} initialValues={{name: '', email: '', message: ''}} method="POST" name='contact' netlify data-netlify-recaptcha="true">
                     <Form.Item name='name' rules={[{required: true, message: 'Please input your name'}]}>
                         <Input placeholder='Name' />

@@ -1,8 +1,9 @@
 import { Button, Col, Row, Spin, Table } from 'antd';
+import { Link } from 'gatsby';
 import React, { useEffect, useState } from 'react'
 import { LessonService } from '../services/lesson-service';
 import { StudentsService } from '../services/students-service';
-import PageLayout from '../templates/page-layout'
+import PageLayout from '../templates/layout';
 
 const lessonNames = {
     react: 'ReactJS',
@@ -61,6 +62,8 @@ const ProgressCard = ({progress, data}) => {
 
             Currently working on:
             <div style={{fontWeight: 'bold', fontSize: 12, marginTop: 10}}>{currentChapter}</div><div style={{fontSize: 12}}>{currentLesson}</div>
+
+            <div style={{marginTop: 10, fontSize: '0.8em'}}><Link to='/student-quiz'>View quiz result</Link></div>
         </div>
     )
 }
@@ -164,7 +167,9 @@ export default ({ data }) => {
 
     return (
         <div>
+            
             <PageLayout title='Students' active='students' topRight={<Button>Add Student</Button>}>
+            <h2 style={{marginBottom: 20}}>Students</h2>
                 {students && columns ? <Table dataSource={students} columns={columns} expandable={{
       expandedRowRender: record => <p style={{ margin: 0 }}>{<StudentInfo student={record} data={data} />}</p>,
       rowExpandable: () => true,
