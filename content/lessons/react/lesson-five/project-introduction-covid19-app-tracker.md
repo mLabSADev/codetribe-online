@@ -7,3 +7,6 @@ duration: "1:09"
 ---
 
 <iframe width="100%" height="600" src="https://www.youtube.com/embed/TXcIAzN7eH0?list=PLlvgXQiqkT5BUM2GChIt7y5raWmyetsQz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<br /><br />This lesson will give participants the background knowledge on how to work with restful API
+and fetching data from web services.

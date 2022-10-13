@@ -9,11 +9,25 @@ id: ionic
 price: 0
 featureImage: react-native.png
 overview: [
-    'In this course, you will learn ionic from the ground up starting with the fundamentals all the way to more advanced topics. You will learn by building a real app.',
-    'In this course, you will learn ionic from the ground up starting with the fundamentals all the way to more advanced topics. You will learn by building a real app.',
-    'In this course, you will learn ionic from the ground up starting with the fundamentals all the way to more advanced topics. You will learn by building a real app.',
-    'In this course, you will learn ionic from the ground up starting with the fundamentals all the way to more advanced topics. You will learn by building a real app.'
+    'React Native components',
+    'React Native navigation',
+    'Google Cloud',
+    'API consumption',
+    'Redux',
+    'Plugins'
 ]
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+The working principles of React Native are virtually identical to React, except that React Native
+does not manipulate the DOM via the Virtual DOM. It runs in a background process, which
+interprets the JavaScript written by the developers, directly on the end-device and
+communicates with the native platform via serialised data over an asynchronous and batched
+bridge.
+
+React components wrap existing native code and interact with native APIs via React's
+declarative UI paradigm and JavaScript.
+While React Native styling has a similar syntax to CSS, it does not use HTML or CSS. Instead,
+messages from the JavaScript thread are used to manipulate native views. With React Native,
+developers have to write native code in the languages of the aimed platform such as Java or
+Kotlin for Android, Objective-C or Swift for iOS, and C++/WinRT or C# for Windows 10.
+4Microsoft builds and maintains React Native for Windows and React Native for macOS.
