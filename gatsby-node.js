@@ -57,6 +57,18 @@ exports.createPages = async ({graphql, actions}) => {
     }
   `)
 
+  createPage({
+    path: `/verify-student/`,
+    matchPath: '/verify-student/:id',
+    component: path.resolve(`./src/templates/verify-student.js`),
+    ownerNodeId: `123456`,
+    // The context is passed as props to the component as well
+    // as into the component's GraphQL query.
+    context: {
+      id: `123456`,
+    },
+  })
+
   result.data.allMarkdownRemark.edges.forEach(({node}) => {
     if (node.fields.slug.indexOf('lessons') == 1) {
       createPage({

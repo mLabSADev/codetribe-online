@@ -29,5 +29,10 @@ export const AuthService = {
     },
     forgotPassword: email => {
         return firebase.auth().sendPasswordResetEmail(email)
+    },
+    getUser: (id) => {
+        return firebase.database().ref(`users/${id}`).once('value').then(snapshot => {
+            return snapshot.val()
+        })
     }
 }
