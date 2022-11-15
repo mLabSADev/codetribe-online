@@ -25,9 +25,9 @@ const Footer = () => {
                         <div style={alignmentStyle.child}>
                             <h2 style={{color: 'white'}}>Menu</h2>
                             <Link className='footer-links' to='/' style={{color: 'white'}}>Home</Link>
-                            <Link className='footer-links' to='/tutorials' style={{color: 'white'}}>Tutorials</Link>
-                            <Link className='footer-links' to='/blog' style={{color: 'white'}}>Blog</Link>
-                            <Link className='footer-links' to='/templates' style={{color: 'white'}}>Templates</Link>
+                            <Link className='footer-links' to='/home' style={{color: 'white'}}>Lessons</Link>
+                            {/* <Link className='footer-links' to='/blog' style={{color: 'white'}}>Blog</Link> */}
+                            {/* <Link className='footer-links' to='/templates' style={{color: 'white'}}>Templates</Link> */}
                             <Link className='footer-links' to='/contact' style={{color: 'white'}}>Contact</Link>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ const Footer = () => {
                 </Col>
             </Row>
             <Divider />
-            <p id='copyright'>Made with <HeartFilled style={{color: 'red'}} /> in Pretoria<br />&copy; ReactFire 2020</p>
+            <p id='copyright'>Made with <HeartFilled style={{color: 'red'}} /> by <span style={{color: '#97CA42'}}>mLab</span><br />&copy; CodeTribe 2020</p>
         </div>
     )
 }

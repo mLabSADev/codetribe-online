@@ -3,6 +3,7 @@ title: Events and Data-Binding
 author: Melvin Musehani
 date: 2018-08-18
 featureImage: ./images/events-and-data-binding/events-and-data-binding.png
+duration: "0:0"
 ---
 
 In almost every app, there is a need to change content on the HTML dynamically or receive some input from the user and then apply a change to the UI. Angular data binding gives you the tools to achieve just that – and the best part is that it’s super simple and convenient.

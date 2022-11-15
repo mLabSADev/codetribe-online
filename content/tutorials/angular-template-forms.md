@@ -3,6 +3,7 @@ title: Angular Template Forms
 date: 2018-09-11
 author: Melvin Musehani
 featureImage: "./images/angular-template-forms/angular-template-forms.jpg"
+duration: "0:0"
 ---
 
 ## The Importance of Forms

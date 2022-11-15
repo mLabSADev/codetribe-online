@@ -3,6 +3,7 @@ title: Introduction to Angular
 author: Melvin Musehani
 date: 2018-08-16
 featureImage: ./images/introduction-angular/introduction-angular.png
+duration: "0:0"
 ---
 
 ## What is Angular

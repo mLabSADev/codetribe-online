@@ -1,13 +1,30 @@
-import React, { useState } from 'react'
-import { Layout, Row, Col, Menu } from "antd"
+import React, { useEffect, useState } from 'react'
+import { Layout, Row, Col, Menu, Button } from "antd"
 import Header from "../components/header"
 import Footer from "../components/footer"
 import '../styles/page-layout.css'
-const PageLayout = ({ children, title, active, header, withPadding = true, fullscreen = false, background = 'white' }) => {
+import { AuthService } from '../services/auth-service'
+import Login from '../components/login'
+const PageLayout = ({ children, title, active, header, withPadding = true, fullscreen = false, background = 'white', topRight }) => {
     const [collapsed, setCollapsed] = useState(true)
+    const [loggedIn, setLoggedIn] = useState(true)
 
     const toggleMenu = () => {
         setCollapsed(!collapsed)
+    }
+
+    const onLogin = () => {
+        setLoggedIn(true)
+    }
+
+    useEffect(() => {
+        AuthService.isLoggedIn().then(user => {
+            setLoggedIn(!!user)
+        })
+    }, [])
+
+    if (!loggedIn) {
+        fullscreen = false
     }
     
     return (
@@ -29,15 +46,35 @@ const PageLayout = ({ children, title, active, header, withPadding = true, fulls
                     <div>
                         {header}
                     </div>
-                    <Row style={{ marginTop: 40 }}>
+                    {loggedIn && (<Row style={{ marginTop: 40 }}>
                         <Col span={fullscreen ? 0 : null} xs={0} md={2} lg={4}></Col>
                         <Col span={fullscreen ? 24 : null} xs={fullscreen ? null : 24} md={fullscreen ? null : 20} lg={fullscreen ? null : 16}>
-                            <div style={{ background: background, marginBottom: 40, minHeight: 280, paddingTop: withPadding ? 40 : 0, paddingBottom: 20, paddingLeft: withPadding ? 40 : 0, paddingRight: withPadding ? 40 : 0 }}>
-                                {title && <h1 style={{ marginTop: 0, paddingTop: 0 }}>{title}</h1>}
-                                {children}
-                            </div>
+                            
+                                    <div style={{ background: background, marginBottom: 40, minHeight: 280, paddingTop: withPadding ? 40 : 0, paddingBottom: 20, paddingLeft: withPadding ? 40 : 0, paddingRight: withPadding ? 40 : 0 }}>
+                                    {title && <div style={{
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    }}><h1 style={{ marginTop: 0, paddingTop: 0, flex: 1 }}>{title}</h1>{topRight}</div>}
+                                    {children}
+                                </div>
+                            
                         </Col>
-                    </Row>
+                    </Row>)
+                    }
+
+{!loggedIn && (<Row style={{ marginTop: 40 }}>
+                        <Col span={fullscreen ? 0 : null} xs={0} md={6} lg={8}></Col>
+                        <Col span={fullscreen ? 24 : null} xs={fullscreen ? null : 24} md={fullscreen ? null : 12} lg={fullscreen ? null : 8}>
+
+                            
+                            
+                                <div style={{ background: background, marginBottom: 40, minHeight: 280, paddingTop: withPadding ? 40 : 0, paddingBottom: 20, paddingLeft: withPadding ? 40 : 0, paddingRight: withPadding ? 40 : 0 }}>
+                                    <Login onLoggedIn={onLogin} />
+                                </div>
+                            
+                        </Col>
+                    </Row>)
+                    }
                 </Layout.Content>
                 <Layout.Footer style={{ background: '#101010' }}>
                     <Footer />

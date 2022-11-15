@@ -3,6 +3,7 @@ title: Migrate to Ionic 4
 author: Melvin Musehani
 date: 2018-09-03
 featureImage: ./images/migrate-ionic-4/migrate-ionic-4.jpg
+duration: "0:0"
 ---
 
 After a long wait, Ionic 4 is finally at beta. This basically means there won’t be major changes from what they have released. If you are brave enough, you can even start building your projects in Ionic 4 or migrate to Ionic 4. I am one of the brave ones, and I am LOVING IT! The biggest change in Ionic 4 is its use of Web Components, removing its dependency to Angular. That means you can build Ionic Apps using your favourite framework. In this tutorial, I’ll take you through the changes in Ionic 4 and how to migrate from Ionic 3 to 4.

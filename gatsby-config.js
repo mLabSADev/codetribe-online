@@ -7,13 +7,13 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: 'ReactFire',
-    titleTemplate: 'ReactFire - %s',
+    title: 'Codetribe',
+    titleTemplate: 'Codetribe - %s',
     description: 'Best place to learn how to build Web & Mobile Apps with React',
     url: 'https://www.reactfire.com',
     siteUrl: 'https://www.reactfire.com',
     image: '/images/logo.png',
-    twitterUsername: 'reactfire',
+    twitterUsername: 'codetribe',
   },
   plugins: [
     {
@@ -25,7 +25,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: `reactfire`
+        shortname: `codetribe`
       }
     },
     `gatsby-plugin-react-helmet`,
@@ -66,21 +66,35 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `ReactFire`,
-        short_name: `ReactFire`,
+        name: `Codetribe`,
+        short_name: `Codetribe`,
         start_url: `/`,
-        background_color: `#00586d`,
-        theme_color: `#00586d`,
+        background_color: `#232222`,
+        theme_color: `#97CA42`,
         display: `minimal-ui`,
         icon: `static/favicon.png`,
       },
     },
     {
-      resolve: `gatsby-plugin-offline`,
+      resolve: "gatsby-plugin-firebase",
       options: {
-        precachePages: [`/`, `/tutorials/`, '/blog/', '/templates/', '/contact/'],
-      },
+        credentials: {
+          apiKey: "AIzaSyCSvPQ3-fpuAYGljNEBCrWTVO-yO9tepaU",
+          authDomain: "mlab-22bb9.firebaseapp.com",
+          databaseURL: "https://mlab-22bb9.firebaseio.com",
+          projectId: "mlab-22bb9",
+          storageBucket: "mlab-22bb9.appspot.com",
+          messagingSenderId: "479164571450",
+          appId: "1:479164571450:web:5d286c2c7e8eba82927a03",
+        }
+      }
     },
+    // {
+    //   resolve: `gatsby-plugin-offline`,
+    //   options: {
+    //     precachePages: [`/`, `/tutorials/`, '/blog/', '/templates/', '/contact/'],
+    //   },
+    // },
     `gatsby-transformer-sharp`, 
     `gatsby-plugin-sharp`,
     `gatsby-plugin-robots-txt`,

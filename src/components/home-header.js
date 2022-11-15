@@ -11,7 +11,8 @@ export const HomeHeader = () => {
     return (
         <div id='home-header'>
             <h1>Learn how to build Android &amp; iOS Apps</h1>
-            <p>Building apps is easier than you think. We will take you through the process of building your own apps using React and Firebase</p>
+            <h2>Welcome to <span style={{fontWeight: 'bold'}}><span style={{color: "#97CA42"}}>code</span><span style={{color: "#9397A1"}}>tribe</span> coding academy!</span></h2>
+            <p>We are excited that we have managed to join the team. Your hardwork and dedication have been recognized. We have an amazing team that is willing to train, guide and mentor you on your journey. </p>
             <Button size='large' type='primary' onClick={getStarted}>Get Started</Button>
         </div>
     )

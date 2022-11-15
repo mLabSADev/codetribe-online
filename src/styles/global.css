@@ -8,6 +8,16 @@ p, li {
     color: red;
 }
 
+.ant-btn-primary {
+  background-color: #97CA42;
+  border-color: #97CA42;
+}
+
+.ant-menu-item-selected {
+  color: #97CA42 !important;
+  border-bottom-color: #97CA42 !important;
+}
+
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
 blockquote{
   font-size: 1em;

@@ -3,6 +3,7 @@ title: "Angular Router in Ionic 4"
 date: "2018-11-01"
 author: "Melvin Musehani"
 featureImage: ./images/angular-router-ionic-4/angular-router-ionic-4.jpg
+duration: "0:0"
 ---
 
 Throughout Ionic 2 until 3, there was no such thing as the Angular Router (unless you did something a little extra). Ionic used its own custom routing with NavController to control the flow of your Ionic App. NavController had methods like push, pop and setRoot. Push was used to display a page and add it to the stack. Pop would remove a page that has been added to the stack and setRoot will display a page while starting a new stack, meaning you cannot go back to the previous page.

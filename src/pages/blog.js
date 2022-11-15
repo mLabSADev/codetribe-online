@@ -5,7 +5,7 @@ import PostListing from '../components/post-listing'
 export default () => (
     <div>
         <PageLayout title='Blog' active='blog'>
-            <PostListing type={'blog'} />
+            <PostListing />
         </PageLayout>
     </div>
 )
