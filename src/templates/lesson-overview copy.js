@@ -238,7 +238,6 @@ const CourseOverview = ({data}) => {
                                         {Object.keys(chapters).map(key => {
                                             const chapter = chapters[key]
 
-                                            console.log(chapter);
                                             let chapterTotalDuration = 0
                                             for (let chapterLesson of chapter.lessons) {
                                                 if (!chapterLesson)
@@ -248,8 +247,6 @@ const CourseOverview = ({data}) => {
                                         
                                                 chapterTotalDuration += (parseInt(min) * 60) + parseInt(sec)
                                             }
-                                            console.log(lessons);
-                                            console.log(`Total seconds: ` + chapterTotalDuration);
                                             chapterTotalDuration = DurationHelper.secondsToText(chapterTotalDuration);
 
                                             return (

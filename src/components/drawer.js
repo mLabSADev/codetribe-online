@@ -51,7 +51,6 @@ const Drawer = ({
     useEffect(() => {
         ProfileService.observerProfile(profile => {
             setProfile(profile)
-            console.log(profile);
         })
 
         
@@ -73,13 +72,10 @@ const Drawer = ({
     }
 
     const onOpenEditProfile = () => {
-        console.log(`Open Profile`);
         setShowEditProfile(true)
     }
 
     const handleEditProfile = values => {
-        console.log(values);
-
         setSavingPassword(true)
         ProfileService.updateProfile(profile.uid, values)
         .then(() => {

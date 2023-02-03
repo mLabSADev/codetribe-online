@@ -200,7 +200,7 @@ const CourseOverview = ({data}) => {
                                 width: '100%',
                                 marginBottom: 0,
                                 marginTop: 20
-                            }} sizes={post.frontmatter.featureImage.childImageSharp.sizes} />
+                            }} sizes={post.frontmatter.featureImage && post.frontmatter.featureImage.childImageSharp.sizes} />
 
 <div style={{
                             
@@ -225,7 +225,7 @@ const CourseOverview = ({data}) => {
 
                     <div style={{marginTop: 20}}>
                         <Row>
-                            {post.frontmatter.overview.map(overview => {
+                            {(post.frontmatter.overview || []).map(overview => {
                                 return (
                                     <Col xs={24} sm={24} md={12}>
                                         <div style={{
@@ -268,7 +268,6 @@ const CourseOverview = ({data}) => {
                                         {Object.keys(chapters).map(key => {
                                             const chapter = chapters[key]
 
-                                            console.log(chapter);
                                             let chapterTotalDuration = 0
                                             for (let chapterLesson of chapter.lessons) {
                                                 if (!chapterLesson)
@@ -278,8 +277,6 @@ const CourseOverview = ({data}) => {
                                         
                                                 chapterTotalDuration += (parseInt(min) * 60) + parseInt(sec)
                                             }
-                                            console.log(lessons);
-                                            console.log(`Total seconds: ` + chapterTotalDuration);
                                             chapterTotalDuration = DurationHelper.secondsToText(chapterTotalDuration);
 
                                             return (

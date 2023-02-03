@@ -7,7 +7,6 @@ import PageLayout from './layout'
 export default ({ data }) => {
     const webinar = data.markdownRemark
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-    console.log(webinar);
 
     function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;

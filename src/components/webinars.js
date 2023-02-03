@@ -28,7 +28,6 @@ const Webinars = () => {
     }
 
     const getInitials = user => {
-        console.log(user);
         if (user)
             return user.firstname.substr(0, 1) + user.lastname.substr(0, 1)
         else
@@ -37,7 +36,6 @@ const Webinars = () => {
 
     useEffect(() => {
         AuthService.currentUser().then(result => {
-            console.log(result);
             setUser(result)
         })
     }, [])
@@ -48,8 +46,6 @@ const Webinars = () => {
 
     const onSearch = event => {
         const term = event.target.value
-
-        console.log(term);
 
         setSearchTerm(term)
     }

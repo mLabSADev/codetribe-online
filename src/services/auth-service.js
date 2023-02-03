@@ -17,11 +17,8 @@ export const AuthService = {
     },
     currentUser: () => {
         return AuthService.isLoggedIn().then(user => {
-            console.log(user.uid);
             return firebase.database().ref(`users/${user.uid}`).once('value').then(result => {
                 const data = result.val()
-
-                console.log(data);
                 
                 return data
             })
@@ -43,6 +40,10 @@ export const AuthService = {
                 })
             })
         })
-        
+    },
+    getUser: (id) => {
+        return firebase.database().ref(`users/${id}`).once('value').then(snapshot => {
+            return snapshot.val()
+        })
     }
 }

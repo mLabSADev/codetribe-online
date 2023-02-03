@@ -72,9 +72,6 @@ export default ({ data }) => {
         //     }
         // }
 
-        console.log(data.markdownRemark.fields.tutorial);
-
-        console.log(`Getting lesson progress for ${mainSlug}`);
         LessonService.currentLessonPosition(data.markdownRemark.fields.tutorial).then(position => {
             setPosition(position)
             const lessons = data.allMarkdownRemark.edges.map(edge => {
@@ -119,8 +116,6 @@ export default ({ data }) => {
         })
     }, [])
 
-    console.log(post)
-
     const lessons = data.allMarkdownRemark.edges.map(edge => {
         return edge.node
     }).filter(lesson => lesson.fields.tutorial === post.fields.tutorial)
@@ -138,8 +133,7 @@ export default ({ data }) => {
     // }
 
     // let total = 0
-    console.log(currentChapter);
-    console.log(currentLesson);
+
     // for (let lesson of lessons) {
     //     const [min, sec] = lesson.frontmatter.duration.split(':')
 
@@ -226,9 +220,6 @@ export default ({ data }) => {
             nextLesson = chapters[post.frontmatter.chapter].lessons[post.frontmatter.lesson + 1]
         }
 
-        console.log(`Next lesson`);
-        console.log(nextLesson);
-
         setNextIsLoading(true)
         LessonService.currentLessonPosition(data.markdownRemark.fields.tutorial).then(position => {
             let proceed = false
@@ -255,12 +246,10 @@ export default ({ data }) => {
         
     }
 
-    console.log(`Total Duration: ${totalDurationUntilCurrentLesson} / ${total}`);
     const progress = Math.round(totalDurationUntilCurrentLesson / total * 100)
 
     useEffect(() => {
-        console.log(`Quiz`);
-        console.log(post.frontmatter.questions);
+
     }, [])
 
     return (
@@ -369,7 +358,6 @@ export default ({ data }) => {
                                         {Object.keys(chapters).map(key => {
                                             const chapter = chapters[key]
 
-                                            console.log(chapter);
                                             let chapterTotalDuration = 0
                                             for (let chapterLesson of chapter.lessons) {
                                                 if (!chapterLesson)
@@ -379,8 +367,6 @@ export default ({ data }) => {
                                         
                                                 chapterTotalDuration += (parseInt(min) * 60) + parseInt(sec)
                                             }
-                                            console.log(lessons);
-                                            console.log(`Total seconds: ` + chapterTotalDuration);
                                             chapterTotalDuration = DurationHelper.secondsToText(chapterTotalDuration);
 
                                             return (
