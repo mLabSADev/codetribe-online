@@ -29,5 +29,20 @@ export const AuthService = {
     },
     forgotPassword: email => {
         return firebase.auth().sendPasswordResetEmail(email)
+    },
+    logout: () => {
+        return firebase.auth().signOut()
+    },
+    changePassword: (currentPassword, password) => {
+        const { email, uid } = firebase.auth().currentUser
+
+        return firebase.auth().signInWithEmailAndPassword(email, currentPassword).then(() => {
+            return firebase.auth().currentUser.updatePassword(password).then(() => {
+                return firebase.database().ref(`users/${uid}`).update({
+                    changedPassword: true
+                })
+            })
+        })
+        
     }
 }

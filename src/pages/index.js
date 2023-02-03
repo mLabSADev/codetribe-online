@@ -92,7 +92,11 @@ export default () => {
         setMessage(null)
 
         AuthService.login(values.email, values.password).then(() => {
-            onLoggedIn()
+            AuthService.currentUser().then(profile => {
+                onLoggedIn(profile)
+                
+            })
+            
         }).catch(err => {
             setMessage(err.message)
         }).finally(() => {
@@ -105,8 +109,13 @@ export default () => {
         wrapperCol: { span: 16 },
       };
 
-    const onLoggedIn = () => {
-        navigate('/home')
+    const onLoggedIn = (profile) => {
+        if (profile.bootcamp) {
+            navigate('/webinars')
+        } else {
+            navigate('/home')
+        }
+        
     }
 
     const onForgotPassword = () => {

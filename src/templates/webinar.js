@@ -1,13 +1,31 @@
 import { LeftOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { navigate } from 'gatsby'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PageLayout from './layout'
 
 export default ({ data }) => {
     const webinar = data.markdownRemark
-
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
     console.log(webinar);
+
+    function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+    }
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     return (
         <PageLayout active={'webinars'}>
@@ -42,7 +60,7 @@ export default ({ data }) => {
                     overflow: 'hidden',
                     marginTop: 20
                 }}>
-                    <iframe width="100%" height="600" src={webinar.frontmatter.link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  <iframe width="100%" height={windowDimensions.width * 0.6} src={webinar.frontmatter.link} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
 
                 <div style={{

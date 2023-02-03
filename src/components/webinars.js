@@ -88,9 +88,9 @@ const Webinars = () => {
                 <div style={{width: '100%', background: "linear-gradient(105deg, #5c61ff 0%, hsl(214, 100%, 84%) 100%)", borderRadius: 20, padding: 30, overflow: 'hidden', position: 'relative'}}>
                     <Row>
                         <Col xs={24} sm={24} md={16} lg={12}>
-                        <span style={{color: 'white', fontSize: 64, fontWeight: 'bold', display: 'block'}}>Browse our<br />useful <span style={{color: 'rgb(143, 230, 76)'}}>Webinars</span></span>
+                        <span style={{color: 'white', fontSize: 64, fontWeight: 'bold', display: 'block'}}>Browse <span style={{color: 'rgb(143, 230, 76)'}}>Webinars</span></span>
                         <div>
-                        <span style={{color: 'white'}}>Nunc quis tortor ut diam scelerisque volutpat ac ut felis. Nullam tincidunt lacinia eleifend. Vestibulum nisi augue, commodo sed tellus sed, condimentum lobortis orci. Aenean eu enim et arcu finibus facilisis nec vel orci.</span>
+                        <span style={{color: 'white'}}>All of the sessions from the bootcamp will be uploaded immediately after each session, and you'll be able to access them from anywhere, anytime.</span>
                         </div>
                         </Col>
                         <Col xs={0} sm={0} md={0} lg={8}>

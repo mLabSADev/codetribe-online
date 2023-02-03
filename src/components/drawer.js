@@ -4,16 +4,18 @@ import Modal from 'antd/lib/modal/Modal'
 import { Link, navigate } from 'gatsby'
 import React, { useEffect, useState } from 'react'
 import EditProfile from '../modals/edit-profile'
+import { AuthService } from '../services/auth-service'
 import { ProfileService } from '../services/profile-service'
 
 const MenuButton = ({
     children,
     to,
     active = false,
-    icon
+    icon,
+    onClick
 }) => {
     return (
-        <Link to={to}><button style={{
+        <Link to={to}><button onClick={onClick} style={{
             background: 'rgba(61, 61, 61, 0.05)',
             borderStyle: 'none',
             padding: 10,
@@ -37,18 +39,34 @@ const MenuButton = ({
 const Drawer = ({
     active
 }) => {
-    const image = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b290ad14-8fde-4b91-bbd2-6cb837f60313/da2ijnn-ba9c9710-f50d-4561-a79d-57573fc1fc9b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi9iMjkwYWQxNC04ZmRlLTRiOTEtYmJkMi02Y2I4MzdmNjAzMTMvZGEyaWpubi1iYTljOTcxMC1mNTBkLTQ1NjEtYTc5ZC01NzU3M2ZjMWZjOWIucG5nIn1dXX0.d1-jK5bL9B_FW3_HH8lcfNkkRrR3wrIKhhjdzzPXXhY'
+    const image = '/images/icon.png'
     const [profile, setProfile] = useState()
     const [showEditProfile, setShowEditProfile] = useState(false)
     const [savingPassword, setSavingPassword] = useState(false)
+    
     const [onCancel, setOnCancel] = useState(false)
+    const [confirmLogout, setConfirmLogout] = useState(false)
+    
 
     useEffect(() => {
         ProfileService.observerProfile(profile => {
             setProfile(profile)
             console.log(profile);
         })
+
+        
     }, [])
+
+    const onLogout = () => {
+        setConfirmLogout(true)
+    }
+
+    const handleLogout = () => {
+        AuthService.logout()
+        setConfirmLogout(false)
+
+        navigate('/')
+    }
 
     const onCloseEditProfile = () => {
         setShowEditProfile(false)
@@ -77,22 +95,36 @@ const Drawer = ({
         // console.log(values);
     }
 
+    
+
     return (
         <div style={{
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'column',
-            minHeight: '100vh'
+            minHeight: '100vh',
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            width: '300px'
         }}>
-            <img src={image} style={{
-                width: 100,
-                height: 100,
-                objectFit: 'cover',
-                borderRadius: '100%',
-                marginTop: 30,
-                marginBottom: 20,
-                cursor: 'pointer'
-            }} onClick={() => navigate('/profile')} />
+            <div style={{
+                background: 'rgb(130, 200, 3)',
+                width: 70,
+                height: 70,
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold',
+                color: 'white',
+                fontSize: '1.3em',
+                marginTop: 40,
+                marginBottom: 20
+            }}>
+                {profile?.firstname.substring(0, 1)}
+                {profile?.lastname.substring(0, 1)}
+            </div>
 
             <div style={{ fontWeight: 'bold' }}>{profile?.firstname} {profile?.lastname}</div>
             <div style={{ marginBottom: 10 }}>{profile?.role == 'facilitator' ? 'Facilitator' : profile?.location}</div>
@@ -100,15 +132,15 @@ const Drawer = ({
             <EditOutlined onClick={onOpenEditProfile} />
 
             <div style={{ padding: 20, width: '100%', marginTop: 20 }}>
-                <MenuButton to={'/home'} icon={<UnorderedListOutlined />} active={active === 'browse'}>Browse</MenuButton>
+                {!profile?.bootcamp && <MenuButton to={'/home'} icon={<UnorderedListOutlined />} active={active === 'browse'}>Browse</MenuButton>}
                 <MenuButton to={'/webinars'} icon={<VideoCameraAddOutlined />} active={active === 'webinars'}>Webinars</MenuButton>
-                <MenuButton to={'/students'} icon={<UserOutlined />} active={active === 'students'}>Students</MenuButton>
+              {profile?.isAdmin && <MenuButton to={'/students'} icon={<UserOutlined />} active={active === 'students'}>Students</MenuButton>}
             </div>
 
             <div style={{ flex: 1 }} />
 
             <div style={{ padding: 20, width: '100%' }}>
-                <MenuButton icon={<PoweroffOutlined />}>Sign out</MenuButton>
+                <MenuButton onClick={onLogout} icon={<PoweroffOutlined />}>Sign out</MenuButton>
             </div>
 
             <Modal title="Update Profile" open={showEditProfile} onOk={handleEditProfile} onCancel={onCloseEditProfile} okButtonProps={{style: {display: 'none'}}}>
@@ -187,6 +219,12 @@ const Drawer = ({
                         }}>Update</Button>
                 </Form>
             </Modal>
+
+            <Modal title="Logout" open={confirmLogout} onOk={handleLogout} onCancel={() => setConfirmLogout(false)}>
+                <p>Are you sure you want to logout?</p>
+            </Modal>
+
+            
         </div>
     )
 }

@@ -14,6 +14,12 @@ export default () => {
         AuthService.isLoggedIn().then(result => {
             if (result) {
                 setIsLoggedIn(true)
+                AuthService.currentUser().then(profile => {
+                    if (profile.bootcamp) {
+                        navigate('/webinars')
+                    }
+                })
+                
             }
         }).catch(err => {
             navigate('/')
