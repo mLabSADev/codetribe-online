@@ -41,6 +41,13 @@ export const AuthService = {
             })
         })
     },
+    keepPassword: () => {
+        const { uid } = firebase.auth().currentUser
+
+        return firebase.database().ref(`users/${uid}`).update({
+            changedPassword: true
+        })
+    },
     getUser: (id) => {
         return firebase.database().ref(`users/${id}`).once('value').then(snapshot => {
             return snapshot.val()

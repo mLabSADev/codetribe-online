@@ -94,6 +94,17 @@ const PageLayout = ({children, active}) => {
         })
     }
 
+    const ignoreClick = () => {
+        setSavingChangePassword(true)
+        AuthService.keepPassword().then(() => {
+            setChangePassword(false)
+        }).catch(err => {
+            setError(err.message)
+        }).finally(() => {
+            setSavingChangePassword(false)
+        })
+    }
+
     return (
         <Layout style={{ minHeight: '100vh' }} hasSider>
             {/* <Layout.Sider collapsedWidth='0' collapsible trigger={null} collapsed={collapsed} open={true}>
@@ -205,6 +216,16 @@ const PageLayout = ({children, active}) => {
                             borderWidth: 2
                         }} />
                     </Form.Item>
+
+                    <Button size='large' loading={savingChangePassword} disabled={savingChangePassword} onClick={ignoreClick} style={{
+                            background: 'rgb(143, 230, 76)',
+                            borderStyle: 'none',
+                            borderRadius: 28,
+                            color: 'white',
+                            cursor: 'pointer',
+                            width: '100%',
+                            marginTop: 20
+                        }}>Keep current password</Button>
 
                     <Button size='large' loading={savingChangePassword} disabled={savingChangePassword} htmlType='submit' style={{
                             background: 'rgb(143, 230, 76)',
