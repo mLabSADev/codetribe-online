@@ -75,6 +75,30 @@ exports.createPages = async ({graphql, actions}) => {
     },
   })
 
+  createPage({
+    path: `/course/`,
+    matchPath: '/course/:id',
+    component: path.resolve(`./src/templates/course.js`),
+    ownerNodeId: `123455`,
+    // The context is passed as props to the component as well
+    // as into the component's GraphQL query.
+    context: {
+      id: `123455`,
+    },
+  })
+
+  createPage({
+    path: `/editor/`,
+    matchPath: '/editor/:courseId/chapter/:chapterId/lesson/:lessonId',
+    component: path.resolve(`./src/templates/create-edit-lesson.js`),
+    ownerNodeId: `123454`,
+    // The context is passed as props to the component as well
+    // as into the component's GraphQL query.
+    context: {
+      id: `123454`,
+    },
+  })
+
   result.data.allMarkdownRemark.edges.forEach(({node}) => {
     if (node.fields.slug.indexOf('lessons') == 1) {
       createPage({

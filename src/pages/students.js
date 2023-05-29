@@ -121,11 +121,6 @@ export default ({ data }) => {
                 dataIndex: 'firstname',
                 key: 'firstname',
                 sorter: (a, b) => a.firstname < b.firstname ? -1 : 1,
-                
-            //   filters: [{
-            //     text: 'Joe',
-            //     value: 'Joe',
-            //   },],
                 filterMode: 'tree',
                 filterSearch: true,
                 onFilter: (input, record) => record.firstname && record.firstname.toLowerCase() == input.toLowerCase()
@@ -134,7 +129,6 @@ export default ({ data }) => {
                 title: 'Last Name',
                 dataIndex: 'lastname',
                 key: 'lastname',
-            //   sorter: (a, b) => a.lastname < b.lastname,
             },
             {
                 title: 'Email Address',

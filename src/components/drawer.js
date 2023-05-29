@@ -131,6 +131,7 @@ const Drawer = ({
                 {!profile?.bootcamp && <MenuButton to={'/home'} icon={<UnorderedListOutlined />} active={active === 'browse'}>Browse</MenuButton>}
                 <MenuButton to={'/webinars'} icon={<VideoCameraAddOutlined />} active={active === 'webinars'}>Webinars</MenuButton>
               {profile?.isAdmin && <MenuButton to={'/students'} icon={<UserOutlined />} active={active === 'students'}>Students</MenuButton>}
+              {profile?.isAdmin && <MenuButton to={'/courses'} icon={<UserOutlined />} active={active === 'courses'}>Courses</MenuButton>}
             </div>
 
             <div style={{ flex: 1 }} />

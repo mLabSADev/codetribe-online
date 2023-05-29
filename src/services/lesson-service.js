@@ -6,7 +6,14 @@ export const LessonService = {
         return AuthService.isLoggedIn().then(user => {
             if (user) {
                 return firebase.database().ref(`lessons/${lessonId}/${user.uid}`).once('value').then(snapshot => {
-                    const position = snapshot.val()
+                    let position = snapshot.val()
+
+                    if (!position) {
+                        position = {
+                            chapter: 0,
+                            lesson: 0
+                        }
+                    }
 
                     return position
                 })

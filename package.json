@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "codetribe-online",
   "private": true,
   "description": "A simplified bare-bones starter for Gatsby",
   "version": "0.1.0",
@@ -45,6 +45,7 @@
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.0.0",
+    "react-quill": "^2.0.0",
     "react-quiz-component": "^0.3.7"
   },
   "devDependencies": {
