@@ -60,7 +60,7 @@ const ResourceCards = ({ title, description, links, image }) => {
             </Stack>
           </Stack>
           <Stack>
-            <Image width={300} src={image} />
+            <Image width={200} src={image} />
           </Stack>
         </Stack>
       </CardContent>

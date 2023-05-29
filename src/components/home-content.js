@@ -41,7 +41,7 @@ const FrontEndResourceData = [
     image: "/images/resources/IONIC.jpg",
     title: "Ionic UI Components",
     description:
-      "Ionic apps are made of high-level building blocks called Components, which allow you to quickly construct the UI for your app. Ionic comes stock with a number of components, including cards, lists, and tabs. Once you’re familiar with the basics, refer to the API Index for a complete list of each component and sub-component.",
+      "Ionic apps are made of high-level building blocks called Components, which allow you to quickly construct the UI for your app. Ionic comes stock with a number of components, including cards, lists, and tabs.",
     links: [
       {
         label: "Layout",
@@ -117,8 +117,8 @@ const FrontEndResourceData = [
         link: "https://ant.design/components/tour",
       },
       {
-        label: "Theming",
-        link: "https://mui.com/material-ui/customization/theming/",
+        label: "ConfigProvider",
+        link: "https://ant.design/components/config-provider",
       },
     ],
   },
