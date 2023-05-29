@@ -4,6 +4,7 @@ import { Form, Input, Button, Row, Col, Alert } from "antd"
 import { Link, navigate } from "gatsby"
 import { AuthService } from "../services/auth-service"
 
+// import "swiper/css"
 const ForgotPassword = ({ email, onCancel }) => {
   const [resettingPassword, setResettingPassword] = useState(false)
   const [errorMessage, setErrorMessage] = useState()

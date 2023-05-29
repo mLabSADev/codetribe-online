@@ -1,113 +1,136 @@
-import { EyeInvisibleOutlined, EyeTwoTone, MenuOutlined } from '@ant-design/icons'
-import Icon from '@ant-design/icons/lib/components/AntdIcon'
-import { Layout, Menu, Modal, Drawer as ADrawer, Form, Button, Input, Alert } from 'antd'
-import React, { useEffect, useState } from 'react'
-import Drawer from '../components/drawer'
-import EditProfile from '../modals/edit-profile'
-import { AuthService } from '../services/auth-service'
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  MenuOutlined,
+} from "@ant-design/icons"
+import Icon from "@ant-design/icons/lib/components/AntdIcon"
+import {
+  Layout,
+  Menu,
+  Modal,
+  Drawer as ADrawer,
+  Form,
+  Button,
+  Input,
+  Alert,
+} from "antd"
+import React, { useEffect, useState } from "react"
+import Drawer from "../components/drawer"
+import EditProfile from "../modals/edit-profile"
+import { AuthService } from "../services/auth-service"
 
-const CourseProgress = ({
-    progress,
-    course,
-    image
-}) => {
-    
-
-    return (
-        <div style={{
-            position: 'relative',
-            display: 'inline-block'
-        }}>
-        <div style={{
-            width: 40,
-            height: 40,
-            borderRadius: '50%',
-            background: '#ffffff',
-            marginLeft: 5,
-            marginRight: 5,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-            overflow: 'hidden'
-        }}>
-            {[0, 90, 180, 270].map((deg, index) => (
-                <div style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    width: '100vw',
-                    height: '100vw',
-                    background: '#82c803',
-                    transformOrigin: '0 0',
-                    transform: `rotate(${deg}deg) skew(${index === 3 ? '20' : '0'}deg)`
-                }} />
-            )) }
-            <img src={image} style={{
-                width: 34,
-                height: 34,
-                borderRadius: '50%',
-                background: '#dfdfdf',
-                zIndex: 10000
-            }} />
-        </div>
-        
-        </div>
-    )
+const CourseProgress = ({ progress, course, image }) => {
+  return (
+    <div
+      style={{
+        position: "relative",
+        display: "inline-block",
+      }}
+    >
+      <div
+        style={{
+          width: 40,
+          height: 40,
+          borderRadius: "50%",
+          background: "#ffffff",
+          marginLeft: 5,
+          marginRight: 5,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {[0, 90, 180, 270].map((deg, index) => (
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              width: "100vw",
+              height: "100vw",
+              background: "#82c803",
+              transformOrigin: "0 0",
+              transform: `rotate(${deg}deg) skew(${
+                index === 3 ? "20" : "0"
+              }deg)`,
+            }}
+          />
+        ))}
+        <img
+          src={image}
+          style={{
+            width: 34,
+            height: 34,
+            borderRadius: "50%",
+            background: "#dfdfdf",
+            zIndex: 10000,
+          }}
+        />
+      </div>
+    </div>
+  )
 }
 
-const PageLayout = ({children, active}) => {
-    const [collapsed, setCollapsed] = useState(true)
-    const [loggedIn, setLoggedIn] = useState(true)
-    const [showEditProfile, setShowEditProfile] = useState(false)
-    const [changePassword, setChangePassword] = useState(false)
-    const [savingChangePassword, setSavingChangePassword] = useState(false)
-    const [error, setError] = useState()
+const PageLayout = ({ children, active }) => {
+  const [collapsed, setCollapsed] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(true)
+  const [showEditProfile, setShowEditProfile] = useState(false)
+  const [changePassword, setChangePassword] = useState(false)
+  const [savingChangePassword, setSavingChangePassword] = useState(false)
+  const [error, setError] = useState()
 
-    useEffect(() => {
-        AuthService.currentUser().then(profile => {
-            console.log(profile)
-            if (!profile.changedPassword) {
-                setError(null)
-                console.log('Change password')
-                setChangePassword(true)
-            }
-        })
-    }, [])
+  useEffect(() => {
+    AuthService.currentUser().then(profile => {
+      console.log(profile)
+      if (!profile.changedPassword) {
+        setError(null)
+        console.log("Change password")
+        setChangePassword(true)
+      }
+    })
+  }, [])
 
-    const onCloseEditProfile = () => {
-        setShowEditProfile(false)
-    } 
+  const onCloseEditProfile = () => {
+    setShowEditProfile(false)
+  }
 
-    const toggleMenu = () => {
-        setCollapsed(!collapsed)
-    }
+  const toggleMenu = () => {
+    setCollapsed(!collapsed)
+  }
 
-    const handleChangePassword = values => {
-        setSavingChangePassword(true)
-        AuthService.changePassword(values.currentPassword, values.password).then(() => {
-            setChangePassword(false)
-        }).catch(err => {
-            setError(err.message)
-        }).finally(() => {
-            setSavingChangePassword(false)
-        })
-    }
+  const handleChangePassword = values => {
+    setSavingChangePassword(true)
+    AuthService.changePassword(values.currentPassword, values.password)
+      .then(() => {
+        setChangePassword(false)
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+      .finally(() => {
+        setSavingChangePassword(false)
+      })
+  }
 
-    const ignoreClick = () => {
-        setSavingChangePassword(true)
-        AuthService.keepPassword().then(() => {
-            setChangePassword(false)
-        }).catch(err => {
-            setError(err.message)
-        }).finally(() => {
-            setSavingChangePassword(false)
-        })
-    }
+  const ignoreClick = () => {
+    setSavingChangePassword(true)
+    AuthService.keepPassword()
+      .then(() => {
+        setChangePassword(false)
+      })
+      .catch(err => {
+        setError(err.message)
+      })
+      .finally(() => {
+        setSavingChangePassword(false)
+      })
+  }
 
-    return (
-        <Layout style={{ minHeight: '100vh' }} hasSider>
-            {/* <Layout.Sider collapsedWidth='0' collapsible trigger={null} collapsed={collapsed} open={true}>
+  return (
+    <Layout style={{ minHeight: "100vh" }} hasSider>
+      {/* <Layout.Sider collapsedWidth='0' collapsible trigger={null} collapsed={collapsed} open={true}>
                 <div style={{
                     background: 'white',
                     minHeight: '100vh',
@@ -125,122 +148,181 @@ const PageLayout = ({children, active}) => {
                 </div>
             </Layout.Sider> */}
 
-            <ADrawer width={300} closable={false} open={!collapsed} placement='left' onClose={() => setCollapsed(true)}>
-                <div style={{
-                    position: 'relative',
-                    width: '100%'
-                }}>
-                    <Drawer active={active} />
-                </div>
-            </ADrawer>
+      <ADrawer
+        width={300}
+        closable={false}
+        open={!collapsed}
+        placement="left"
+        onClose={() => setCollapsed(true)}
+      >
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+          }}
+        >
+          <Drawer active={active} />
+        </div>
+      </ADrawer>
 
-            <Layout>
-                <Layout.Header  style={{ background: 'white', padding: 0, position: 'relative', height: 40 }}>
-                    {/* <div style={{ */}
-                    {/*     display: 'flex', */}
-                    {/*     alignItems: 'center', */}
-                    {/*     flexDirection: 'row', */}
-                    {/*     height: '100%', */}
-                    {/*     marginRight: 20 */}
-                    {/* }}> */}
-                    {/*     <div style={{flex: 1}} /> */}
-                    {/*     <span style={{marginRight: 10}}>Course Progress</span> */}
-                    {/*     <CourseProgress image={'/images/react.png'} progress={50} course='reactjs' /> */}
-                    {/*     <CourseProgress image={'/images/react-native.png'} progress={78} course='react-native' /> */}
-                    {/*     <CourseProgress image={'/images/ionic.png'} progress={20} course='ionic' /> */}
-                    {/* </div> */}
-                </Layout.Header>
-                <Layout.Content style={{background: 'white'}}>
-                    <div style={{paddingRight: 20, paddingLeft: 20}}>
-                        {children}
-                    </div>
-                </Layout.Content>
-            
-            </Layout>
-            {showEditProfile && <EditProfile onCancel={onCloseEditProfile} />}
+      <Layout>
+        <Layout.Header
+          style={{
+            background: "white",
+            padding: 0,
+            position: "relative",
+            height: 40,
+          }}
+        >
+          {/* <div style={{ */}
+          {/*     display: 'flex', */}
+          {/*     alignItems: 'center', */}
+          {/*     flexDirection: 'row', */}
+          {/*     height: '100%', */}
+          {/*     marginRight: 20 */}
+          {/* }}> */}
+          {/*     <div style={{flex: 1}} /> */}
+          {/*     <span style={{marginRight: 10}}>Course Progress</span> */}
+          {/*     <CourseProgress image={'/images/react.png'} progress={50} course='reactjs' /> */}
+          {/*     <CourseProgress image={'/images/react-native.png'} progress={78} course='react-native' /> */}
+          {/*     <CourseProgress image={'/images/ionic.png'} progress={20} course='ionic' /> */}
+          {/* </div> */}
+        </Layout.Header>
+        <Layout.Content style={{ background: "white" }}>
+          <div style={{ paddingRight: 20, paddingLeft: 20 }}>{children}</div>
+        </Layout.Content>
+      </Layout>
+      {showEditProfile && <EditProfile onCancel={onCloseEditProfile} />}
 
-            <button style={{
-                position: 'fixed',
-                top: 10,
-                left: 10,
-                background: 'green',
-                width: 40,
-                height: 40,
-                borderRadius: '50%',
-                border: 'none',
-                color: 'white',
-                backgroundColor: 'rgb(130, 200, 3)'
-            }} onClick={toggleMenu}>
-                <MenuOutlined color='white' />
-            </button>
+      <button
+        style={{
+          position: "fixed",
+          top: 10,
+          left: 10,
+          background: "green",
+          width: 40,
+          height: 40,
+          borderRadius: "50%",
+          border: "none",
+          color: "white",
+          backgroundColor: "rgb(130, 200, 3)",
+        }}
+        onClick={toggleMenu}
+      >
+        <MenuOutlined color="white" />
+      </button>
 
-            <Modal title="Change Password"  open={changePassword} onCancel={() => setChangePassword(false)} okButtonProps={{style: {display: 'none'}}}>
-            {error && <Alert message={error} type='error' style={{marginBottom: 10}} />}
-            <Form layout="vertical" initialValues={{
-                password: '',
-                confirmPassword: ''
-            }} onFinish={handleChangePassword}>
-                <Form.Item style={{}} label="Current Password" name='currentPassword' rules={[
-                        {
-                            required: true,
-                            message: 'Current Password required'
-                        }
-                    ]}>
-                        <Input.Password placeholder="Current Password" 
-                            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                            style={{
-                            height: 50,
-                            borderRadius: 10,
-                            borderColor: 'rgb(143, 230, 76)',
-                            borderStyle: 'solid',
-                            padding: 10,
-                            
-                            borderWidth: 2
-                        }} />
-                    </Form.Item>
-                <Form.Item style={{}} label="New Password" name='password' rules={[
-                        {
-                            required: true,
-                            message: 'New Password required'
-                        }
-                    ]}>
-                        <Input.Password placeholder="New Password" 
-                            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                            style={{
-                            height: 50,
-                            borderRadius: 10,
-                            borderColor: 'rgb(143, 230, 76)',
-                            borderStyle: 'solid',
-                            padding: 10,
-                            
-                            borderWidth: 2
-                        }} />
-                    </Form.Item>
+      <Modal
+        title="Change Password"
+        open={changePassword}
+        onCancel={() => setChangePassword(false)}
+        okButtonProps={{ style: { display: "none" } }}
+      >
+        {error && (
+          <Alert message={error} type="error" style={{ marginBottom: 10 }} />
+        )}
+        <Form
+          layout="vertical"
+          initialValues={{
+            password: "",
+            confirmPassword: "",
+          }}
+          onFinish={handleChangePassword}
+        >
+          <Form.Item
+            style={{}}
+            label="Current Password"
+            name="currentPassword"
+            rules={[
+              {
+                required: true,
+                message: "Current Password required",
+              },
+            ]}
+          >
+            <Input.Password
+              placeholder="Current Password"
+              iconRender={visible =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
+              style={{
+                height: 50,
+                borderRadius: 10,
+                borderColor: "rgb(143, 230, 76)",
+                borderStyle: "solid",
+                padding: 10,
 
-                    <Button size='large' loading={savingChangePassword} disabled={savingChangePassword} onClick={ignoreClick} style={{
-                            background: 'rgb(143, 230, 76)',
-                            borderStyle: 'none',
-                            borderRadius: 28,
-                            color: 'white',
-                            cursor: 'pointer',
-                            width: '100%',
-                            marginTop: 20
-                        }}>Keep current password</Button>
+                borderWidth: 2,
+              }}
+            />
+          </Form.Item>
+          <Form.Item
+            style={{}}
+            label="New Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "New Password required",
+              },
+            ]}
+          >
+            <Input.Password
+              placeholder="New Password"
+              iconRender={visible =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
+              style={{
+                height: 50,
+                borderRadius: 10,
+                borderColor: "rgb(143, 230, 76)",
+                borderStyle: "solid",
+                padding: 10,
 
-                    <Button size='large' loading={savingChangePassword} disabled={savingChangePassword} htmlType='submit' style={{
-                            background: 'rgb(143, 230, 76)',
-                            borderStyle: 'none',
-                            borderRadius: 28,
-                            color: 'white',
-                            cursor: 'pointer',
-                            width: '100%',
-                            marginTop: 20
-                        }}>Change Password</Button>
-            </Form>
-            </Modal>
-        </Layout>
-        
-    )
+                borderWidth: 2,
+              }}
+            />
+          </Form.Item>
+
+          <Button
+            size="large"
+            loading={savingChangePassword}
+            disabled={savingChangePassword}
+            onClick={ignoreClick}
+            style={{
+              background: "rgb(143, 230, 76)",
+              borderStyle: "none",
+              borderRadius: 28,
+              color: "white",
+              cursor: "pointer",
+              width: "100%",
+              marginTop: 20,
+            }}
+          >
+            Keep current password
+          </Button>
+
+          <Button
+            size="large"
+            loading={savingChangePassword}
+            disabled={savingChangePassword}
+            htmlType="submit"
+            style={{
+              background: "rgb(143, 230, 76)",
+              borderStyle: "none",
+              borderRadius: 28,
+              color: "white",
+              cursor: "pointer",
+              width: "100%",
+              marginTop: 20,
+            }}
+          >
+            Change Password
+          </Button>
+        </Form>
+      </Modal>
+    </Layout>
+  )
 }
 
 export default PageLayout
