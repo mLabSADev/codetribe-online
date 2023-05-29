@@ -1,4 +1,4 @@
-import { Spin } from 'antd';
+import { Button, Spin } from 'antd';
 import React, { useEffect, useState } from 'react'
 import Quiz from 'react-quiz-component';
 import { LessonService } from '../services/lesson-service';
@@ -7,7 +7,8 @@ const QuizPage = ({
   quiz,
   chapter,
   lessonId,
-  showResult
+  showResult,
+  onNext
 }) => {
     const [loading, setLoading] = useState()
     const [result, setResult] = useState()
@@ -43,8 +44,14 @@ const QuizPage = ({
       return <div style={{
         textAlign: 'center',
         marginTop: 40,
-        fontSize: '2em'
-      }}>You have already completed this quiz</div>
+        fontSize: '2em',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column'
+      }}>
+        <div>You have already completed this quiz</div>
+        <Button onClick={onNext}>Next</Button>
+      </div>
     }
 
     return (

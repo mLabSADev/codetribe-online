@@ -303,7 +303,7 @@ export default ({ data }) => {
                         </div>
 
                     </div>) : (
-                        <Quiz chapter={currentChapter} lessonId={data.markdownRemark.fields.tutorial} quiz={post.frontmatter.quiz} />
+                        <Quiz onNext={goToNext} chapter={currentChapter} lessonId={data.markdownRemark.fields.tutorial} quiz={post.frontmatter.quiz} />
                     )}
                     
 
