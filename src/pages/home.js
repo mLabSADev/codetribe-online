@@ -7,34 +7,43 @@ import { AuthService } from "../services/auth-service"
 import { navigate } from "gatsby"
 
 export default () => {
-    const [loading, setLoading] = useState(false)
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-    useEffect(() => {
-        AuthService.isLoggedIn().then(result => {
-            if (result) {
-                setIsLoggedIn(true)
-                AuthService.currentUser().then(profile => {
-                    if (profile.bootcamp) {
-                        navigate('/webinars')
-                    }
-                })
-                
+  useEffect(() => {
+    AuthService.isLoggedIn()
+      .then(result => {
+        if (result) {
+          setIsLoggedIn(true)
+          AuthService.currentUser().then(profile => {
+            if (profile.bootcamp) {
+              navigate("/webinars")
             }
-        }).catch(err => {
-            navigate('/')
-        }).finally(() => {
-            setLoading(false)
-        })
-    }, [])
+          })
+        }
+      })
+      .catch(err => {
+        navigate("/")
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [])
 
-    return loading ? (<div></div>) : (isLoggedIn ? (
-        <div>
-            <SEO title='Build React Web &amp; Mobile Apps' description='Building apps is easier than you think. We will take you through the process of building your own apps using React and Firebase' />
-            {/* <PageLayout fullscreen={true} active='home'>
+  return loading ? (
+    <div></div>
+  ) : isLoggedIn ? (
+    <div>
+      <SEO
+        title="Build React Web &amp; Mobile Apps"
+        description="Building apps is easier than you think. We will take you through the process of building your own apps using React and Firebase"
+      />
+      {/* <PageLayout fullscreen={true} active='home'>
                 
             </PageLayout> */}
-            <HomeContent />
-        </div>
-    ) : <div></div>)
+      <HomeContent />
+    </div>
+  ) : (
+    <div></div>
+  )
 }

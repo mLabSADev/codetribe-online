@@ -9,7 +9,7 @@ import { AuthService } from "../services/auth-service"
 import PageLayout from "../templates/layout"
 import { Avatar, Stack } from "@mui/material"
 import StudentProgress from "./progress"
-import ResourceCards from "./resources"
+import ResourceCards, { BackendCard } from "./resources"
 const ProgressData = [
   {
     progress: 100,
@@ -123,6 +123,24 @@ const FrontEndResourceData = [
     ],
   },
 ]
+const BackendResourceData = [
+  {
+    icon: "/images/resources/REDUX.png",
+    title: "Redux Toolkit",
+    color: "#593D88",
+    description:
+      "The official, opinionated, batteries-included toolset for efficient Redux development",
+    link: "https://redux-toolkit.js.org/tutorials/quick-start",
+  },
+  {
+    icon: "/images/resources/FIREBASE.png",
+    title: "Firebase",
+    color: "#039BE5",
+    description:
+      "Firebase is an app development platform that helps you build and grow apps and games users love. Backed by Google and trusted by millions of businesses around the world.",
+    link: "https://firebase.google.com/docs/build?authuser=0&hl=en",
+  },
+]
 function stringToColor(string) {
   let hash = 0
   let i
@@ -182,41 +200,52 @@ const HomeContent = () => {
   return (
     <PageLayout active={"browse"}>
       {/* Profile */}
-      <Stack alignItems={"center"}>
+      <Stack py={5} spacing={2} alignItems={"center"}>
         <Avatar
           sx={{ width: 56, height: 56 }}
           {...stringAvatar(
             `${user?.firstname || "C"} ${user?.lastname || "T"}`
           )}
         />
-        <Typography.Title style={{ fontSize: 28 }}>
+        <Typography.Title style={{ fontSize: 28, margin: 0 }}>
           {user?.firstname} {user?.lastname}
         </Typography.Title>
         <Typography>
           {user?.role.toUpperCase() || `${user?.name}@mail.com`}
         </Typography>
       </Stack>
-      <Stack>
-        <div style={{ padding: 20 }}>
+      <Stack p={1}>
+        <div>
           <div style={{ flex: 1 }}>
             {/* Courses */}
             <div
               style={{
-                marginTop: 20,
+                marginTop: 0,
                 borderRadius: 20,
-                padding: 15,
-                marginBottom: 20,
+                // marginBottom: 20,
               }}
             >
+              <Divider orientation="left">Your Progress</Divider>
+              {/* <Stack p={2}>
+                <Typography
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 23,
+                  }}
+                >
+                  Your Progress
+                </Typography>
+              </Stack> */}
               <Stack
-                spacing={3}
-                gap={3}
+                spacing={1}
+                gap={1}
                 sx={{ overflowX: "auto" }}
                 direction={{ xs: "column", sm: "row", md: "row" }}
               >
                 {ProgressData.map((item, i) => {
                   return (
                     <StudentProgress
+                      locked={item.course === "React Native"}
                       key={i}
                       lesson={item.lesson}
                       course={item.course}
@@ -226,7 +255,10 @@ const HomeContent = () => {
                   )
                 })}
               </Stack>
-              <Typography.Title>Browse Tutorials</Typography.Title>
+              <Divider />
+              <Stack p={2}>
+                <Typography.Title>Browse Tutorials</Typography.Title>
+              </Stack>
             </div>
 
             <TutorialListing limit={6} />
@@ -252,6 +284,23 @@ const HomeContent = () => {
                       description={item.description}
                       links={item.links}
                       image={item.image}
+                    />
+                  )
+                })}
+              </Stack>
+              <Stack
+                direction={{ sm: "column", md: "column", lg: "row" }}
+                spacing={1}
+                gap={1}
+              >
+                {BackendResourceData.map((item, i) => {
+                  return (
+                    <BackendCard
+                      key={i}
+                      color={item.color}
+                      title={item.title}
+                      description={item.description}
+                      icon={item.icon}
                     />
                   )
                 })}

@@ -10,7 +10,6 @@ import {
   Modal,
   Drawer as ADrawer,
   Form,
-  Button,
   Input,
   Alert,
 } from "antd"
@@ -18,7 +17,8 @@ import React, { useEffect, useState } from "react"
 import Drawer from "../components/drawer"
 import EditProfile from "../modals/edit-profile"
 import { AuthService } from "../services/auth-service"
-
+import MenuIcon from "@mui/icons-material/Menu"
+import { Button, IconButton } from "@mui/material"
 const CourseProgress = ({ progress, course, image }) => {
   return (
     <div
@@ -129,7 +129,12 @@ const PageLayout = ({ children, active }) => {
   }
 
   return (
-    <Layout style={{ minHeight: "100vh" }} hasSider>
+    <Layout
+      style={{
+        minHeight: "100vh",
+      }}
+      hasSider
+    >
       {/* <Layout.Sider collapsedWidth='0' collapsible trigger={null} collapsed={collapsed} open={true}>
                 <div style={{
                     background: 'white',
@@ -171,7 +176,7 @@ const PageLayout = ({ children, active }) => {
             background: "white",
             padding: 0,
             position: "relative",
-            height: 40,
+            height: 0, // was  40
           }}
         >
           {/* <div style={{ */}
@@ -188,13 +193,40 @@ const PageLayout = ({ children, active }) => {
           {/*     <CourseProgress image={'/images/ionic.png'} progress={20} course='ionic' /> */}
           {/* </div> */}
         </Layout.Header>
-        <Layout.Content style={{ background: "white" }}>
+        <Layout.Content
+          style={{
+            minHeight: "100vh",
+            background:
+              'linear-gradient(0deg, rgba(255,255,255,1) 70%, rgba(255,255,255,0.7) 100%), url("https://plus.unsplash.com/premium_photo-1673890230816-7184bee134db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=627&q=80")',
+            backgroundSize: "cover",
+            backgroundAttachment: "fixed",
+            // backgroundRepeat: "no-repeat",
+          }}
+        >
           <div style={{ paddingRight: 20, paddingLeft: 20 }}>{children}</div>
         </Layout.Content>
       </Layout>
       {showEditProfile && <EditProfile onCancel={onCloseEditProfile} />}
 
-      <button
+      <IconButton
+        size="90"
+        sx={{
+          position: "fixed",
+          top: 10,
+          left: 10,
+          background: "green",
+          width: 40,
+          height: 40,
+          borderRadius: "50%",
+          border: "none",
+          color: "white",
+          backgroundColor: "rgb(130, 200, 3)",
+        }}
+        onClick={toggleMenu}
+      >
+        <MenuIcon />
+      </IconButton>
+      {/* <button
         style={{
           position: "fixed",
           top: 10,
@@ -210,7 +242,7 @@ const PageLayout = ({ children, active }) => {
         onClick={toggleMenu}
       >
         <MenuOutlined color="white" />
-      </button>
+      </button> */}
 
       <Modal
         title="Change Password"

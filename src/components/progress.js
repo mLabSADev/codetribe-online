@@ -12,13 +12,28 @@ import React from "react"
  * @returns
  */
 
-function StudentProgress({ progress, title, course, lesson, link }) {
+function StudentProgress({
+  progress,
+  title,
+  course,
+  lesson,
+  link,
+  locked = false,
+}) {
   return (
     <Stack
+      border={1}
+      p={2}
       minWidth={{ xs: "100%", sm: 400 }}
       direction={{ xs: "column", sm: "row", md: "row" }}
       alignItems={"center"}
       spacing={3}
+      sx={{
+        borderRadius: 5,
+        borderColor: "#E4E4E4",
+        backdropFilter: "blur(14px)",
+        background: "rgba(255,255,255,0)",
+      }}
     >
       <Stack
         width={{ xs: "100%", sm: "auto", md: "auto" }}
@@ -27,30 +42,32 @@ function StudentProgress({ progress, title, course, lesson, link }) {
         {/* Needs refresh to apply TODO: will try to use mui Box */}
         {window.screen.width < 500 ? (
           <Progress
-            strokeColor={{ "0%": "#00467F", "100%": "#87d068" }}
+            strokeColor={{ "0%": "#87d068", "100%": "#87d068" }}
             percent={progress}
             width={"100%"}
           />
         ) : (
           <Progress
             type="dashboard"
-            strokeColor={{ "0%": "#00467F", "100%": "#87d068" }}
+            strokeColor={{ "0%": "#87d068", "100%": "#87d068" }}
             percent={progress}
           />
         )}
       </Stack>
       <Stack spacing={2}>
         <Stack>
-          <Typography variant="subtitle2">
-            {course} - Lesson {lesson}
+          <Typography variant="subtitle2" color={"gray"}>
+            {progress == 100 ? `Well Done` : `${course} - Lesson ${lesson}`}
           </Typography>
           <Typography variant="h6" fontWeight={"bold"}>
-            {title}
+            {progress == 100 ? `${course} Course Completed` : title}
           </Typography>
         </Stack>
         {progress == 100 ? null : (
           <Button
-            disabled={course === "React Native"} // TODO: temporary disabler
+            component={"a"}
+            href={link}
+            disabled={locked} // TODO: temporary disabler
             size="small"
             disableElevation
             sx={{
@@ -62,7 +79,7 @@ function StudentProgress({ progress, title, course, lesson, link }) {
           >
             <Typography fontSize={14} variant="button">
               {/* TODO: customize condition */}
-              {course === "React Native" ? "Locked" : "Continue Learning"}
+              {locked ? "Locked" : "Continue Learning"}
             </Typography>
           </Button>
         )}
