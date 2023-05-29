@@ -202,24 +202,26 @@ export default () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              alignItems: "flex-end",
+              alignItems: "flex-start",
               paddingRight: 0,
               overflow: "hidden",
             }}
           >
             <img
-              src="/images/Frame.png"
+              src="/images/login-illustration.png"
               style={{
                 position: "absolute",
-                left: 0,
-                top: 0,
+                right: 0,
+                bottom: "15%",
+                // marginBottom: "-50%",
                 opacity: 0.5,
               }}
             />
             <div
               style={{
-                width: 600,
+                width: 700,
                 zIndex: 10000,
+                padding: 50,
               }}
             >
               <p
