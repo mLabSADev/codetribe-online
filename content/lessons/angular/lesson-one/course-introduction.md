@@ -1,6 +1,8 @@
 ---
 title: Course Introduction
 duration: "6:15"
+chapter: 1
+lesson: 1
 ---
 
 

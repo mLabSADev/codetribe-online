@@ -1,6 +1,8 @@
 ---
 title: Create Weather Card Component 
 duration: "21:27"
+chapter: 3
+lesson: 2
 ---
 
 

@@ -1,6 +1,8 @@
 ---
 title: Using Postman
 duration: "12:16"
+chapter: 3
+lesson: 4
 ---
 
 
