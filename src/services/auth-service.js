@@ -15,6 +15,51 @@ export const AuthService = {
         })
         
     },
+    confirmRegistration: (user) => {
+        delete user.key
+
+        return AuthService.checkUser(user.email).then(userInfo => {
+            const key = userInfo.key
+
+            return firebase.auth().createUserWithEmailAndPassword(user.email, user.password).then(registeredUser => {
+                delete user.password
+                delete user.confirmPassword
+                
+                return firebase.database().ref(`users/${key}`).once('value').then(snapshot => {
+                    if (snapshot.exists()) {
+                        const userData = snapshot.val()
+    
+                        return firebase.database().ref(`users/${registeredUser.user.uid}`).set({
+                            ...userData,
+                            registered: true,
+                            ...user
+                        }).then(() => {
+                            return firebase.database().ref(`users/${key}`).remove()
+                        })
+                    } else {
+                        throw new Error("Couldn't register user. An error occurred")
+                    }
+                })
+            })
+        })
+        
+    },
+    checkUser: email => {
+        return firebase.database().ref(`users`).orderByChild('email').equalTo(email).once('value').then(snapshot => {
+            if (snapshot.exists()) {
+                const user = snapshot.val()
+
+                const keys = Object.keys(user)
+
+                return {
+                    ...user[keys[0]],
+                    key: keys[0]
+                }
+            } else {
+                throw new Error('User not found')
+            }
+        })
+    },
     login: (email, password) => {
         return firebase.auth().signInWithEmailAndPassword(email, password)
     },
