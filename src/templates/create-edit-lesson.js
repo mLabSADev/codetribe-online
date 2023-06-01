@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react'
 import { CoursesService } from '../services/courses-service';
 import { Link } from 'gatsby';
 import { PlusOutlined } from '@ant-design/icons';
-import ReactQuill from 'react-quill';
+// import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import CreateEditCourse from '../modals/create-edit-course';
 
 export default ({ params }) => {
     const [course, setCourse] = useState()
@@ -68,33 +69,24 @@ export default ({ params }) => {
 
     return (
         <div>
+            
             <PageLayout title='Lesson' active='courses'>
                 <div>
                 
                 {(lessonId == null || lesson) && (<Form
                     name="basic"
+                    layout='vertical'
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 16 }}
-                    style={{ minWidth: 600 }}
+                    style={{ width: '100%' }}
                     onFinish={onFinish}
                     autoComplete="off"
-                    initialValues={{
+                    initialValues={lesson ? {
                         title: lesson.title,
                         videoUrl: lesson.videoUrl
-                    }}
+                    } : null}
                 >
-                    <div style={{
-                    display: 'flex'
-                }}>
                     <div>
-                    <Upload
-                        listType="picture-card"
-                        fileList={fileList}
-                        onPreview={handlePreview}
-                        onChange={onUploadChange}
-                    >
-                        {fileList.length >= 1 ? null : uploadButton}
-                    </Upload> 
                     <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
                         <img alt="example" style={{ width: '100%' }} src={previewImage} />
                     </Modal>
@@ -102,7 +94,8 @@ export default ({ params }) => {
                     <div style={{
                         flexGrow: 1,
                         display: 'flex',
-                        flexDirection: 'column'
+                        flexDirection: 'column',
+                        marginTop: 60
                     }}>
                     <Form.Item
                         label="Title"
@@ -121,8 +114,7 @@ export default ({ params }) => {
                     </Form.Item>
                     </div>
 
-                    </div>
-                    <ReactQuill modules={{
+                    {/* <ReactQuill modules={{
                         toolbar: [
                             [{ font: [] }],
                             [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -135,7 +127,7 @@ export default ({ params }) => {
                             ["link", "image", "video"],
                             ["clean"],
                         ]
-                    }} value={lesson && lesson.body} theme="snow"/>
+                    }} value={lesson && lesson.body} theme="snow"/> */}
                     
                 </Form>)}
                 </div>

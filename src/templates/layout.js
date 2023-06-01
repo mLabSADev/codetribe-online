@@ -244,7 +244,7 @@ const PageLayout = ({ children, active }) => {
         <MenuOutlined color="white" />
       </button> */}
 
-      <Modal
+      {/* <Modal
         title="Change Password"
         open={changePassword}
         onCancel={() => setChangePassword(false)}
@@ -352,7 +352,7 @@ const PageLayout = ({ children, active }) => {
             Change Password
           </Button>
         </Form>
-      </Modal>
+      </Modal> */}
     </Layout>
   )
 }

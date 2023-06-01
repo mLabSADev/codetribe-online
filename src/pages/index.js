@@ -143,23 +143,53 @@ export default () => {
   const [loggingIn, setIsLoggingIn] = useState(false)
   const [errorMessage, setMessage] = useState(null)
   const [showForgotPassword, setShowForgotPassword] = useState(false)
+  const [signInMethod, setSignInMethod] = useState()
 
   const onLogin = values => {
     setIsLoggingIn(true)
     setMessage(null)
 
-    AuthService.login(values.email, values.password)
-      .then(() => {
-        AuthService.currentUser().then(profile => {
-          onLoggedIn(profile)
-        })
-      })
-      .catch(err => {
+    if (!signInMethod) {
+      AuthService.checkUser(values.email).then(user => {
+        console.log(user)
+        if (user.registered === false) {
+          setSignInMethod('new-user')
+        } else {
+          setSignInMethod('existing-user')
+        }
+      }).catch(err => {
         setMessage(err.message)
-      })
-      .finally(() => {
+      }).finally(() => {
         setIsLoggingIn(false)
       })
+    } else {
+      if (signInMethod === 'existing-user') {
+        AuthService.login(values.email, values.password)
+        .then(() => {
+          AuthService.currentUser().then(profile => {
+            onLoggedIn(profile)
+          })
+        })
+        .catch(err => {
+          setMessage(err.message)
+        })
+        .finally(() => {
+          setIsLoggingIn(false)
+        })
+      } else if (signInMethod === 'new-user') {
+        AuthService.confirmRegistration(values).then(() => {
+          AuthService.currentUser().then(profile => {
+            onLoggedIn(profile)
+          })
+        }).catch(err => {
+          setMessage(err.message)
+        })
+        .finally(() => {
+          setIsLoggingIn(false)
+        })
+      }
+    }
+    
   }
 
   const layout = {
@@ -325,7 +355,37 @@ export default () => {
                   }}
                 />
               </Form.Item>
-              <Form.Item
+              {signInMethod === 'new-user' && <Form.Item
+                label="First Name"
+                name="firstname"
+                rules={[
+                  {
+                    required: true,
+                    message: "Your first name is required",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="Input your first name"
+                  style={{ height: 50 }}
+                />
+              </Form.Item>}
+              {signInMethod === 'new-user' && <Form.Item
+                label="Last Name"
+                name="lastname"
+                rules={[
+                  {
+                    required: true,
+                    message: "Your last name is required",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="Input your last name"
+                  style={{ height: 50 }}
+                />
+              </Form.Item>}
+              {signInMethod === 'existing-user' && <Form.Item
                 label="Password"
                 name="password"
                 rules={[
@@ -338,17 +398,42 @@ export default () => {
                 <Input
                   type="password"
                   placeholder="Input your password"
-                  style={{
-                    height: 50,
-                    borderRadius: 10,
-                    borderColor: "rgb(143, 230, 76)",
-                    borderStyle: "solid",
-                    borderWidth: 2,
-                    padding: 10,
-                    marginBottom: 20,
-                  }}
+                  style={{ height: 50 }}
                 />
-              </Form.Item>
+              </Form.Item>}
+
+              {signInMethod === 'new-user' && <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Your password is required",
+                  },
+                ]}
+              >
+                <Input
+                  type="password"
+                  placeholder="Input your password"
+                  style={{ height: 50 }}
+                />
+              </Form.Item>}
+              {signInMethod === 'new-user' && <Form.Item
+                label="Confirm Password"
+                name="confirmPassword"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter your password again",
+                  },
+                ]}
+              >
+                <Input
+                  type="password"
+                  placeholder="Confirm Password"
+                  style={{ height: 50 }}
+                />
+              </Form.Item>}
               {/* <Form.Item>
             <Button loading={loggingIn} disabled={loggingIn} htmlType='submit' type="primary" style={{height: 50, width: 100}}>Sign In</Button>
         </Form.Item> */}

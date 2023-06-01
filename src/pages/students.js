@@ -1,14 +1,17 @@
-import { Button, Col, Row, Spin, Table } from 'antd';
+import { Button, Col, Row, Space, Spin, Table } from 'antd';
 import { Link } from 'gatsby';
 import React, { useEffect, useState } from 'react'
 import { LessonService } from '../services/lesson-service';
 import { StudentsService } from '../services/students-service';
 import PageLayout from '../templates/layout';
+import CreateEditStudent from '../modals/create-edit-student';
 
 const lessonNames = {
     react: 'ReactJS',
     ionic: 'Ionic',
-    'react-native': 'React Native'
+    'react-native': 'React Native',
+    'nodejs': 'nodejs',
+    'angular': 'angular'
 }
 
 const ProgressCard = ({progress, data}) => {
@@ -111,6 +114,10 @@ const StudentInfo = ({student, data}) => {
 export default ({ data }) => {
     const [students, setStudents] = useState()
     const [columns, setColumns] = useState()
+    const [showCreateEditStudent, setShowCreateEditStudent] = useState({
+        show: false,
+        selectedStudent: null
+    })
 
     useEffect(() => {
         StudentsService.students().then(({students, groups}) => {
@@ -151,7 +158,7 @@ export default ({ data }) => {
                 key: 'location',
                 filterMode: 'tree',
                 filterSearch: true,
-                filters: groups.map(filter => ({text: filter, value: filter})),
+                // filters: groups.map(filter => ({text: filter, value: filter})),
                 onFilter: (value, record) => record.location && record.location.startsWith(value)
             }])
 
@@ -159,11 +166,27 @@ export default ({ data }) => {
         })
     }, [])
 
+    const onClose = () => {
+        setShowCreateEditStudent({
+            show: false
+        })
+    }
+
+    const onAddStudent = () => {
+        setShowCreateEditStudent({
+            show: true
+        })
+    }
+
     return (
         <div>
-            
+            {showCreateEditStudent.show && <CreateEditStudent student={showCreateEditStudent.selectedCourse} onCancel={onClose} />}
             <PageLayout title='Students' active='students' topRight={<Button>Add Student</Button>}>
-            <h2 style={{marginBottom: 20}}>Students</h2>
+            <Space style={{marginBottom: 20, marginTop: 60}} size={'middle'}>
+                <h2 style={{marginTop: 10}}>Students</h2>
+                <Button onClick={onAddStudent}>Add Student</Button>
+                <Button>Add Bulk Students</Button>
+            </Space>
                 {students && columns ? <Table dataSource={students} columns={columns} expandable={{
       expandedRowRender: record => <p style={{ margin: 0 }}>{<StudentInfo student={record} data={data} />}</p>,
       rowExpandable: () => true,

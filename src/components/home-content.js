@@ -210,9 +210,9 @@ const HomeContent = () => {
         <Typography.Title style={{ fontSize: 28, margin: 0 }}>
           {user?.firstname} {user?.lastname}
         </Typography.Title>
-        <Typography>
-          {user?.role.toUpperCase() || `${user?.name}@mail.com`}
-        </Typography>
+        {/* <Typography>
+          {user.role && user.role.toUpperCase() || `${user?.name}@mail.com`}
+        </Typography> */}
       </Stack>
       <Stack p={1}>
         <div>

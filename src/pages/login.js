@@ -7,6 +7,7 @@ import { AuthService } from "../services/auth-service"
 export default () => {
   const [loggingIn, setIsLoggingIn] = useState(false)
   const [errorMessage, setMessage] = useState(null)
+  const [signInMethod, setSignInMethod] = useState()
 
   const onLogin = values => {
     setIsLoggingIn(true)
@@ -149,7 +150,37 @@ export default () => {
                   style={{ height: 50 }}
                 />
               </Form.Item>
-              <Form.Item
+              {signInMethod === 'new-user' && <Form.Item
+                label="First Name"
+                name="firstname"
+                rules={[
+                  {
+                    required: true,
+                    message: "Your first name is required",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="Input your first name"
+                  style={{ height: 50 }}
+                />
+              </Form.Item>}
+              {signInMethod === 'new-user' && <Form.Item
+                label="Last Name"
+                name="lastname"
+                rules={[
+                  {
+                    required: true,
+                    message: "Your last name is required",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="Input your last name"
+                  style={{ height: 50 }}
+                />
+              </Form.Item>}
+              {signInMethod === 'existing-user' && <Form.Item
                 label="Password"
                 name="password"
                 rules={[
@@ -164,7 +195,41 @@ export default () => {
                   placeholder="Input your password"
                   style={{ height: 50 }}
                 />
-              </Form.Item>
+              </Form.Item>}
+
+              {signInMethod === 'new-user' && <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Your password is required",
+                  },
+                ]}
+              >
+                <Input
+                  type="password"
+                  placeholder="Input your password"
+                  style={{ height: 50 }}
+                />
+              </Form.Item>}
+              {signInMethod === 'new-user' && <Form.Item
+                label="Confirm Password"
+                name="confirmPassword"
+                rules={[
+                  {
+                    required: true,
+                    message: "Enter your password again",
+                  },
+                ]}
+              >
+                <Input
+                  type="password"
+                  placeholder="Confirm Password"
+                  style={{ height: 50 }}
+                />
+              </Form.Item>}
+
               <Form.Item>
                 {/* <Button loading={loggingIn} disabled={loggingIn} htmlType='submit' type="primary" style={{height: 50, width: 100}}>Sign In</Button>
             <Button htmlType='button' type="ghost" style={{height: 50, width: 100}}>Forgot Password</Button> */}
