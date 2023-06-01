@@ -10,6 +10,7 @@ import PageLayout from "../templates/layout"
 import { Avatar, Stack } from "@mui/material"
 import StudentProgress from "./progress"
 import ResourceCards, { BackendCard } from "./resources"
+// Dummy data ====
 const ProgressData = [
   {
     progress: 100,
@@ -141,6 +142,7 @@ const BackendResourceData = [
     link: "https://firebase.google.com/docs/build?authuser=0&hl=en",
   },
 ]
+// End dummy data ====
 function stringToColor(string) {
   let hash = 0
   let i
