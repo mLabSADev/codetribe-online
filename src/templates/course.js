@@ -1,10 +1,29 @@
 import PageLayout from '../templates/layout';
-import { Button, Col, Row, Spin, Table } from 'antd';
+import { Button, Col, Row, Space, Spin, Table } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { CoursesService } from '../services/courses-service';
 import { Link } from 'gatsby';
+import CreateEditLesson from '../modals/create-edit-lesson';
 
 const Lessons = ({ course, chapter }) => {
+    const [showCreateEditLesson, setShowCreateEditLesson] = useState({
+        show: false,
+        selectedLesson: null
+    })
+
+    const onEdit = (lesson) => {
+        setShowCreateEditLesson({
+            show: true,
+            selectedLesson: lesson
+        })
+    }
+
+    const onClose = () => {
+        setShowCreateEditLesson({
+            show: false
+        })
+    }
+
     const columns = [
         {
             title: 'Title',
@@ -23,15 +42,25 @@ const Lessons = ({ course, chapter }) => {
         {
             title: 'Actions',
             render: (_, record) => {
-                return <Link to={`/editor/${course}/chapter/${chapter.key}/lesson/${record.key}`}>Edit</Link>
+                return (
+                    <Space size="middle">
+                        <a onClick={() => onEdit(record)}>Edit</a>
+                        <a>Remove</a>
+                    </Space>
+                    
+                    
+                )
             },
         }
     ]
     
     return (
-        <Table dataSource={chapter.lessons} columns={columns}>
+        <div>
+            <Table dataSource={chapter.lessons} columns={columns}>
 
-        </Table>
+            </Table>
+            {showCreateEditLesson.show && <CreateEditLesson lesson={showCreateEditLesson.selectedLesson} onCancel={onClose} />}
+        </div>
     )
 }
 
@@ -68,7 +97,7 @@ export default ({ params }) => {
     return (
         <div>
             <PageLayout title='Courses' active='courses' topRight={<Button>Add Chapter</Button>}>
-            <h2 style={{marginBottom: 20}}>Course - {course && course.title}</h2>
+            <h2 style={{marginBottom: 20, marginTop: 60}}>Course - {course && course.title}</h2>
                 {course && columns ? <Table dataSource={course.chapters} columns={columns} expandable={{
                     expandedRowRender: record => <Lessons course={id} chapter={record} />,
                     rowExpandable: () => true

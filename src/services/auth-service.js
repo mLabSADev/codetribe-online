@@ -1,6 +1,20 @@
 import firebase from "gatsby-plugin-firebase"
 
 export const AuthService = {
+    createUser: (user) => {
+        return firebase.database().ref(`users`).orderByChild('email').equalTo(user.email).once('value').then(snapshot => {
+            if (snapshot.exists()) {
+                throw new Error('User already exists')
+            } else {
+                return firebase.database().ref(`users`).push({
+                    ...user,
+                    registered: false,
+                    createdAt: firebase.database.ServerValue.TIMESTAMP
+                })
+            }
+        })
+        
+    },
     login: (email, password) => {
         return firebase.auth().signInWithEmailAndPassword(email, password)
     },
