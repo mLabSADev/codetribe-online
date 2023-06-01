@@ -245,6 +245,9 @@ const HomeContent = () => {
                 {ProgressData.map((item, i) => {
                   return (
                     <StudentProgress
+                      link={
+                        "https://codetribe.mlab.co.za/lessons/react/lesson-three/introduction/"
+                      }
                       locked={item.course === "React Native"}
                       key={i}
                       lesson={item.lesson}
@@ -297,6 +300,7 @@ const HomeContent = () => {
                   return (
                     <BackendCard
                       key={i}
+                      link={item.link}
                       color={item.color}
                       title={item.title}
                       description={item.description}
