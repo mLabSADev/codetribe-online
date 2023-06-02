@@ -13,14 +13,18 @@ import {
   Collapse,
   Statistic,
   Input,
+  Select,
+  Form,
+  Checkbox,
 } from "antd"
-import { Formik, Form, Field, ErrorMessage } from "formik"
 import {
   CheckSquareOutlined,
   EllipsisOutlined,
   EditOutlined,
   SettingOutlined,
   DeleteOutlined,
+  MinusCircleOutlined,
+  PlusOutlined,
 } from "@ant-design/icons"
 const { Column, ColumnGroup } = Table
 const { Meta } = Card
@@ -205,13 +209,46 @@ const data = [
     tags: ["cool", "teacher"],
   },
 ]
+const COURSES = ["nodejs", "ionic", "angular", "reactjs"]
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 4 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 20 },
+  },
+}
+
+const formItemLayoutWithOutLabel = {
+  wrapperCol: {
+    xs: { span: 24, offset: 0 },
+    sm: { span: 20, offset: 4 },
+  },
+}
 function Assessments() {
   const [openModal, setOpenModal] = React.useState(false)
   const [openEval, setEval] = React.useState(false)
+  const [criteria, setCriteria] = React.useState([])
+  const [form] = Form.useForm()
   const showModal = () => {
     setOpenModal(true)
   }
-
+  const onCourseChange = value => {
+    switch (value) {
+      case "male":
+        form.setFieldsValue({ note: "Hi, man!" })
+        break
+      case "female":
+        form.setFieldsValue({ note: "Hi, lady!" })
+        break
+      case "other":
+        form.setFieldsValue({ note: "Hi there!" })
+        break
+      default:
+    }
+  }
   const handleOk = () => {
     setOpenModal(false)
   }
@@ -219,46 +256,138 @@ function Assessments() {
   const handleCancel = () => {
     setOpenModal(false)
   }
+  const onFinish = values => {
+    console.log("Success:", values)
+  }
+
+  const onFinishFailed = errorInfo => {
+    console.log("Failed:", errorInfo)
+  }
   return (
     <PageLayout>
       <Modal
         title="New Assessment"
+        style={{ width: "60%" }}
         open={openModal}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Formik
-          initialValues={{ email: "", password: "" }}
-          validate={values => {
-            const errors = {}
-            if (!values.email) {
-              errors.email = "Required"
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = "Invalid email address"
-            }
-            return errors
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2))
-              setSubmitting(false)
-            }, 400)
-          }}
+        <Form
+          name="assessment"
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          style={{ maxWidth: 600 }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="on"
         >
-          {({ isSubmitting }) => (
-            <Form>
-              <Field type="email" name="email" />
-              <ErrorMessage name="email" component="div" />
-              <Field type="password" name="password" />
-              <ErrorMessage name="password" component="div" />
-              <button type="submit" disabled={isSubmitting}>
-                Submit
-              </button>
-            </Form>
-          )}
-        </Formik>
+          <Form.Item name="course" label="Course" rules={[{ required: true }]}>
+            <Select
+              placeholder="Select course"
+              onChange={onCourseChange}
+              allowClear
+            >
+              {COURSES.map(item => (
+                <Select.Option value={item}>{item.toUpperCase()}</Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item
+            label="Title"
+            name="title"
+            rules={[
+              { required: true, message: "Please input assessment title" },
+            ]}
+          >
+            <Input size="large" />
+          </Form.Item>
+
+          <Form.Item
+            label="Description"
+            name="description"
+            rules={[{ required: true, message: "Please add a desription" }]}
+          >
+            <Input.TextArea rows={7} />
+          </Form.Item>
+
+          <Form.Item
+            label="Criteria"
+            name="criteria"
+            rules={[{ required: true, message: "Please add a criteria" }]}
+          >
+            <Form.List
+              name="names"
+              rules={[
+                {
+                  validator: async (_, names) => {
+                    if (!names || names.length < 2) {
+                      return Promise.reject(new Error("At least 2 criteria"))
+                    }
+                  },
+                },
+              ]}
+            >
+              {(fields, { add, remove }, { errors }) => (
+                <>
+                  {fields.map((field, index) => (
+                    <Form.Item key={field.key}>
+                      <Form.Item
+                        {...field}
+                        validateTrigger={["onChange", "onBlur"]}
+                        rules={[
+                          {
+                            required: true,
+                            whitespace: true,
+                            message:
+                              "Please add criteria or delete this field.",
+                          },
+                        ]}
+                        noStyle
+                      >
+                        <Input.TextArea
+                          rows={2}
+                          placeholder="Criteria..."
+                          style={{ width: fields.length > 1 ? "80%" : "100%" }}
+                        />
+                      </Form.Item>
+                      {fields.length > 1 ? (
+                        <Button
+                          type="text"
+                          danger
+                          onClick={() => remove(field.name)}
+                        >
+                          <MinusCircleOutlined className="dynamic-delete-button" />
+                        </Button>
+                      ) : null}
+                    </Form.Item>
+                  ))}
+                  <Form.Item>
+                    <Button
+                      type="dashed"
+                      onClick={() => add()}
+                      style={{ width: "60%" }}
+                      icon={<PlusOutlined />}
+                    >
+                      Add field
+                    </Button>
+                    <Form.ErrorList errors={errors} />
+                  </Form.Item>
+                </>
+              )}
+            </Form.List>
+          </Form.Item>
+          <Form.Item wrapperCol={{ offset: 8, span: 0 }}>
+            <Button
+              size="large"
+              type="primary"
+              style={{ width: "100%" }}
+              htmlType="submit"
+            >
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
       </Modal>
       <Stack p={5} direction={"row"} spacing={1}>
         <Typography variant="h5">Assessments</Typography>
