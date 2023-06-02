@@ -427,14 +427,16 @@ function Assessments() {
                       key={i}
                       style={{ width: 400 }}
                       actions={[
-                        <Button type="primary">
+                        <Button
+                          onClick={() => {
+                            setOpenModal(true)
+                          }}
+                          style={{ width: "100%" }}
+                          type="primary"
+                        >
                           <EditOutlined key="edit" /> Edit
                         </Button>,
 
-                        <Button type="ghost">
-                          <CheckSquareOutlined />
-                          Evaluation
-                        </Button>,
                         <Button type="text" danger>
                           <DeleteOutlined />
                         </Button>,
