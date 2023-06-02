@@ -4,6 +4,9 @@ import { LessonService } from "../services/lesson-service"
 import React from "react"
 import PageLayout from "./layout"
 import SEO from "../components/seo"
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank"
+import CheckBoxIcon from "@mui/icons-material/CheckBox"
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded"
 import { Button, Col, Collapse, Divider, Row, Timeline } from "antd"
 import {
   ArrowLeftOutlined,
@@ -14,6 +17,7 @@ import {
 } from "@ant-design/icons"
 import Quiz from "../components/quiz"
 import Disqus from "gatsby-plugin-disqus/components/Disqus"
+import { IconButton, Stack, Typography } from "@mui/material"
 
 export const DurationHelper = {
   secondsToText: seconds => {
@@ -294,7 +298,7 @@ export default ({ data }) => {
   useEffect(() => {}, [])
 
   return (
-    <>
+    <Stack position={"relative"}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description}
@@ -305,45 +309,35 @@ export default ({ data }) => {
         background="transparent"
         withPadding={false}
       >
-        <Row>
-          <Col xs={24} sm={24} md={16} lg={19}>
-            <div
-              style={{
+        <Stack
+          flex={1}
+          p={2}
+          spacing={2}
+          direction={{ xs: "column", sm: "column", md: "row", lg: "row" }}
+        >
+          <Stack flex={1}>
+            <Stack
+              flex={1}
+              sx={{
                 background: "#efefef",
-                borderRadius: 20,
-                width: "100%",
-                padding: 20,
-                marginBottom: 20,
-                paddingLeft: 50,
-                paddingRight: 50,
+                borderRadius: 5,
               }}
+              p={2}
             >
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Button
-                  style={{
-                    borderStyle: "none",
-                    background: "#dfdfdf",
-                    width: 35,
-                    height: 35,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginRight: 20,
-                    borderRadius: "50%",
-                  }}
-                  onClick={() => navigate(-1)}
-                >
-                  <LeftOutlined />
-                </Button>
-                <div
-                  style={{
-                    textTransform: "uppercase",
-                    fontSize: "1.3em",
-                  }}
-                >
+              <Stack
+                position={"sticky"}
+                spacing={2}
+                direction={"row"}
+                alignItems={"center"}
+              >
+                <IconButton onClick={() => navigate(-1)}>
+                  <ArrowBackRoundedIcon />
+                </IconButton>
+
+                <Typography fontWeight={"bold"} variant="h6">
                   {post.frontmatter.title}
-                </div>
-              </div>
+                </Typography>
+              </Stack>
 
               {!post.frontmatter.quiz ? (
                 <div>
@@ -423,138 +417,118 @@ export default ({ data }) => {
               <div style={{ padding: 40, paddingTop: 20 }}>
                 <Disqus />
               </div>
-            </div>
-          </Col>
-          <Col xs={24} sm={24} md={8} lg={5}>
-            <div
-              style={{
-                background: "#efefef",
-                width: "100%",
-                maxWidth: "100%",
-                marginLeft: 10,
-                marginBottom: 20,
-                borderRadius: 20,
-              }}
-            >
-              <div
-                style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 20 }}
-              >
-                <h2 style={{ fontWeight: "bold" }}>Course Content</h2>
-                {/* <Link to={mainSlug}><h2 style={{color: '#97CA42', marginBottom: 0}}>{title}</h2><span style={{color: '#afafaf'}}>{totalDuration}</span></Link> */}
-                {/* <div style={{display: 'flex', alignItems: 'center'}}>
+            </Stack>
+          </Stack>
+          <Stack
+            sx={{
+              background: "#efefef",
+              maxHeight: `${96}vh`,
+              overflowY: "auto",
+              borderRadius: 5,
+            }}
+          >
+            <Stack p={2}>
+              <Typography variant="h5" fontWeight={"bold"}>
+                Course Content
+              </Typography>
+              {/* <Link to={mainSlug}><h2 style={{color: '#97CA42', marginBottom: 0}}>{title}</h2><span style={{color: '#afafaf'}}>{totalDuration}</span></Link> */}
+              {/* <div style={{display: 'flex', alignItems: 'center'}}>
                                             Progress
                                             <div style={{background: '#cfcfcf', flex: 1, height: 5, marginLeft: 30, borderRadius: 3, overflow: 'hidden'}}>
                                                 <div style={{background: '#97CA42', width: `${progress}%`, height: 5}} />
                                             </div>
                                             <div style={{paddingLeft: 10}}>{isNaN(progress) ? '-' : progress}%</div>
                                         </div> */}
-              </div>
+            </Stack>
 
-              <Collapse
-                style={{ background: "transparent" }}
-                defaultActiveKey={[`${currentChapter}`]}
-                bordered={false}
-                expandIconPosition="right"
-              >
-                {Object.keys(chapters).map(key => {
-                  const chapter = chapters[key]
+            <Collapse
+              style={{ background: "transparent" }}
+              defaultActiveKey={[`${currentChapter}`]}
+              bordered={false}
+              expandIconPosition="right"
+            >
+              {Object.keys(chapters).map(key => {
+                const chapter = chapters[key]
 
-                  let chapterTotalDuration = 0
-                  for (let chapterLesson of chapter.lessons) {
-                    if (!chapterLesson) continue
+                let chapterTotalDuration = 0
+                for (let chapterLesson of chapter.lessons) {
+                  if (!chapterLesson) continue
 
-                    const [min, sec] = chapterLesson.frontmatter.duration.split(
-                      ":"
-                    )
-
-                    chapterTotalDuration += parseInt(min) * 60 + parseInt(sec)
-                  }
-                  chapterTotalDuration = DurationHelper.secondsToText(
-                    chapterTotalDuration
+                  const [min, sec] = chapterLesson.frontmatter.duration.split(
+                    ":"
                   )
 
-                  return (
-                    <Collapse.Panel
-                      expandIconPosition="right"
-                      header={
-                        <div
-                          style={{
+                  chapterTotalDuration += parseInt(min) * 60 + parseInt(sec)
+                }
+                chapterTotalDuration = DurationHelper.secondsToText(
+                  chapterTotalDuration
+                )
+
+                return (
+                  <Collapse.Panel
+                    expandIconPosition="right"
+                    header={
+                      <Stack>
+                        <Typography
+                          sx={{
                             color: chapter.current ? "#97CA42" : "#606060",
-                            fontSize: "1.5em",
-                            fontWeight: "bold",
                           }}
-                        >{`${chapter.title} (${chapterTotalDuration})`}</div>
-                      }
-                      key={key}
-                      style={{
-                        background: "transparent",
-                        borderColor: "#f0f2f5",
-                      }}
-                    >
-                      <Timeline style={{ marginLeft: 20, marginTop: 10 }}>
-                        {chapter.lessons.map((lesson, key) => {
-                          return (
-                            <Timeline.Item
-                              style={{ background: "transparent" }}
-                              key={key}
-                              dot={
-                                <div
-                                  style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    background: isLegalPage(lesson)
-                                      ? "#97CA42"
-                                      : "#dfdfdf",
-                                    padding: 2,
-                                    borderRadius: 5,
-                                  }}
-                                >
-                                  {
-                                    <CheckOutlined
-                                      style={{
-                                        color: isLegalPage(lesson)
-                                          ? "white"
-                                          : "#dfdfdf",
-                                        background: "transparent",
-                                      }}
-                                    />
-                                  }
-                                </div>
-                              }
-                            >
-                              {/* <Link style={{color: lesson.current ? '#97CA42' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title} ({DurationHelper.timeFormatToText(lesson.frontmatter.duration)})</Link> */}
-                              <Link
-                                to={
-                                  isLegalPage(lesson)
-                                    ? lesson.fields.slug
-                                    : undefined
-                                }
-                                style={{
-                                  color: "#606060",
-                                  fontWeight: lesson.current
-                                    ? "bold"
-                                    : "normal",
-                                }}
-                              >
-                                {lesson.frontmatter.title} (
-                                {DurationHelper.timeFormatToText(
-                                  lesson.frontmatter.duration
+                          variant="subtitle1"
+                        >{`${chapter.title} (${chapterTotalDuration})`}</Typography>
+                      </Stack>
+                    }
+                    key={key}
+                    style={{
+                      backgroundColor: "rgba(0,0,0,0)",
+                      borderColor: "#f0f2f5",
+                    }}
+                  >
+                    <Timeline style={{ marginLeft: 20, marginTop: 10 }}>
+                      {chapter.lessons.map((lesson, key) => {
+                        return (
+                          <Timeline.Item
+                            style={{ backgroundColor: "rgba(0,0,0,0)" }}
+                            key={key}
+                            dot={
+                              <Stack>
+                                {isLegalPage(lesson) ? (
+                                  <CheckBoxIcon color="success" />
+                                ) : (
+                                  <CheckBoxOutlineBlankIcon color="success" />
                                 )}
-                                )
-                              </Link>
-                            </Timeline.Item>
-                          )
-                        })}
-                      </Timeline>
-                    </Collapse.Panel>
-                  )
-                })}
-              </Collapse>
-            </div>
-          </Col>
-        </Row>
+                              </Stack>
+                            }
+                          >
+                            {/* <Link style={{color: lesson.current ? '#97CA42' : '#606060', fontWeight: lesson.current ? 'bold' : 'normal'}}>{lesson.frontmatter.title} ({DurationHelper.timeFormatToText(lesson.frontmatter.duration)})</Link> */}
+                            <Link
+                              to={
+                                isLegalPage(lesson)
+                                  ? lesson.fields.slug
+                                  : undefined
+                              }
+                              style={{
+                                color: "#606060",
+                                fontWeight: lesson.current ? "bold" : "normal",
+                              }}
+                            >
+                              {lesson.frontmatter.title} (
+                              {DurationHelper.timeFormatToText(
+                                lesson.frontmatter.duration
+                              )}
+                              )
+                            </Link>
+                          </Timeline.Item>
+                        )
+                      })}
+                    </Timeline>
+                  </Collapse.Panel>
+                )
+              })}
+            </Collapse>
+          </Stack>
+        </Stack>
       </PageLayout>
-    </>
+    </Stack>
   )
 }
 

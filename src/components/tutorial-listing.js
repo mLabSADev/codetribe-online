@@ -1,9 +1,11 @@
 import React from "react"
 import { StaticQuery, graphql, navigate, Link } from "gatsby"
-import { Card, Col, Row } from "antd"
+import { Card, Col, Row, Space, Button } from "antd"
+import { LocalLibraryIcon, ShareRounded } from "@mui/icons-material"
+import { IconButton } from "@mui/material"
 import Img from "gatsby-image"
-import { BookFilled, HeartFilled } from "@ant-design/icons"
-
+import { CodeOutlined } from "@ant-design/icons"
+const { Meta } = Card
 const TutorialListing = ({ type, category, limit, onClick }) => {
   const PostCard = ({ post }) => {
     const handleClick = () => {
@@ -11,7 +13,31 @@ const TutorialListing = ({ type, category, limit, onClick }) => {
     }
 
     const share = () => {}
-
+    return (
+      <Card
+        hoverable
+        style={{ width: 400, borderRadius: 20, overflow: "hidden" }}
+        cover={
+          <Img
+            alt={post.frontmatter.title}
+            sizes={post.frontmatter.featureImage.childImageSharp.sizes}
+          />
+        }
+        actions={[
+          <Button
+            style={{ borderRadius: 20 }}
+            type="primary"
+            size="large"
+            icon={<CodeOutlined />}
+            onClick={handleClick}
+          >
+            View Course
+          </Button>,
+        ]}
+      >
+        <Meta title={post.frontmatter.title} description={post.excerpt} />
+      </Card>
+    )
     return (
       <div
         style={{
@@ -22,10 +48,6 @@ const TutorialListing = ({ type, category, limit, onClick }) => {
           background: "rgba(255,255,255,0.3)",
         }}
       >
-        <Img
-          alt={post.frontmatter.title}
-          sizes={post.frontmatter.featureImage.childImageSharp.sizes}
-        />
         <div
           style={{
             padding: 20,
@@ -34,7 +56,7 @@ const TutorialListing = ({ type, category, limit, onClick }) => {
             flexDirection: "column",
           }}
         >
-          <h2>{post.frontmatter.title}</h2>
+          <h2></h2>
           <div style={{ marginBottom: 20 }}>
             <span
               style={{
@@ -72,7 +94,6 @@ const TutorialListing = ({ type, category, limit, onClick }) => {
                   width: "100%",
                   height: 50,
                 }}
-                onClick={handleClick}
               >
                 View Course
               </button>
@@ -154,7 +175,7 @@ const TutorialListing = ({ type, category, limit, onClick }) => {
 
         return (
           <div>
-            <Row>
+            <Space wrap align="center">
               {posts.length > 0 &&
                 posts.map((post, index) => (
                   <Col
@@ -172,7 +193,7 @@ const TutorialListing = ({ type, category, limit, onClick }) => {
                     <PostCard post={post} onClick={onClick} />
                   </Col>
                 ))}
-            </Row>
+            </Space>
           </div>
         )
       }}
