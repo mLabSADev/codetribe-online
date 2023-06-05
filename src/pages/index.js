@@ -3,7 +3,7 @@ import PageLayout from "../templates/page-layout"
 import { Form, Input, Button, Row, Col, Alert } from "antd"
 import { Link, navigate } from "gatsby"
 import { AuthService } from "../services/auth-service"
-import { Box } from "@mui/material"
+import { Box, Stack, Typography } from "@mui/material"
 
 // import "swiper/css"
 const ForgotPassword = ({ email, onCancel }) => {
@@ -145,7 +145,7 @@ export default () => {
   const [errorMessage, setMessage] = useState(null)
   const [showForgotPassword, setShowForgotPassword] = useState(false)
   const [signInMethod, setSignInMethod] = useState()
-
+  let title = "Learn how to build Android & IOS Apps"
   const onLogin = values => {
     setIsLoggingIn(true)
     setMessage(null)
@@ -219,109 +219,118 @@ export default () => {
   }
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        left: 0,
-        top: 0,
-        right: 0,
-        bottom: 0,
+    <Stack
+      flex={1}
+      position={"absolute"}
+      left={0}
+      right={0}
+      bottom={0}
+      top={0}
+      p={3}
+      overflow={{ xs: "auto", sm: "auto", md: "hidden" }}
+      sx={{
         background:
           "linear-gradient(227deg, #fffedb 0%, hsl(283, 100%, 88%) 100%)",
       }}
     >
-      <Row style={{ height: "100%", overflow: "hidden" }}>
-        <Col xs={0} sm={0} md={0} lg={16}>
-          <div
-            style={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "flex-start",
-              paddingRight: 0,
-              overflow: "hidden",
-            }}
+      <Box position={"absolute"} top={0} left={0} right={0} bottom={0}>
+        <iframe
+          src="https://my.spline.design/abstractgradientbackground-ae8ec1cf1d3539574dc82e8925f79a95/"
+          frameborder="0"
+          width="100%"
+          height="100%"
+        ></iframe>
+      </Box>
+      <Stack
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
+        flex={1}
+        // height={"100%"}
+        spacing={2}
+        // overflow={"hidden"}
+      >
+        {/* Text & illustration */}
+        <Stack
+          flex={1}
+          alignItems={"center"}
+          direction={{ xs: "column-reverse", sm: "row", md: "row" }}
+        >
+          {/* Text */}
+          <Stack zIndex={3} flex={1} spacing={2}>
+            {/* ...Responsive title text... */}
+            <Box display={{ xs: "none", sm: "none", md: "none", lg: "block" }}>
+              <Typography variant={"h2"} fontFamily={"K2D"}>
+                {title}
+              </Typography>
+            </Box>
+            <Box display={{ xs: "none", sm: "none", md: "block", lg: "none" }}>
+              <Typography variant={"h3"} fontFamily={"K2D"}>
+                {title}
+              </Typography>
+            </Box>
+            <Box display={{ xs: "block", sm: "block", md: "none", lg: "none" }}>
+              <Typography variant={"h4"} fontFamily={"K2D"}>
+                {title}
+              </Typography>
+            </Box>
+            {/* .... */}
+            <Typography variant="h5" fontFamily={"Poppins"}>
+              Welcome to Codetribe Coding Academy!
+            </Typography>
+            <Typography variant="body2" fontFamily={"Poppins"}>
+              We are excited that you have managed to join the team. Your
+              hardwork and dedication has been recognized. We have an amazing
+              team that is willing to train, guide and mentor you on your
+              journey.
+            </Typography>
+          </Stack>
+          {/* Illustration */}
+          <Stack
+            sx={{ width: "100%" }}
+            alignItems={"center"}
+            justifyItems={"center"}
+            flex={1}
           >
             <Box
-              position={"absolute"}
-              right={{ sm: "0%", md: "-40%", lg: "-20%" }}
-              bottom={"15%"}
+              width={{ sm: 300, md: 400, lg: "100%" }}
+              sx={{ transform: "translate(0px, 0px)", zIndex: 0 }}
             >
-              <img src="/images/login-illustration.png" />
+              <img
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                src="/images/login-illustration.png"
+              />
             </Box>
-
-            <div
-              style={{
-                width: 700,
-                zIndex: 10000,
-                padding: 50,
-              }}
-            >
-              <p
-                style={{
-                  fontSize: 60,
-                  fontWeight: 700,
-                  fontStyle: "bold",
-                  fontFamily: `"K2D", serif`,
-                }}
-              >
-                Learn how to build
-                <br />
-                Android &amp; iOS
-                <br />
-                Apps
-              </p>
-              <p
-                style={{
-                  fontFamily: `Poppins`,
-                  color: "#3d3d3d",
-                  fontSize: 16,
-                }}
-              >
-                Welcome to Codetribe Coding Academy!
-              </p>
-              <p
-                style={{
-                  fontFamily: `Poppins`,
-                  color: "#3d3d3d",
-                  fontSize: 16,
-                }}
-              >
-                We are excited that you have managed to join the team. Your
-                hardwork and dedication has been recognized. We have an amazing
-                team that is willing to train, guide and mentor you on your
-                journey.
-              </p>
-            </div>
-          </div>
-        </Col>
-        <Col
-          xs={24}
-          sm={24}
-          md={24}
-          lg={8}
-          style={{ height: "100%", padding: 20 }}
+          </Stack>
+        </Stack>
+        {/* Form */}
+        <Stack
+          width={{ xs: "100%", sm: "100%", md: "100%", lg: 500 }}
+          sx={{
+            height: "100%",
+            zIndex: 5,
+          }}
         >
-          <div
-            style={{
-              background: "white",
-              borderRadius: 20,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "column",
-              height: "100%",
-            }}
+          <Stack
+            justifyContent={"center"}
+            alignItems={"center"}
+            height={"100%"}
+            spacing={3}
+            borderRadius={7}
+            bgcolor={"white"}
+            p={5}
           >
-            <img src="/images/mlab.png" style={{ height: 40 }} />
-            <h1
-              style={{
-                fontFamily: "Poppins",
-              }}
+            {/* logo */}
+            <img
+              src="/images/mlab.png"
+              style={{ height: 40, objectFit: "contain" }}
+            />
+
+            <Typography
+              fontFamily={"Poppins"}
+              variant="h4"
+              textTransform={"uppercase"}
             >
-              SIGN IN
-            </h1>
+              Sign In
+            </Typography>
             <Form
               style={{ width: "90%" }}
               layout="vertical"
@@ -406,7 +415,14 @@ export default () => {
                   <Input
                     type="password"
                     placeholder="Input your password"
-                    style={{ height: 50 }}
+                    style={{
+                      height: 50,
+                      borderRadius: 10,
+                      borderColor: "rgb(143, 230, 76)",
+                      borderStyle: "solid",
+                      padding: 10,
+                      borderWidth: 2,
+                    }}
                   />
                 </Form.Item>
               )}
@@ -461,7 +477,7 @@ export default () => {
                     marginBottom: 10,
                   }}
                 >
-                  <button
+                  <Button
                     type="button"
                     onClick={onForgotPassword}
                     style={{
@@ -475,7 +491,7 @@ export default () => {
                     }}
                   >
                     Forgot Password
-                  </button>
+                  </Button>
                 </Col>
                 <Col
                   xs={24}
@@ -494,7 +510,7 @@ export default () => {
                     style={{
                       background: "rgb(143, 230, 76)",
                       borderStyle: "none",
-                      borderRadius: 28,
+                      borderRadius: 30,
                       color: "white",
                       cursor: "pointer",
                       width: "100%",
@@ -505,13 +521,13 @@ export default () => {
                 </Col>
               </Row>
             </Form>
-          </div>
-        </Col>
-      </Row>
+          </Stack>
+        </Stack>
+      </Stack>
 
       {showForgotPassword && (
         <ForgotPassword onCancel={onCloseForgotPassword} />
       )}
-    </div>
+    </Stack>
   )
 }

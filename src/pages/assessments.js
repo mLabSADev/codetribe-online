@@ -231,6 +231,7 @@ function Assessments() {
   const [openModal, setOpenModal] = React.useState(false)
   const [openEval, setEval] = React.useState(false)
   const [criteria, setCriteria] = React.useState([])
+  const [updating, setUpdating] = React.useState(false)
   const [form] = Form.useForm()
   const showModal = () => {
     setOpenModal(true)
@@ -263,16 +264,20 @@ function Assessments() {
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo)
   }
+
   return (
     <PageLayout>
       <Modal
-        title="New Assessment"
+        title={updating ? "Update Assessment" : "New Assessment"}
         style={{ width: "60%" }}
         open={openModal}
+        footer={false}
+        okButtonProps={{ disabled: true }}
         onOk={handleOk}
         onCancel={handleCancel}
       >
         <Form
+          form={form}
           name="assessment"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
@@ -314,10 +319,10 @@ function Assessments() {
           <Form.Item
             label="Criteria"
             name="criteria"
-            rules={[{ required: true, message: "Please add a criteria" }]}
+            // rules={[{ required: true, message: "Please add a criteria" }]}
           >
             <Form.List
-              name="names"
+              name="criteria"
               rules={[
                 {
                   validator: async (_, names) => {
@@ -377,7 +382,7 @@ function Assessments() {
               )}
             </Form.List>
           </Form.Item>
-          <Form.Item wrapperCol={{ offset: 8, span: 0 }}>
+          <Form.Item wrapperCol={{ offset: 0, span: 0 }}>
             <Button
               size="large"
               type="primary"
@@ -386,12 +391,28 @@ function Assessments() {
             >
               Submit
             </Button>
+            <Button
+              size="large"
+              type="ghost"
+              style={{ width: "100%", marginTop: 5 }}
+              htmlType="reset"
+            >
+              Clear
+            </Button>
           </Form.Item>
         </Form>
       </Modal>
       <Stack p={5} direction={"row"} spacing={1}>
         <Typography variant="h5">Assessments</Typography>
-        <Button onClick={showModal}>New Assessment</Button>
+        <Button
+          onClick={() => {
+            showModal(true)
+            setUpdating(false)
+            form.resetFields()
+          }}
+        >
+          New Assessment
+        </Button>
       </Stack>
       <Collapse defaultActiveKey={["0"]}>
         {assessments.map((course, i) => {
@@ -427,12 +448,37 @@ function Assessments() {
                       key={i}
                       style={{ width: 400 }}
                       actions={[
+                        <Button type="primary">Submissions</Button>,
                         <Button
                           onClick={() => {
+                            setUpdating(true)
                             setOpenModal(true)
+                            console.log(form)
+                            form.setFieldValue("course", "nodejs")
+                            form.setFieldValue({
+                              course: "nodejs",
+                              title: "Activity - Practice Set",
+                              description:
+                                "Create a digital birthday card using React Native. You  should demonstrate your understanding of React Native components, styling, and interactivity to build an engaging and visually appealing birthday card.",
+                              criteria: [
+                                {
+                                  label:
+                                    "Adherence to the requirements outlined in the specification.",
+                                },
+                                {
+                                  label:
+                                    "User interface design and visual appeal.",
+                                },
+                                {
+                                  label:
+                                    "Correct implementation of React Native components and interactivity.",
+                                },
+                              ],
+                            })
                           }}
                           style={{ width: "100%" }}
-                          type="primary"
+                          type="link"
+                          htmlType="button"
                         >
                           <EditOutlined key="edit" /> Edit
                         </Button>,
