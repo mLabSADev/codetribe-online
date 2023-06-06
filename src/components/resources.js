@@ -18,7 +18,7 @@ export const BackendCard = ({ icon, title, description, link, color }) => {
       alignItems={"center"}
       p={3}
       spacing={2}
-      sx={{ borderRadius: 10, background: color, color: "#fff" }}
+      sx={{ borderRadius: 5, background: color, color: "#fff" }}
     >
       <Box borderRadius={5} overflow={"hidden"}>
         <Image width={90} src={icon} />
@@ -26,7 +26,9 @@ export const BackendCard = ({ icon, title, description, link, color }) => {
       <Typography variant="h5" color={"white"}>
         {title}
       </Typography>
-      <Typography variant="body2">{description}</Typography>
+      <Typography variant="body2" textAlign={"center"}>
+        {description}
+      </Typography>
       <Button
         component={"a"}
         href={link}
@@ -34,6 +36,7 @@ export const BackendCard = ({ icon, title, description, link, color }) => {
         variant="outlined"
         sx={{ borderRadius: 5 }}
         color="inherit"
+        endIcon={<OpenInNewIcon />}
       >
         Go to Docs
       </Button>
@@ -73,19 +76,19 @@ const ResourceCards = ({ title, description, links, image }) => {
           alignItems={"center"}
         >
           <Stack width={"100%"} spacing={2}>
-            <Stack flex={1}>
-              <Typography variant="h5" fontWeight={"bold"}>
+            <Stack spacing={1} flex={1}>
+              <Typography variant="h6" fontWeight={"bold"}>
                 {title}
               </Typography>
-              <Typography variant="body1">{description}</Typography>
+              <Typography variant="body2">{description}</Typography>
             </Stack>
             <Stack
               width={"100%"}
               direction={"row"}
               flexWrap={"wrap"}
               paddingY={0}
-              spacing={1}
-              gap={1}
+              // spacing={1}
+              // gap={1}
               py={2}
             >
               {links.map(item => {
@@ -96,7 +99,11 @@ const ResourceCards = ({ title, description, links, image }) => {
                     target="_blank"
                     href={item.link}
                     size="small"
-                    sx={{ alignSelf: "flex-start" }}
+                    sx={{
+                      alignSelf: "flex-start",
+                      borderRadius: 20,
+                      margin: 0.3,
+                    }}
                     label={item.label}
                     deleteIcon={<OpenInNewIcon />}
                   />

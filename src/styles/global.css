@@ -1,6 +1,4 @@
-@import '~antd/dist/antd.css';
-
-
+@import "~antd/dist/antd.css";
 
 /* @font-face {
   font-family: 'K2D';
@@ -19,7 +17,7 @@
 } */
 
 @font-face {
-  font-family: 'K2D';
+  font-family: "K2D";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
@@ -27,7 +25,7 @@
 }
 
 @font-face {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
@@ -89,8 +87,13 @@
   font-display: swap;
   src: url(/fonts/k2d/K2D-BoldItalic.ttf) format('ttf');
 } */
-.ant-timeline-item-head, .ant-timeline-item-head-custom, .ant-timeline-item-head-blue {
-  background: 'transparent' !important;
+.ant-timeline-item-head {
+  background-color: transparent !important;
+}
+.ant-timeline-item-head,
+.ant-timeline-item-head-custom,
+.ant-timeline-item-head-blue {
+  background: "transparent" !important; /* val wont work in "quotes" */
 }
 
 .ant-collapse-item .ant-collapse-no-arrow {
@@ -114,61 +117,61 @@ div::-webkit-scrollbar {
 }
 
 div {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
-p, li {
-    font-size: 1.2em;
+p,
+li {
+  font-size: 1.2em;
 }
 
 .Button {
-    color: red;
+  color: red;
 }
 
 .ant-btn-primary {
-  background-color: #97CA42;
-  border-color: #97CA42;
+  background-color: #97ca42;
+  border-color: #97ca42;
 }
 
 .ant-menu-item-selected {
-  color: #97CA42 !important;
-  border-bottom-color: #97CA42 !important;
+  color: #97ca42 !important;
+  border-bottom-color: #97ca42 !important;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
-blockquote{
+@import url(https://fonts.googleapis.com/css?family=Open + Sans:400italic);
+blockquote {
   font-size: 1em;
-  width:95%;
+  width: 95%;
   margin-top: 30px;
   margin-bottom: 20px;
   margin-left: 5%;
   /* margin:50px auto; */
-  font-family:Open Sans;
-  font-style:italic;
+  font-family: Open Sans;
+  font-style: italic;
   color: #555555;
   /* padding:1.2em 10px 1.2em 75px; */
   padding: 20px;
   padding-bottom: 1px;
-  border-left:8px solid #78C0A8 ;
-  line-height:1.6;
+  border-left: 8px solid #78c0a8;
+  line-height: 1.6;
   position: relative;
-  background:#EDEDED;
+  background: #ededed;
 }
 
-blockquote::after{
-  content: '';
+blockquote::after {
+  content: "";
 }
 
-blockquote span{
-  display:block;
-  color:#333333;
+blockquote span {
+  display: block;
+  color: #333333;
   font-style: normal;
   font-weight: bold;
-  margin-top:1em;
+  margin-top: 1em;
 }
 
 .gatsby-highlight {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-

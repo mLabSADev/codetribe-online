@@ -22,6 +22,7 @@
     "antd": "^4.23.0",
     "file-system": "^2.2.2",
     "firebase": "^8.0.0",
+    "formik": "^2.4.1",
     "gatsby": "^2.20.25",
     "gatsby-cli": "^2.12.7",
     "gatsby-image": "^2.3.4",
@@ -52,7 +53,8 @@
     "react-helmet": "^6.0.0",
     "react-quill": "^2.0.0",
     "react-quiz-component": "^0.3.7",
-    "swiper": "^9.3.2"
+    "swiper": "^9.3.2",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "prettier": "2.0.4"

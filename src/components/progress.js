@@ -59,7 +59,7 @@ function StudentProgress({
           <Typography variant="subtitle2" color={"gray"}>
             {progress == 100 ? `Well Done` : `${course} - Lesson ${lesson}`}
           </Typography>
-          <Typography variant="h6" fontWeight={"bold"}>
+          <Typography variant="subtitle1" fontWeight={"bold"}>
             {progress == 100 ? `${course} Course Completed` : title}
           </Typography>
         </Stack>
@@ -72,7 +72,7 @@ function StudentProgress({
             disableElevation
             sx={{
               alignSelf: "flex-start",
-              borderRadius: 30,
+              borderRadius: 5,
               backgroundColor: "#87d068", // TODO: need to figure out how to setup MUI provider for theming
             }}
             variant="contained"

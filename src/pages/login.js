@@ -62,7 +62,7 @@ export default () => {
                 position: "absolute",
                 left: 0,
                 top: 0,
-                opacity: 0.5,
+                opacity: 1,
               }}
             />
             <div
@@ -150,85 +150,95 @@ export default () => {
                   style={{ height: 50 }}
                 />
               </Form.Item>
-              {signInMethod === 'new-user' && <Form.Item
-                label="First Name"
-                name="firstname"
-                rules={[
-                  {
-                    required: true,
-                    message: "Your first name is required",
-                  },
-                ]}
-              >
-                <Input
-                  placeholder="Input your first name"
-                  style={{ height: 50 }}
-                />
-              </Form.Item>}
-              {signInMethod === 'new-user' && <Form.Item
-                label="Last Name"
-                name="lastname"
-                rules={[
-                  {
-                    required: true,
-                    message: "Your last name is required",
-                  },
-                ]}
-              >
-                <Input
-                  placeholder="Input your last name"
-                  style={{ height: 50 }}
-                />
-              </Form.Item>}
-              {signInMethod === 'existing-user' && <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Your password is required",
-                  },
-                ]}
-              >
-                <Input
-                  type="password"
-                  placeholder="Input your password"
-                  style={{ height: 50 }}
-                />
-              </Form.Item>}
+              {signInMethod === "new-user" && (
+                <Form.Item
+                  label="First Name"
+                  name="firstname"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Your first name is required",
+                    },
+                  ]}
+                >
+                  <Input
+                    placeholder="Input your first name"
+                    style={{ height: 50 }}
+                  />
+                </Form.Item>
+              )}
+              {signInMethod === "new-user" && (
+                <Form.Item
+                  label="Last Name"
+                  name="lastname"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Your last name is required",
+                    },
+                  ]}
+                >
+                  <Input
+                    placeholder="Input your last name"
+                    style={{ height: 50 }}
+                  />
+                </Form.Item>
+              )}
+              {signInMethod === "existing-user" && (
+                <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Your password is required",
+                    },
+                  ]}
+                >
+                  <Input
+                    type="password"
+                    placeholder="Input your password"
+                    style={{ height: 50 }}
+                  />
+                </Form.Item>
+              )}
 
-              {signInMethod === 'new-user' && <Form.Item
-                label="Password"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Your password is required",
-                  },
-                ]}
-              >
-                <Input
-                  type="password"
-                  placeholder="Input your password"
-                  style={{ height: 50 }}
-                />
-              </Form.Item>}
-              {signInMethod === 'new-user' && <Form.Item
-                label="Confirm Password"
-                name="confirmPassword"
-                rules={[
-                  {
-                    required: true,
-                    message: "Enter your password again",
-                  },
-                ]}
-              >
-                <Input
-                  type="password"
-                  placeholder="Confirm Password"
-                  style={{ height: 50 }}
-                />
-              </Form.Item>}
+              {signInMethod === "new-user" && (
+                <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Your password is required",
+                    },
+                  ]}
+                >
+                  <Input
+                    type="password"
+                    placeholder="Input your password"
+                    style={{ height: 50 }}
+                  />
+                </Form.Item>
+              )}
+              {signInMethod === "new-user" && (
+                <Form.Item
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Enter your password again",
+                    },
+                  ]}
+                >
+                  <Input
+                    type="password"
+                    placeholder="Confirm Password"
+                    style={{ height: 50 }}
+                  />
+                </Form.Item>
+              )}
 
               <Form.Item>
                 {/* <Button loading={loggingIn} disabled={loggingIn} htmlType='submit' type="primary" style={{height: 50, width: 100}}>Sign In</Button>
