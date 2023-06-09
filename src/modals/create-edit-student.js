@@ -48,13 +48,13 @@ const CreateEditStudent = ({ student, onCancel }) => {
                 <Col xs={0} sm={0} md={4} lg={6} />
                 <Col xs={24} sm={24} md={16} lg={9} style={{ padding: 20 }}>
                     <div style={{ padding: 20, width: '100%', borderRadius: 15, background: 'white' }}>
-                        <h2 style={{ textAlign: 'center' }}>Save Student</h2>
+                        <h2 style={{ textAlign: 'center' }}>Add Student</h2>
                         {/* <p style={{ textAlign: 'center' }}>Input your email address below. You will receive an email with further instructions</p> */}
                         <Form layout="vertical" initialValues={currentStudent ? currentStudent : null} onFinish={save}>
                             {errorMessage && <Alert message={errorMessage} type="error" style={{ marginBottom: 20 }} />}
                             {/* {success && <Alert message={'A password reset link has been sent to your email'} type="success" style={{ marginBottom: 20 }} />} */}
                             
-                            <Form.Item style={{}} label="First Name" name='firstname' rules={[
+                            {/* <Form.Item style={{}} label="First Name" name='firstname' rules={[
                                 {
                                     required: true,
                                     message: 'First Name required'
@@ -83,7 +83,7 @@ const CreateEditStudent = ({ student, onCancel }) => {
                                     padding: 10,
                                     borderWidth: 2
                                 }} />
-                            </Form.Item>
+                            </Form.Item> */}
                             <Form.Item style={{}} label="Email" name='email' rules={[
                                 {
                                     required: true,
@@ -99,14 +99,18 @@ const CreateEditStudent = ({ student, onCancel }) => {
                                     borderWidth: 2
                                 }} />
                             </Form.Item>
-                            <Form.Item style={{zIndex: 1000000000}} label="Group" name='location'>
+                            <Form.Item required={true} style={{zIndex: 1000000000}} label="Group" name='location'>
                                 <Select
+                                    bordered={false}
+                                    placeholder='Select a group'
                                     style={{
-                                        height: 50,
+                                        // height: 50,
                                         borderRadius: 10,
                                         borderColor: 'rgb(143, 230, 76)',
                                         borderStyle: 'solid',
                                         padding: 10,
+                                        paddingLeft: 0,
+                                        paddingBottom: 10,
                                         borderWidth: 2
                                     }}
                                     options={[
