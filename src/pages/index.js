@@ -358,7 +358,6 @@ export default () => {
                 <Input
                   placeholder="Input your email address"
                   style={{
-                    height: 50,
                     borderRadius: 10,
                     borderColor: "rgb(143, 230, 76)",
                     borderStyle: "solid",
@@ -402,29 +401,44 @@ export default () => {
                 </Form.Item>
               )}
               {signInMethod === "existing-user" && (
-                <Form.Item
-                  label="Password"
-                  name="password"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Your password is required",
-                    },
-                  ]}
-                >
-                  <Input
-                    type="password"
-                    placeholder="Input your password"
-                    style={{
-                      height: 50,
-                      borderRadius: 10,
-                      borderColor: "rgb(143, 230, 76)",
-                      borderStyle: "solid",
-                      padding: 10,
-                      borderWidth: 2,
-                    }}
-                  />
-                </Form.Item>
+                <Stack>
+                  <Form.Item
+                    label="Password"
+                    name="password"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Your password is required",
+                      },
+                    ]}
+                  >
+                    <Input
+                      type="password"
+                      placeholder="Input your password"
+                      style={{
+                        borderRadius: 10,
+                        borderColor: "rgb(143, 230, 76)",
+                        borderStyle: "solid",
+                        padding: 10,
+                        borderWidth: 2,
+                      }}
+                    />
+                  </Form.Item>
+                  <Stack
+                    sx={{ transform: "translate(0px, -20px)" }}
+                    alignItems={"flex-end"}
+                    justifyItems={"flex-end"}
+                  >
+                    <Button
+                      style={{ borderRadius: 30 }}
+                      type="link"
+                      onClick={onForgotPassword}
+                      size="small"
+                    >
+                      Forgot Password
+                    </Button>
+                  </Stack>
+                </Stack>
               )}
 
               {signInMethod === "new-user" && (
@@ -467,59 +481,22 @@ export default () => {
             <Button loading={loggingIn} disabled={loggingIn} htmlType='submit' type="primary" style={{height: 50, width: 100}}>Sign In</Button>
         </Form.Item> */}
 
-              <Row style={{ width: "100%" }}>
-                <Col
-                  xs={24}
-                  sm={12}
-                  style={{
-                    paddingLeft: 5,
-                    paddingRight: 5,
-                    marginBottom: 10,
-                  }}
+              <Stack
+                gap={1}
+                sx={{ width: "100%" }}
+                direction={{ xs: "column", sm: "column", md: "row", lg: "row" }}
+              >
+                <Button
+                  style={{ width: "100%", borderRadius: 30 }}
+                  type="primary"
+                  size="large"
+                  loading={loggingIn}
+                  disabled={loggingIn}
+                  htmlType="submit"
                 >
-                  <Button
-                    type="button"
-                    onClick={onForgotPassword}
-                    style={{
-                      background: "rgba(61, 61, 61, 0.05)",
-                      borderStyle: "none",
-                      padding: 10,
-                      borderRadius: 28,
-                      color: "rgb(61, 61, 61)",
-                      cursor: "pointer",
-                      width: "100%",
-                    }}
-                  >
-                    Forgot Password
-                  </Button>
-                </Col>
-                <Col
-                  xs={24}
-                  sm={12}
-                  style={{
-                    paddingLeft: 5,
-                    paddingRight: 5,
-                    marginBottom: 10,
-                  }}
-                >
-                  <Button
-                    size="large"
-                    loading={loggingIn}
-                    disabled={loggingIn}
-                    htmlType="submit"
-                    style={{
-                      background: "rgb(143, 230, 76)",
-                      borderStyle: "none",
-                      borderRadius: 30,
-                      color: "white",
-                      cursor: "pointer",
-                      width: "100%",
-                    }}
-                  >
-                    Sign In
-                  </Button>
-                </Col>
-              </Row>
+                  Sign In
+                </Button>
+              </Stack>
             </Form>
           </Stack>
         </Stack>

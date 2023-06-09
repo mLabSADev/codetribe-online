@@ -1,6 +1,6 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import PageLayout from "../templates/layout"
-import { Stack, Typography, Divider } from "@mui/material"
+import { Stack, Typography, Divider, Snackbar } from "@mui/material"
 import {
   Button,
   Space,
@@ -16,6 +16,8 @@ import {
   Select,
   Form,
   Checkbox,
+  Alert,
+  Popconfirm,
 } from "antd"
 import {
   CheckSquareOutlined,
@@ -26,9 +28,15 @@ import {
   MinusCircleOutlined,
   PlusOutlined,
 } from "@ant-design/icons"
+import CrisisAlertIcon from "@mui/icons-material/CrisisAlert"
+import CircleIcon from "@mui/icons-material/Circle"
+import { Editor } from "react-draft-wysiwyg"
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
+import { Assessment } from "../services/admin-service"
+import { AuthService } from "../services/auth-service"
 const { Column, ColumnGroup } = Table
 const { Meta } = Card
-const assessments = [
+const assessmentsTest = [
   {
     course: "ionic",
     assessments: [
@@ -209,30 +217,25 @@ const data = [
     tags: ["cool", "teacher"],
   },
 ]
-const COURSES = ["nodejs", "ionic", "angular", "reactjs"]
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 4 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 20 },
-  },
-}
+const COURSES = ["nodejs", "ionic", "angular", "react", "react-native"]
 
-const formItemLayoutWithOutLabel = {
-  wrapperCol: {
-    xs: { span: 24, offset: 0 },
-    sm: { span: 20, offset: 4 },
-  },
-}
 function Assessments() {
   const [openModal, setOpenModal] = React.useState(false)
   const [openEval, setEval] = React.useState(false)
   const [criteria, setCriteria] = React.useState([])
   const [updating, setUpdating] = React.useState(false)
+  const [assessments, setAssessments] = React.useState([])
+  const [assessmentDetails, setAssessmentDetails] = React.useState({
+    show: false,
+    data: [],
+    title: "",
+  })
   const [form] = Form.useForm()
+  const [alert, setAlert] = React.useState({
+    show: false,
+    message: "",
+    severity: "", // error || warning || info || success
+  })
   const showModal = () => {
     setOpenModal(true)
   }
@@ -257,19 +260,39 @@ function Assessments() {
   const handleCancel = () => {
     setOpenModal(false)
   }
-  const onFinish = values => {
+  const onFinish = async values => {
     console.log("Success:", values)
+    let name = await AuthService.currentUser().then(res => res.firstname)
+    Assessment.add({ ...values, createdby: name })
+      .then(async res => {
+        setAlert({ message: "Assessment Added", show: true })
+        setOpenModal(false)
+        form.resetFields()
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   const onFinishFailed = errorInfo => {
     console.log("Failed:", errorInfo)
   }
-
+  useEffect(() => {
+    Assessment.getAll().then(res => {
+      console.log(
+        res.forEach(doc => {
+          console.log(doc)
+        })
+      )
+      setAssessments(res)
+    })
+  }, [])
   return (
     <PageLayout>
+      {/* Form Modal */}
       <Modal
         title={updating ? "Update Assessment" : "New Assessment"}
-        style={{ width: "60%" }}
+        style={{ width: "80%" }}
         open={openModal}
         footer={false}
         okButtonProps={{ disabled: true }}
@@ -279,9 +302,9 @@ function Assessments() {
         <Form
           form={form}
           name="assessment"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600 }}
+          labelCol={{ span: 5 }}
+          // wrapperCol={{ span: 8 }}
+          // style={{ width: 900 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -309,79 +332,26 @@ function Assessments() {
           </Form.Item>
 
           <Form.Item
-            label="Description"
-            name="description"
-            rules={[{ required: true, message: "Please add a desription" }]}
+            label="Content"
+            name="content"
+            rules={[{ required: true, message: "Please add content" }]}
           >
-            <Input.TextArea rows={7} />
+            <Editor
+              toolbar={{
+                inline: { inDropdown: true },
+                list: { inDropdown: true },
+                textAlign: { inDropdown: false },
+                link: { inDropdown: true },
+                history: { inDropdown: false },
+              }}
+              name="content"
+              placeholder="Type here"
+              toolbarClassName="toolbarClassName"
+              wrapperClassName="wrapperClassName"
+              editorClassName="editorClassName"
+            />
           </Form.Item>
 
-          <Form.Item
-            label="Criteria"
-            name="criteria"
-            // rules={[{ required: true, message: "Please add a criteria" }]}
-          >
-            <Form.List
-              name="criteria"
-              rules={[
-                {
-                  validator: async (_, names) => {
-                    if (!names || names.length < 2) {
-                      return Promise.reject(new Error("At least 2 criteria"))
-                    }
-                  },
-                },
-              ]}
-            >
-              {(fields, { add, remove }, { errors }) => (
-                <>
-                  {fields.map((field, index) => (
-                    <Form.Item key={field.key}>
-                      <Form.Item
-                        {...field}
-                        validateTrigger={["onChange", "onBlur"]}
-                        rules={[
-                          {
-                            required: true,
-                            whitespace: true,
-                            message:
-                              "Please add criteria or delete this field.",
-                          },
-                        ]}
-                        noStyle
-                      >
-                        <Input.TextArea
-                          rows={2}
-                          placeholder="Criteria..."
-                          style={{ width: fields.length > 1 ? "80%" : "100%" }}
-                        />
-                      </Form.Item>
-                      {fields.length > 1 ? (
-                        <Button
-                          type="text"
-                          danger
-                          onClick={() => remove(field.name)}
-                        >
-                          <MinusCircleOutlined className="dynamic-delete-button" />
-                        </Button>
-                      ) : null}
-                    </Form.Item>
-                  ))}
-                  <Form.Item>
-                    <Button
-                      type="dashed"
-                      onClick={() => add()}
-                      style={{ width: "60%" }}
-                      icon={<PlusOutlined />}
-                    >
-                      Add field
-                    </Button>
-                    <Form.ErrorList errors={errors} />
-                  </Form.Item>
-                </>
-              )}
-            </Form.List>
-          </Form.Item>
           <Form.Item wrapperCol={{ offset: 0, span: 0 }}>
             <Button
               size="large"
@@ -402,6 +372,55 @@ function Assessments() {
           </Form.Item>
         </Form>
       </Modal>
+      {/* End form Modal */}
+
+      {/* Details Modal */}
+      <Modal
+        title={"Assessment Content"}
+        style={{ width: "80%" }}
+        open={assessmentDetails.show}
+        footer={false}
+        // okButtonProps={{ disabled: true }}
+        onOk={() => setAssessmentDetails({ show: false, data: [], title: "" })}
+        onCancel={() =>
+          setAssessmentDetails({ show: false, data: [], title: "" })
+        }
+      >
+        <Stack spacing={2}>
+          <Stack>
+            <Typography variant="subtitle2">Content</Typography>
+            <Typography variant="h5">{assessmentDetails.title}</Typography>
+          </Stack>
+
+          <Stack>
+            {assessmentDetails?.data?.map((detail, i) => {
+              return (
+                <Stack direction={"row"}>
+                  <Stack p={0.5} paddingLeft={detail.depth}>
+                    {detail.type == "unordered-list-item" && <CircleIcon />}
+                    {detail.type == "ordered-list-item" && (
+                      <Typography>{i + 1}</Typography>
+                    )}
+                    {/* <CheckSquareOutlined /> */}
+                  </Stack>
+                  <Typography color={"GrayText"} variant="body1">
+                    {detail.text}
+                  </Typography>
+                </Stack>
+              )
+            })}
+          </Stack>
+        </Stack>
+      </Modal>
+      {/* End Details Modal */}
+      <Snackbar
+        open={alert.show}
+        message={alert.message}
+        autoHideDuration={3000}
+        onClose={() => {
+          setAlert({ show: false, message: "" })
+        }}
+      ></Snackbar>
       <Stack p={5} direction={"row"} spacing={1}>
         <Typography variant="h5">Assessments</Typography>
         <Button
@@ -414,10 +433,46 @@ function Assessments() {
           New Assessment
         </Button>
       </Stack>
-      <Collapse defaultActiveKey={["0"]}>
+      {/* Empty list state */}
+      {assessments.length === 0 ? (
+        <Stack spacing={2} alignItems={"center"} p={2}>
+          <CrisisAlertIcon sx={{ fontSize: 90 }} />
+          <Typography variant="h5">No Assessments</Typography>
+          <Typography variant="body1" color={"GrayText"}>
+            Your Assessments will be displayed here
+          </Typography>
+          <Button
+            type="primary"
+            onClick={() => {
+              showModal(true)
+              setUpdating(false)
+              form.resetFields()
+            }}
+          >
+            New Assessment
+          </Button>
+        </Stack>
+      ) : null}
+      {/* End empty list state */}
+
+      {/* Assessments */}
+      <Collapse
+        style={{ borderRadius: 15, overflow: "hidden" }}
+        defaultActiveKey={["0"]}
+      >
         {assessments.map((course, i) => {
+          let list = []
+          for (const [key, value] of Object.entries(course)) {
+            if (key !== "key") {
+              list.push({
+                content: course[key].content,
+                title: course[key].title,
+              })
+            }
+          }
+          console.log(list)
           return (
-            <Collapse.Panel key={i} header={course.course.toUpperCase()}>
+            <Collapse.Panel key={i} header={course.key.toUpperCase()}>
               <Stack
                 direction={"row"}
                 spacing={1}
@@ -427,7 +482,7 @@ function Assessments() {
                 <Stack>
                   <Statistic
                     title="Total Assessments"
-                    value={course.assessments.length}
+                    value={list.length}
                     precision={0}
                   />
                 </Stack>
@@ -440,8 +495,8 @@ function Assessments() {
                   style={{ width: 200 }}
                 />
               </Stack>
-              <Stack direction={"row"} flexWrap={"wrap"}>
-                {course.assessments.map((item, i) => {
+              <Stack gap={1} direction={"row"} flexWrap={"wrap"}>
+                {list.map((item, i) => {
                   return (
                     <Card
                       hoverable
@@ -482,34 +537,34 @@ function Assessments() {
                         >
                           <EditOutlined key="edit" /> Edit
                         </Button>,
-
-                        <Button type="text" danger>
-                          <DeleteOutlined />
-                        </Button>,
+                        <Popconfirm
+                          title="Delete Assessment"
+                          description="This is a permanent action that will remove this assessment from the database, continue?"
+                          okText="Continue"
+                          cancelText="Cancel"
+                        >
+                          <Button type="text" danger>
+                            <DeleteOutlined />
+                          </Button>
+                        </Popconfirm>,
                       ]}
                     >
-                      <Meta
-                        title={`Lesson ${i + 1} ${item.title}`}
-                        description={item.description}
-                      />
-                      <br />
-                      <Divider />
+                      <Meta title={`${item.title}`} />
                       <Stack pt={1} spacing={2}>
-                        <Typography variant="subtitle1">
-                          Evaluation Criteria
+                        <Typography color={"GrayText"} variant="caption">
+                          {item.content.blocks[0].text}
                         </Typography>
-                        {item.criteria.map((evaluation, i) => {
-                          return (
-                            <Stack direction={"row"}>
-                              <Stack p={0.5}>
-                                <CheckSquareOutlined />
-                              </Stack>
-                              <Typography variant="caption">
-                                {evaluation.label}
-                              </Typography>
-                            </Stack>
-                          )
-                        })}
+                        <Button
+                          onClick={() => {
+                            setAssessmentDetails({
+                              data: item.content.blocks,
+                              show: true,
+                              title: item.title,
+                            })
+                          }}
+                        >
+                          View Content
+                        </Button>
                       </Stack>
                     </Card>
                   )
@@ -519,6 +574,7 @@ function Assessments() {
           )
         })}
       </Collapse>
+      {/* End Assessments */}
       <Stack direction={"row"} flexWrap={"wrap"}></Stack>
     </PageLayout>
   )

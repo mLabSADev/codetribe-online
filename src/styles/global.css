@@ -139,8 +139,12 @@ li {
   color: #97ca42 !important;
   border-bottom-color: #97ca42 !important;
 }
-
-@import url(https://fonts.googleapis.com/css?family=Open + Sans:400italic);
+.wrapperClassName {
+  width: 100%;
+  height: 100%;
+  border: solid 1px rgb(214, 214, 214);
+}
+@import url("https://fonts.googleapis.com/css?family=Open + Sans:400italic");
 blockquote {
   font-size: 1em;
   width: 95%;
