@@ -75,19 +75,21 @@ export const Assessment = {
   /**
    * @param {*} id  doc id
    */
-  deleteAssessment: id => {
-    return firebase.database().ref(`assessments/${id}`).remove()
+  delete: (course, id) => {
+    return firebase.database().ref(`assessments/${course}/${id}`).remove()
   },
   /**
    * @param {*} id doc id
    * @param {*} data form data
    */
-  update: (id, data) => {
+  update: (course, assessmentId, data) => {
     return firebase
       .database()
-      .ref(`assessments/${id}`)
-      .update({
-        ...data,
+      .ref(`assessments/${course}/${assessmentId}`)
+      .set({
+        title: data.title,
+        content: data.content,
+        updated: new Date().toISOString(),
       })
   },
 }
