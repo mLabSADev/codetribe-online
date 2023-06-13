@@ -7,7 +7,18 @@ import SEO from "../components/seo"
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank"
 import CheckBoxIcon from "@mui/icons-material/CheckBox"
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded"
-import { Button, Col, Collapse, Divider, Row, Timeline } from "antd"
+import {
+  Button,
+  Checkbox,
+  Col,
+  Collapse,
+  Divider,
+  Form,
+  Input,
+  Modal,
+  Row,
+  Timeline,
+} from "antd"
 import {
   ArrowLeftOutlined,
   ArrowRightOutlined,
@@ -18,6 +29,8 @@ import {
 import Quiz from "../components/quiz"
 import Disqus from "gatsby-plugin-disqus/components/Disqus"
 import { IconButton, Stack, Typography } from "@mui/material"
+import { AuthService } from "../services/auth-service"
+import { Assessment } from "../services/admin-service"
 
 export const DurationHelper = {
   secondsToText: seconds => {
@@ -60,7 +73,10 @@ export default ({ data }) => {
   ] = useState(0)
   const [total, setTotal] = useState(0)
   const [nextIsLoading, setNextIsLoading] = useState(false)
-
+  const [showAssessmentSubmission, setShowAssessmentSubmission] = useState(
+    false
+  )
+  const [user, setUser] = useState({})
   const isLegalPage = lesson => {
     if (position) {
       let hasToMove = false
@@ -294,11 +310,82 @@ export default ({ data }) => {
   }
 
   const progress = Math.round((totalDurationUntilCurrentLesson / total) * 100)
+  const onFinish = values => {
+    console.log("Success ", values)
+    const currentURL = window.location.href
+    let splitter = currentURL.split("/")
+    const submission = {
+      location: "",
+      chapter: splitter[5],
+      course: splitter[4],
+      fullName: "",
+      ...values,
+    }
+    AuthService.currentUser().then(res => {
+      setUser(res)
+      submission.fullName = `${res.firstname} ${res.lastname}`
+      if (res.location) {
+        submission.location = res.location
+      } else {
+        submission.location = res.groups[0]
+      }
+      Assessment.submit(submission).then(res => {
+        console.log("Submitted")
+      })
+    })
+  }
 
+  const onFinishFailed = errorInfo => {
+    console.log("Failed:", errorInfo)
+  }
   useEffect(() => {}, [])
 
   return (
     <Stack position={"relative"}>
+      <Modal
+        footer={false}
+        title={"Assessment Submission"}
+        open={showAssessmentSubmission}
+        onOk={() => setShowAssessmentSubmission(false)}
+        onCancel={() => setShowAssessmentSubmission(false)}
+      >
+        <Form
+          name="basic"
+          labelCol={{ span: 5 }}
+          // wrapperCol={{ span: 16 }}
+          style={{ maxWidth: 600 }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Github URL"
+            name="github"
+            rules={[
+              { required: true, message: "Link to Github Projet is required!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          {/* <Form.Item
+            label="Site URL"
+            name="site"
+            rules={[
+              { required: false, message: "Please input your password!" },
+            ]}
+          >
+            <Input />
+          </Form.Item> */}
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description}
@@ -449,7 +536,7 @@ export default ({ data }) => {
             >
               {Object.keys(chapters).map(key => {
                 const chapter = chapters[key]
-
+                const course = ""
                 let chapterTotalDuration = 0
                 for (let chapterLesson of chapter.lessons) {
                   if (!chapterLesson) continue
@@ -521,6 +608,20 @@ export default ({ data }) => {
                         )
                       })}
                     </Timeline>
+                    {/* Student assessment submission */}
+                    <Stack spacing={2}>
+                      <Typography variant="subtitle1">
+                        Complete Assessment
+                      </Typography>
+                      <Button
+                        onClick={() => {
+                          setShowAssessmentSubmission(true)
+                        }}
+                      >
+                        Submit Assessment
+                      </Button>
+                    </Stack>
+                    <Divider />
                   </Collapse.Panel>
                 )
               })}

@@ -215,6 +215,7 @@ const PageLayout = ({ children, active }) => {
           top: 10,
           left: 10,
           background: "green",
+          zIndex: 15,
           width: 40,
           height: 40,
           borderRadius: "50%",

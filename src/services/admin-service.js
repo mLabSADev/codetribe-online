@@ -89,7 +89,20 @@ export const Assessment = {
       .set({
         title: data.title,
         content: data.content,
+        lesson: data.lesson,
         updated: new Date().toISOString(),
       })
+  },
+  submit: values => {
+    return firebase
+      .database()
+      .ref(`assessments/submissions/${values.course}/${values.location}`)
+      .push({ ...values, submitted: new Date().toISOString() })
+  },
+  getSubmissions: values => {
+    return firebase
+      .database()
+      .ref(`assessments/submissions/${values.course}/${values.location}`)
+      .once("value")
   },
 }
